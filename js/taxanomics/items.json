@@ -1,73 +1,21 @@
 [{
-  "name": "Samsung S8",
-  "picture": "https://staticshop.o2.co.uk/product/images/samsung_galaxy_s8_64gb_midnight_black_front_sku_header.png?cb=80773a56ed8c7c3f0cb94cf8cdf159f6",
-  "description": "The revolutionary design of the Galaxy S8 begins from the inside out. We rethought every part of the phone's layout to break through the confines of the smartphone screen. So all you see is pure content and no bezel. It's the biggest, most immersive screen on a Galaxy smartphone of this size. And it's easy to hold in one hand. Camera Features: VDIS (Video Digital Image Stabilization), HDR (High Dynamic Range), Selective focus (Bokeh effect), Virtual shot, Motion photo, Filters, Stickers, Stamps, Grid line, Location tags, Timer, Quick launch, Voice control. ",
-  "tags": ["phone", "samsung"],
-  "type": "image"
+  "name": "The Enchiridion",
+  "content": "Stotic bookness.",
+  "description": "The Enchiridion (which translates to \"The Handbook\" or \"The Manual\") was an ancient book with codes of conduct, guidelines, and other helpful information for heroes. The book had great power which allowed it to tear open worm holes between dimensions in the multiverse. It was broken into pieces after turning to stone by Finn in \"The Lich\" in order to stop the Lich from gaining access to the multiverse, but, as it turned out, by doing this Finn made the portal to the multiverse. (See \"The Lich\" for more details.) It was revealed in \"Winter Light\" that while Finn and Jake were in the Farmworld Dimension during the events of \"Crossover\", Finn brought the Enchiridion from that timeline back with him.",
+  "tags": ["magic", "book", "old"]
 }, {
-  "name": "Introduction To Algorithms",
-  "picture": "https://image.flaticon.com/icons/svg/136/136522.svg",
-  "description": "Introduction to Algorithms is a book by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein. The book has been widely used as the textbook for algorithms courses at many universities.  Its fame has led to the common use of the abbreviation 'CLRS' (Cormen, Leiserson, Rivest, Stein)",
-  "tags": ["algorithms", "advanced"],
-  "type": "pdf"
+  "name": "Ice Kings Crown",
+  "content": "Magic powers.",
+  "description": "The Ice King's crown is the source of the wizard's Ice Powers. The crown is golden, topped with three points and adorned with three red rubies. The crown's jewels are from Magwood, and are what give the object its magic. Also, one of the gems within the crown protects Ice King from the evil brainwashing spells of the Lich.",
+  "tags": ["magic"]
 }, {
-  "name": "Macbook",
-  "picture": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/image/AppleInc/aos/published/images/m/bp/mbp13/space/mbp13-space-select-201807_GEO_GB?wid=452&hei=420&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1531167593845",
-  "description": "On paper, it looked like an impressive, if predictable, set of internal component upgrades. Apple's 13-inch and 15-inch Touch Bar MacBook Pro models would get new eighth-gen Intel processors, more storage and RAM options, a color-temperature-sensing True Tone screen and other tweaks -- all nice improvements over a ho-hum 2017 update.",
-  "tags": ["macbook", "pro", "apple"],
-  "type": "image"
+ "name": "Scarlet",
+ "content": "https://vignette.wikia.nocookie.net/adventuretimewithfinnandjake/images/5/50/Golden_sword_of_battle.png/revision/latest?cb=20120912043519",
+ "description": "The golden sword of battle (also known as Scarlet) is Finn's weapon of choice throughout most of seasons one and two. The blade is dented, chipped, and dirty. Its hilt is black with some worn leather grip-straps and a red gemstone in the pommel. In \"Business Time\", the Business Men polish and sharpen the sword, making this episode the only one in which the golden sword appears to be in excellent condition.",
+ "tags": ["sword", "weapon", "Scarlet"]
 }, {
-  "name": "Lord Of The Rings",
-  "picture": "https://image.flaticon.com/icons/svg/136/136545.svg",
-  "description": "The Lord of the Rings is a film series of three epic fantasy adventure films directed by Peter Jackson, based on the novel The Lord of the Rings by J. R. R. Tolkien. The films are subtitled The Fellowship of the Ring (2001), The Two Towers (2002) and The Return of the King (2003). ",
-  "tags": ["lord", "of", "the", "rings"],
-  "type": "mp4"
-}, {
-  "name": "Assignment 2",
-  "picture": "https://www.flaticon.com/free-icon/doc_136521",
-  "description": "This assignment covers algorithms on strings, directed graphs and max-flow problems.  The learning outcomes assessed are to reason about fundamental algorithms for a range of problems, and to describe and apply various algorithm design strategies for the construction of efficient algorithms",
-  "tags": ["algorithms", "assignment", "advanced", "2"],
-  "type": "document"
-}, {
-  "name": "Fur Elise",
-  "picture": "https://image.flaticon.com/icons/svg/136/136548.svg",
-  "description": "The score was not published until 1867, 40 years after the composer's death in 1827. The discoverer of the piece, Ludwig Nohl, affirmed that the original autographed manuscript, now lost, was dated 27 April 1810.",
-  "tags": ["mozart"],
-  "type": "mp3"
-}, {
-  "name": "iPhone 8",
-  "picture": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/image/AppleInc/aos/published/images/i/ph/iphone8/select/iphone8-select-2019-family?wid=882&amp;hei=1058&amp;fmt=jpeg&amp;qlt=80&amp;op_usm=0.5,0.5&amp;.v=1550795431127",
-  "description": "The iPhone 8 features a 4.7 Inch Retina HD display, 12MP Camera, 7MP Front-facing lens, 64GB or 256GB internal storage and wireless charging. It has a beautiful glass finish on the front and back, and is certified as IP67, protected against water and dust.",
-  "tags": ["apple", "iphone"],
-  "type": "picture"
-}, {
-  "name": "Harry Potter and the Order of the Phoenix",
-  "picture": "https://upload.wikimedia.org/wikipedia/en/7/70/Harry_Potter_and_the_Order_of_the_Phoenix.jpg",
-  "description": "Harry Potter and the Order of the Phoenix is a fantasy novel written by British author J. K. Rowling and the fifth novel in the Harry Potter series. It follows Harry Potter's struggles through his fifth year at Hogwarts School of Witchcraft and Wizardry, including the surreptitious return of the antagonist Lord Voldemort, O.W.L. exams, and an obstructive Ministry of Magic. The novel was published on 21 June 2003 by Bloomsbury in the United Kingdom, Scholastic in the United States, and Raincoast in Canada.",
-  "tags": ["harry", "potter"],
-  "type": "pdf"
-}, {
-  "name": "Student Handbook",
-  "picture": "https://intranet.royalholloway.ac.uk/international/graphics/InternationalStudentSupportImagesandVideo/handbook-cropped-251x357.jpg",
-  "description": "",
-  "tags": ["student"],
-  "type": "document"
-}, {
-  "name": "Abbey Road",
-  "picture": "https://i2.wp.com/www.beatlesbible.com/wp/media/abbey_road.jpg?resize=200%2C200&quality=100&strip=all&ssl=1",
-  "description": "It is commonly thought that The Beatles knew that Abbey Road would be their final album, and wanted to present a fitting farewell to the world. However, the group members denied that they intended to split after its completion, despite a realisation that their time together was drawing to a close.",
-  "tags": ["beatles"],
-  "type": "mp3"
-}, {
-  "name": "BMW i8",
-  "picture": "https://image.flaticon.com/icons/svg/136/136524.svg",
-  "description": "The BMW i8 is a plug-in hybrid sports car developed by BMW. The i8 is part of BMW's electric fleet 'Project i' being marketed as a new sub-brand, BMW i. The 2015 model year BMW i8 has a 7.1 kWh lithium-ion battery pack that delivers an all-electric range of 37 km (23 mi) under the New European Driving Cycle.",
-  "tags": ["bmw"],
-  "type": "image"
-}, {
-  "name": "A Nightmare On Elm Street",
-  "picture": "https://upload.wikimedia.org/wikipedia/en/thumb/2/2e/NightmareOnElmStreetBoxSetSide.jpg/225px-NightmareOnElmStreetBoxSetSide.jpg",
-  "description": "A Nightmare on Elm Street is a 1984 American slasher film written and directed by Wes Craven, and produced by Robert Shaye.",
-  "tags": ["Nightmare"],
-  "type": "mp4"
+  "name": "Everything Burrito",
+  "content": "https://vignette.wikia.nocookie.net/adventuretimewithfinnandjake/images/0/00/Fooiconz.png/revision/latest/scale-to-width-down/185?cb=20120825154847",
+  "description": "The everything burrito is an extremely large burrito filled with almost everything that is food, and a few things that are inedible like pans. In \"Conquest of Cuteness,\" Jake prepares the everything burrito for breakfast for both Finn and himself. The burrito eventually meets its end when it is buried by Jake, much to his dismay, in a grave outside the Tree Fort. It is buried with a sign that reads \"My Burrito\" out of the suspicion that it was poisoned by the Cuties, ruled by the Cute King.",
+  "tags": ["food", "burrito"]
 }]
