@@ -8,18 +8,20 @@
 }
 
 #main-view {
-  /* border: 1px solid red; */
-  margin: 2vw 5vw !important;
+  margin: 1vw 5vw !important;
   width: auto;
 }
 
-.item-card {
-  /* height: 30vh; */
-  /* width: 25vh; */
-  /* align-items: center; */
+#results-label {
+  text-align: right;
+  padding: 10px 0px;
 }
 
 .item-image {
   height: calc(30vh - 2em) !important;
   display: block !important;
+}
+
+.item-card:hover {
+  box-shadow: 0 0 8px #9ab9ea;
 }
