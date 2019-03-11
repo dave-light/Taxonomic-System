@@ -5,3 +5,18 @@
 #search-input {
   padding-left: 12px !important;
 }
+
+#main-view {
+  /* border: 1px solid red; */
+  margin: 2vw 5vw !important;
+  width: auto;
+}
+
+.item-card {
+  height: 30vh;
+  width: 25vh;
+}
+
+.item-image {
+  height: calc(30vh - 2em) !important;
+}
