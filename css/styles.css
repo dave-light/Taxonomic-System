@@ -1,5 +1,5 @@
 
-#search-bar { 
+#search-bar {
   width: calc(100vw - 262px);
 }
 
@@ -14,8 +14,8 @@
 }
 
 .item-card {
-  height: 30vh;
-  width: 25vh;
+  /* height: 30vh; */
+  /* width: 25vh; */
   /* align-items: center; */
 }
 
