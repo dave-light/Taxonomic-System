@@ -6,6 +6,16 @@ $( document ).ready(function() {
       updateGridWidth();
     });
 
+    // alert("Hello");
+    var Users = Taxonomic.Users;
+    var user = Users.find(0);
+    Taxonomic.login(user);
+    Taxonomic.loadItems();
+    var Items = Taxonomic.Items;
+    var Tags = Taxonomic.Tags;
+
+    alert("Users: " + Users.findAll().length + "\nItems: " + Items.findAll().length + "\nTags: " + Tags.findAll().length);
+
 });
 
 function updateGridWidth() {
@@ -23,5 +33,4 @@ function updateGridWidth() {
 function setGridWidth(size) {
   $('#main-grid').removeClass('one two three four column grid');
   $('#main-grid').addClass(size + ' column grid');
-  return;
 }
