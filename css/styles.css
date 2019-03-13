@@ -6,15 +6,13 @@
   padding-left: 12px !important;
 }
 
+
+
 .box {
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100%;
 }
 
-.box div {
-  width: auto;
-  height: auto;
-  top: calc(50vh - 31px);
-  position: absolute;
-}
+
