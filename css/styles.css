@@ -42,7 +42,7 @@
   left: center;
 }
 
-.log-out-screen{
+#log-out-screen{
   display: flex;
   align-items:center;
   justify-content: center;
