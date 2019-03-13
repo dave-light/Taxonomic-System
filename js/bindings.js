@@ -1,6 +1,6 @@
 $(document).ready(function() {
   const { Users } = Taxonomic;
-  
+
   // User management ***********************************************************
 
   let loggedIn = $('#loggedIn');
@@ -14,7 +14,7 @@ $(document).ready(function() {
     });
   $('#userName').empty()
     .append(userNameOptions);
-  
+
   $('#logInButton').click(function () {
     var user = Users.find(parseInt($('#userName').val(), 10));
     if (Taxonomic.login(user)) {
@@ -31,6 +31,15 @@ $(document).ready(function() {
     }
   });
 
+
+  $( "#logout-button" ).click(function() {
+    var r = true;
+    if (r == true) {
+      $('.ui.basic.modal').modal('show');
+    //window.location="../login.html";
+    }
+  });
+
   $('#logOutButton').click(function () {
     Taxonomic.logout();
     $('#loggedInAs').empty();
@@ -40,7 +49,7 @@ $(document).ready(function() {
   });
 
   // Admin *********************************************************************
-  
+
   $('#resetButton').click(function () {
     Taxonomic.reset();
     window.location.reload();
@@ -67,9 +76,9 @@ $(document).ready(function() {
   $('#itemNameFilter').change(function () {
     $('#listItemsButton').click();
   });
-  
+
   // Tag management ************************************************************
-  
+
   $('#newTagButton').click(function () {
     let createTagPane = $('#createTagPane');
     createTagPane.empty().show().siblings().hide();
@@ -81,7 +90,7 @@ $(document).ready(function() {
 
     let additionalOwners = $('<input/>', { type: 'text' });
     addProperty(details, 'Additional owners', additionalOwners);
-    
+
     let description = $('<textarea/>');
     addProperty(details, 'Description', description);
 
@@ -104,7 +113,7 @@ $(document).ready(function() {
         $('#listTagsButton').click();
       }
     });
-    
+
     createTagPane.append(details).append(createTagButton);
   });
 

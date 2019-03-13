@@ -56,7 +56,9 @@ var Taxonomic = (function () {
       taggedItems: [],
       ownedTags: []
     };
+
     ['Finn', 'Jake', 'Marceline', 'Fionna', 'Cake', 'Princess Bubble Gum', 'Ice King', 'BMO']
+
       .forEach(function (name) {
         CRUD.create(data.users, { name: name });
       });
