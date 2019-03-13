@@ -6,13 +6,19 @@
   padding-left: 12px !important;
 }
 
-
-
 .box {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
+  /* column-gap: 9px; */
 }
 
-
+#logo{
+  position:absolute;
+  padding-left: 1%;
+  padding-top: 2%;
+  font-size: 370%;
+  top: 0%;
+  left: center;
+}
