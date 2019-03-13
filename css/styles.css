@@ -21,3 +21,9 @@
   top: 0%;
   left: center;
 }
+
+#log-out-screen{
+  display: flex;
+  align-items:center;
+  justify-content: center;
+}
