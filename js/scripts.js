@@ -1,7 +1,9 @@
 $( document ).ready(function() {
-    updateGridWidth();
-    $('.ui.dropdown').dropdown();
 
+var container = document.body;
+
+$( document ).ready(function () {
+    updateGridWidth();
     $(window).resize(function() {
       updateGridWidth();
     });
@@ -13,8 +15,39 @@ $( document ).ready(function() {
     Taxonomic.loadItems();
     var Items = Taxonomic.Items;
     var Tags = Taxonomic.Tags;
+     
+    
+    
+    //Enables dropdown in login
+    $( '.ui.dropdown' ).dropdown();
+    //
 
-    alert("Users: " + Users.findAll().length + "\nItems: " + Items.findAll().length + "\nTags: " + Tags.findAll().length);
+
+    //Enables dropdown on the main view
+    var mutationObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {  
+            if(mutation.addedNodes[0]    != undefined &&  
+            mutation.addedNodes[0].id == "loggedIn") {
+                $( '.ui.dropdown' ).dropdown(); 
+                mutationObserver.disconnect();
+                console.log("enabled drop down.")
+            }   
+        });
+    }); 
+        
+    mutationObserver.observe(container, {    
+        attributes: true,
+        childList: true,
+        characterData: true
+    });   
+    //
+
+});
+
+
+
+
+
 
 });
 
