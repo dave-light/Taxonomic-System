@@ -56,7 +56,9 @@ var Taxonomic = (function () {
       taggedItems: [],
       ownedTags: []
     };
-    ['Finn', 'Jake', 'Marceline', 'Fionna', 'Cake', 'Princess Bubble Gum', 'Ice King', 'BMO'] 
+
+    ['Finn', 'Jake', 'Marceline', 'Fionna', 'Cake', 'Princess Bubble Gum', 'Ice King', 'BMO']
+
       .forEach(function (name) {
         CRUD.create(data.users, { name: name });
       });
@@ -219,7 +221,7 @@ var Taxonomic = (function () {
     owns: function (user, tags) {
       if (!tags.hasOwnProperty('length'))
         tags = [tags];
-      
+
       var ownedTags = tags.filter(function (tag) {
         return CRUD.read(data.ownedTags, {
           userId: user.id,
@@ -281,7 +283,7 @@ var Taxonomic = (function () {
     forTags: function (tags) {
       if(!tags)
         return [];
-        
+
       if (!tags.hasOwnProperty('length'))
         tags = [tags];
 
@@ -320,7 +322,7 @@ var Taxonomic = (function () {
       var newTags = tagNames
         .map(n => Tags.findAll({ name: n })[0] || Tags.create({ name: n }));
       var currentTags = Tags.forItem(item);
-      
+
       currentTags.forEach(function (tag) {
         if (CRUD.read(newTags, tag).length === 0)
           Tags.detach(tag, item);
@@ -487,7 +489,7 @@ var Taxonomic = (function () {
         Events.createFor(tag, `Mapped ${tag.name} to ${newTag.name}`);
         Events.createFor(newTag, `Mapped ${tag.name} to ${newTag.name}`);
       });
-      
+
       return copy(newTag);
     },
     history: function (tag) {
@@ -498,7 +500,7 @@ var Taxonomic = (function () {
         .map(n => Users.findAll({ name: n })[0] || console.error(`The user ${n} doesn't exist so can't own an item`))
         .filter(u => u !== undefined);
       var currentOwners = Users.forTags(tag);
-      
+
       currentOwners.forEach(function (user) {
         if (CRUD.read(newOwners, user).length === 0)
           Users.disownTag(user, tag);
@@ -610,6 +612,6 @@ var Taxonomic = (function () {
   };
 
   API.reset();
-  
+
   return API;
 })();

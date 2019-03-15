@@ -1,9 +1,29 @@
+
 #search-bar {
   width: calc(100vw - 262px);
 }
 
 #search-input {
   padding-left: 12px !important;
+}
+
+#main-view {
+  margin: 1vw 5vw !important;
+  width: auto;
+}
+
+#results-label {
+  text-align: right;
+  padding: 10px 0px;
+}
+
+.item-image {
+  height: calc(30vh - 2em) !important;
+  display: block !important;
+}
+
+.item-card:hover {
+  box-shadow: 0 0 8px #9ab9ea;
 }
 
 .box {

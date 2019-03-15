@@ -31,6 +31,7 @@ $(document).ready(function() {
     }
   });
 
+
   $( "#logout-button" ).click(function() {
     var r = true;
     if (r == true) {
