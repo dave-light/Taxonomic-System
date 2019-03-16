@@ -1,10 +1,18 @@
 
 #search-bar {
   width: calc(100vw - 262px);
+  background-color: lightgrey;
+
 }
 
 #search-input {
   padding-left: 12px !important;
+  background-color: white !important;
+  border-radius: 5px !important;
+}
+
+#search-icon{
+  padding-right: 50px !important;
 }
 
 #main-view {
@@ -33,7 +41,7 @@
   height: 100%;
 }
 
-#logo{
+#logo-logged-out{
   position:absolute;
   padding-left: 1%;
   padding-top: 2%;
@@ -46,4 +54,22 @@
   display: flex;
   align-items:center;
   justify-content: center;
+}
+
+#logo-logged-in{
+background-color: lightgrey;
+border-radius: 0px;
+}
+
+#logout-button{
+  background-color: darkgrey;
+}
+
+#logout-button-surrounding{
+  background-color: lightgrey !important;
+}
+
+#search-choice-button{
+  background-color: darkgrey !important;
+  margin-right: 12px;
 }

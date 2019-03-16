@@ -10,7 +10,7 @@
 
 <body>
     <div class='box' id='loggedOut'>
-        <div class="ui huge header item" id='logo'>
+        <div class="ui huge header item" id='logo-logged-out'>
             Taxanomics
         </div>
         <div>
@@ -20,14 +20,14 @@
         </div>
     </div>
     <div id="loggedIn">
-        <div class="ui menu">
-            <div class="ui medium header item">
+        <div class="ui menu search">
+            <div class="ui medium header item bin" id="logo-logged-in">
                 Taxanomics
             </div>
             <div class="menu">
-                <div id="search-bar" class="item">
+                <div class="item" id="search-bar">
                     <div class="ui transparent huge icon input">
-                         <div class="ui basic floating dropdown button">
+                         <div class="ui basic floating dropdown button" id="search-choice-button">
                             <div id="dropdown-text" class="text">All</div>
                             <i class="dropdown icon"></i>
                             <div class="menu">
@@ -37,11 +37,11 @@
                             </div>
                         </div>
                         <input id="search-input" type="text" placeholder="Search...">
-                        <i class="search link icon"></i>
+                        <i class="search link icon" id="search-icon"></i>
                     </div>
                 </div>
             </div>
-            <div class="right menu">
+            <div class="right menu" id="logout-button-surrounding">
                 <div class="item">
                     <div class="ui transparent big icon input">
                         <button class="ui button" id="logout-button">Log Out</button>
@@ -65,9 +65,7 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
         <div id="main-view" class="ui container">
 
             <h1 id="results-label">10 Results</h1>
