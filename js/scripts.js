@@ -133,12 +133,16 @@
       var image = object.element.picture;
       $("#main-grid").append(generateItemCard(id, image));
     });
-    $("#total-results").html($("#main-grid .column").length);
+    updateTotalResults();
   }
 
   // This will eventually be updated to take further parameters, such as name
   function generateItemCard(id, image) {
         return '<div class="column"><div id="item-' + id + '" class="ui fluid card item-card"><div class="content"><img class="ui centered image item-image" src="' + image + '" alt=""></div></div></div>';
+  }
+
+  function updateTotalResults() {
+    $("#total-results").html($("#main-grid .column").length);
   }
 
   function updateGridWidth() {
