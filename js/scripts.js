@@ -38,6 +38,9 @@
                   bindKeys();
                   enable_dropdown();
 
+                  // Initialises check boxes in filter menu
+                  $('.ui.checkbox').checkbox();
+
                   displayAllResults();
 
                   search(); // REMOVE WHEN SEARCH IS FUNCTIONAL.

@@ -80,3 +80,15 @@ border-radius: 0px;
   padding: 15px 5px 5px 5px !important;
   margin-bottom: 30px;
 }
+
+#filter-sidebar {
+  padding: 20px;
+}
+
+#filter-header {
+  margin: 15px;
+}
+
+#filter-type-form {
+  margin-top: 20px;
+}

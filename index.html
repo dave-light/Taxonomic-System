@@ -27,20 +27,52 @@
               <i class="filter icon" style="margin: 0px;"></i>
             </button>
           </div>
-          <div class="ui sidebar inverted vertical menu">
-  <a class="item">
-    1
-  </a>
-  <a class="item">
-    2
-  </a>
-  <a class="item">
-    3
-  </a>
-</div>
-<div class="pusher">
-  <!-- Site content !-->
-</div>
+
+          <div id="filter-sidebar" class="ui grey sidebar inverted vertical menu">
+            <h2 class="ui icon header" id="filter-header">
+              <i class="filter icon"></i>
+              <div class="content">
+                Filter Options
+                <div class="sub header">
+                  Filter your search results according to the preferences below.
+                </div>
+              </div>
+            </h2>
+            <div class="ui fluid icon input">
+              <input type="text" placeholder="Search Tags...">
+              <i class="circular search link icon"></i>
+            </div>
+
+            <div id="filter-type-form" class="ui form">
+              <h4 class="ui dividing header">Filter by item type</h4>
+              <div class="inline field">
+                <div class="ui checkbox">
+                  <label>PDF</label>
+                  <input type="checkbox" tabindex="0" class="hidden">
+                </div>
+              </div>
+              <div class="inline field">
+                <div class="ui checkbox">
+                  <label>Image</label>
+                  <input type="checkbox" tabindex="1" class="hidden">
+                </div>
+              </div>
+              <div class="inline field">
+                <div class="ui checkbox">
+                  <label>Video</label>
+                  <input type="checkbox" tabindex="2" class="hidden">
+                </div>
+              </div>
+              <div class="inline field">
+                <div class="ui checkbox">
+                  <label>Audio</label>
+                  <input type="checkbox" tabindex="3" class="hidden">
+                </div>
+              </div>
+            </div>
+
+          </div>
+
             <div class="menu">
               <div class="item" id="search-bar">
                 <div class="ui transparent huge icon input">
