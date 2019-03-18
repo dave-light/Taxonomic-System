@@ -10,7 +10,7 @@
   $( document ).ready(function () {
 
       var user = Users.find(0);
-      Taxonomic.login(user);
+      Taxonomic.login(user);        
       x = Taxonomic.loadItems();
 
       x.then(function() {
@@ -83,7 +83,7 @@
   function bindKeys() {
     $( '#search-input' ).keypress(function (e) {
 
-      if (e.key === ' ' || e.keyCode == 13) {
+      if (e.keyCode == 13) {
         e.preventDefault()
 
         if(dropdown_selection == "All")   {
@@ -110,15 +110,18 @@
     $( "#search-input" ).on('input', function(e){
       var input = $( this ).val();    
       
+      
       // Possibly have to do some tweaking when actually adding the contents
       // to the layout.
-      if(dropdown_selection == "All")   {
+      if(dropdown_selection == "All") {
         items = Items.search(input);
         tags = Tags.search(input);
-        items_and_tags = items.concat(tags);
+        items_and_tags = items.concat(tags);  
       }
       else if(dropdown_selection == "Items") {
-        items = Items.search(input);
+        var items1 = Items.search(input);
+        var items2 = Items.searchByTag(input);
+        items = items1.concat(items2);
       }
       else if(dropdown_selection == "Tags")  {
         tags = Tags.search(input);
