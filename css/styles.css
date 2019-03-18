@@ -89,6 +89,10 @@ border-radius: 0px;
   margin: 15px;
 }
 
-#filter-type-form {
-  margin-top: 20px;
+#filter-search-container, #filter-tags-table, #filter-type-form {
+  margin-top: 40px;
+}
+
+#filter-search-bar {
+  border-radius: 5px;
 }

@@ -5,6 +5,7 @@
   var items;
   var tags;
   var co_tags;
+  var all_tags = [];
   var items_and_tags;
   var container = document.body;
 
@@ -16,6 +17,9 @@
       x.then(function() {
           items              = Items.search("");
           tags               = Tags.search("");
+          tags.forEach(function(obj) {
+            all_tags.push({ title: obj.element.name});
+          });
           items_and_tags     = items.concat(tags);
         });
 
@@ -40,6 +44,9 @@
 
                   // Initialises check boxes in filter menu
                   $('.ui.checkbox').checkbox();
+
+                  // Initialises the tag search box in filter sidebar
+                  $('#filter-search-tags').search({source: all_tags});
 
                   displayAllResults();
 

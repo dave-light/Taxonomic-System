@@ -28,7 +28,7 @@
             </button>
           </div>
 
-          <div id="filter-sidebar" class="ui grey sidebar inverted vertical menu">
+          <div id="filter-sidebar" class="ui grey very wide sidebar inverted vertical menu">
             <h2 class="ui icon header" id="filter-header">
               <i class="filter icon"></i>
               <div class="content">
@@ -38,13 +38,44 @@
                 </div>
               </div>
             </h2>
-            <div class="ui fluid icon input">
-              <input type="text" placeholder="Search Tags...">
-              <i class="circular search link icon"></i>
+
+            <div id="filter-search-container">
+              <h4 class="ui dividing header">Search for Tags to Filter by</h4>
+
+              <div id="filter-search-tags" class="ui search">
+                <div class="ui fluid icon input">
+                  <input id="filter-search-bar" class="prompt" type="text" placeholder="Search Tags...">
+                  <i class="search icon"></i>
+                </div>
+                <div class="results"></div>
+              </div>
+
+            </div>
+
+            <div id="filter-tags-table">
+              <h4 class="ui dividing header">Current Filtered Tags</h4>
+              <table class="ui celled small table">
+                <thead class="full-width">
+                  <tr>
+                    <th class="center aligned">Tag Name</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="center aligned">
+                    <td><a class="ui tag label">Food <i class="red close icon"></i></a></td>
+                  </tr>
+                  <tr class="center aligned">
+                    <td><a class="ui tag label">Burger <i class="red close icon"></i></a></td>
+                  </tr>
+                  <tr class="center aligned">
+                    <td><a class="ui tag label">American <i class="red close icon"></i></a></td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
 
             <div id="filter-type-form" class="ui form">
-              <h4 class="ui dividing header">Filter by item type</h4>
+              <h4 class="ui dividing header">Filter by Item Type</h4>
               <div class="inline field">
                 <div class="ui checkbox">
                   <label>PDF</label>
