@@ -7,7 +7,7 @@
 }, {
   "name": "Introduction To Algorithms",
   "picture": "https://image.flaticon.com/icons/svg/136/136522.svg",
-  "description": "Introduction to Algorithms is a book by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein. The book has been widely used as the textbook for algorithms courses at many universities.  Its fame has led to the common use of the abbreviation 'CLRS' (Cormen, Leiserson, Rivest, Stein)",
+    "description": "Introduction to Algorithms is a book by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein. The book has been widely used as the textbook for algorithms courses at many universities.  Its fame has led to the common use of the abbreviation 'CLRS' (Cormen, Leiserson, Rivest, Stein)",
   "tags": ["algorithms", "advanced"],
   "type": "pdf"
 }, {
