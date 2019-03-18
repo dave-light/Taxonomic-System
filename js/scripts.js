@@ -165,6 +165,17 @@
 
   function showItem(id){
     let item = Items.find(id);
+    $('#item-modal-image').empty();
+    $("#item-modal-name").text(item.name);
+    $("#item-modal-desc").text(item.description);
+    let tagBuilder = "";
+    let tags = Tags.forItem(item);
+    console.log(item.tags);
+    for(var i = 0; i < tags.length; i++){
+      tagBuilder += tags[i].name + " ";
+    }
+    $("#item-modal-tags").text("Tags: " + tagBuilder);
+    $('#item-modal-image').append("<img src='" + item.picture + "'></img>");
     $('.ui.modal#itemOverlay').modal('show');
    
   }
