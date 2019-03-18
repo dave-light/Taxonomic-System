@@ -6,6 +6,7 @@
   var tags;
   var co_tags;
   var all_tags = [];
+  var filtered_tags = [];
   var items_and_tags;
   var container = document.body;
 
@@ -176,7 +177,22 @@
     $('.ui.sidebar').sidebar('toggle');
   });
 
-  $(".filtered-tag").click(function(){
+  $("#add-tag-filter").click(function(){
+    var tag_name = $("#filter-search-bar").val();
+    var found = all_tags.find(function(element) {
+      return element.title == tag_name;
+    });
+    // alert(tag_name);
+    // alert(tagInFilterList(tag_name));
+    if (found && (tagInFilterList(tag_name) != true)) {
+      insertTagToFilterList(tag_name);
+      $("#filter-search-bar").val("");
+    }
+  });
+
+  $( "#tag-rows" ).on( "click", ".filtered-tag", function() {
+    var i = filtered_tags.indexOf($(this).text());
+    filtered_tags.splice(i,1);
     $(this).parents("tr").remove();
     updateEmptyTable();
   });
@@ -184,9 +200,32 @@
   function updateEmptyTable() {
     var empty_table = '<tr id="empty-tag-list" class="center aligned">' +
     '<td>No tags currently filtered</td></tr>';
-    if ($("#tag-rows").children().length == 0) {
+    if (tagFilterListIsEmpty()) {
       $("#tag-rows").html(empty_table);
     } else {
       $("#empty-tag-list").remove();
     }
+  }
+
+  function tagFilterListIsEmpty() {
+    return $("#tag-rows").children().length == 0;
+  }
+
+  function tagInFilterList(tag) {
+    var flag = false;
+    $(".tag-entry").each(function() {
+        if (tag == $(this).text()) {
+          flag = true;
+        }
+    });
+    return flag;
+  }
+
+  function insertTagToFilterList(tag) {
+    var tag_filter = '<tr class="center aligned"><td>' +
+    '<a class="ui tag label filtered-tag"><span class="tag-entry">' + tag +
+    '</span><i class="red close icon"></i></a></td></tr>';
+    $("#tag-rows").append(tag_filter);
+    filtered_tags.push(tag);
+    updateEmptyTable();
   }
