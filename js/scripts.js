@@ -163,15 +163,31 @@
   }
 
 
+  function undoRemoveTag(itemId, tagId){
+    let item = Items.find(itemId);
+    let tag = Tags.find(tagId);
+    Tags.attach(tag, item);
+    $("#item-modal-tags").append("<button id='item-modal-tag-button-" + tagId + "'class='ui button tag label' onclick='removeItemTag(" 
+    + item.id + ", "+ tag.id + ", "+ tagId + ")'>" + tag.name + "<i class='delete icon red item-delete-tag-icon'> </i></button>");
+    $(".remove-tag-msg").remove();
+    $(".ui .modal").prepend("<div class='remove-tag-msg ui message yellow'><div class='header'>Undid Removing Tag From Item</div><p>Tag "+ tag.name  +" readded to item " + item.name +".</p></div>");
+  }
+
   function removeItemTag(itemId, tagId, buttonId){
    let item = Items.find(itemId);
    let tag = Tags.find(tagId);
     Tags.detach(tag,item);
     $("#item-modal-tag-button-"+buttonId).remove();
-  }
+    $(".remove-tag-msg").remove();
+    $(".ui .modal").prepend("<div class='remove-tag-msg ui message red'><div class='header'>Removed Tag From Item</div><div><p>Tag "+ tag.name  +" removed from item " + item.name 
+    + ".</p><button id='item-modal-undo-remove-tag' class='ui button tag yellow ' onclick='undoRemoveTag(" + itemId + ", "+ tagId +")'>undo</button></div>");
 
+  }
+ 
   function showItem(id){
     let item = Items.find(id);
+    $(".remove-tag-msg").remove();
+    $("#item-modal-tags").empty();
     $('#item-modal-image').empty();
     $("#item-modal-name").text(item.name);
     $("#item-modal-desc").text(item.description);    

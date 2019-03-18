@@ -84,3 +84,9 @@ border-radius: 0px;
 .item-delete-tag-icon{
   padding-left: 10px !important;
 }
+
+#item-modal-undo-remove-tag{
+  position: relative;
+  top: 100%;
+  left: 92%;
+}
