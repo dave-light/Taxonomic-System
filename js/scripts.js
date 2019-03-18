@@ -138,7 +138,7 @@
 
   // This will eventually be updated to take further parameters, such as name
   function generateItemCard(id, image) {
-        return '<div class="column"><div id="item-' + id + '" class="ui fluid card item-card"><div class="content"><img class="ui centered image item-image" src="' + image + '" alt=""></div></div></div>';
+        return '<div class="column"><div id="item-' + id + '" class="ui fluid card item-card" onclick="showItem('+ id + ')"><div class="content"><img class="ui centered image item-image" src="' + image + '" alt=""></div></div></div>';
   }
 
   function updateTotalResults() {
@@ -161,3 +161,12 @@
     $('#main-grid').removeClass('one two three four column grid');
     $('#main-grid').addClass(size + ' column grid');
   }
+
+
+  function showItem(id){
+    let item = Items.find(id);
+    $('.ui.modal#itemOverlay').modal('show');
+   
+  }
+
+
