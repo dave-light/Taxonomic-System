@@ -4,7 +4,7 @@
   var dropdown_selection = "All";
   var items;
   var tags;
-  var co-tags;
+  var co_tags;
   var items_and_tags;
   var container = document.body;
 
