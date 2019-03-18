@@ -84,6 +84,7 @@
     $( '#search-input' ).keypress(function (e) {
 
       if (e.key === ' ' || e.keyCode == 13) {
+        e.preventDefault()
 
         if(dropdown_selection == "All")   {
           items_and_tags.forEach(function(object){

@@ -2,85 +2,70 @@
 <html lang="en" dir="ltr">
 
 <head>
-  <meta charset="utf-8">
-  <title>Taxonomics</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
-  <link rel="stylesheet" href="css/styles.css">
+    <meta charset="utf-8">
+    <title>Taxonomics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
-  <div class='box' id='loggedOut'>
-    <div class="ui huge header item" id='logo-logged-out'>
-      Taxanomics
-    </div>
-    <div>
-      <select class="ui dropdown" id="userName" name="userName">
-      </select>
-      <button class="ui green button" id='logInButton' style="margin-left:10px">Log in</button>
-    </div>
-  </div>
-  <div id="loggedIn">
-    <div class="ui menu search fixed">
-      <div class="ui medium header item bin" id="logo-logged-in">
-        Taxanomics
-        <button class="ui button" id="filter-button">
-          <i class="filter icon" style="margin: 0px;"></i>
-        </button>
-      </div>
-      <div class="menu">
-        <div class="item" id="search-bar">
-          <div class="ui transparent huge icon input">
-            <div class="ui basic floating dropdown button" id="search-choice-button">
-              <div id="dropdown-text" class="text">All</div>
-              <i class="dropdown icon"></i>
-              <div class="menu">
-                <div class="item">All</div>
-                <div class="item">Items</div>
-                <div class="item">Tags</div>
-              </div>
-            </div>
-
-            <input id="search-input" type="text" placeholder="Search...">
-            <i class="search link icon" id="search-icon"></i>
-          </div>
+    <div class='box' id='loggedOut'>
+        <div class="ui huge header item" id='logo'>
+            Taxanomics
         </div>
-      </div>
-      <div class="right menu" id="logout-button-surrounding">
-        <div class="item">
-          <div class="ui transparent big icon input">
-            <button class="ui button" id="logout-button">Log Out</button>
-
-            <!--confirmation box -->
-            <div class="ui basic modal">
-              <div id="log-out-screen" class="content">
-                <h3 class="tiny">Are you sure you would like to log out?</h3>
-              </div>
-              <div id="log-out-screen" class="actions">
-                <div class="ui red basic cancel inverted button">
-                  <i class="remove icon"></i>
-                  No
-
-                </div>
-                <div class="ui green ok inverted button" id="logOutButton">
-                  <i class="checkmark icon"></i>
-                  Yes
-                </div>
-              </div>
-            </div>
-          </div>
+        <div>
+            <select class="ui dropdown" id="userName" name="userName">
+            </select>
+            <button class="ui green button" id='logInButton' style="margin-left:10px">Log in</button>
         </div>
-      </div>
     </div>
-    <div id="main-view" class="ui container">
-      <h1 id="results-label"> 10 Results</h1>
-      <div id="main-grid" class="ui stackable four column grid">
-
-        <div class="column">
-          <div class="ui fluid card item-card">
-            <div class="content">
-              <img class="ui centered image item-image" src="images/orangutan.jpg" alt="">
+    <div id="loggedIn">
+        <div class="ui menu">
+            <div class="ui medium header item">
+                Taxanomics
             </div>
-          </div>
+            <div class="menu">
+                <div id="search-bar" class="item">
+                    <div class="ui transparent huge icon input">
+                         <div class="ui basic floating dropdown button">
+                            <div id="dropdown-text" class="text">All</div>
+                            <i class="dropdown icon"></i>
+                            <div class="menu">
+                                <div class="item">All</div>
+                                <div class="item">Items</div>
+                                <div class="item">Tags</div>
+                            </div>
+                        </div>
+                        <input id="search-input" type="text" placeholder="Search...">
+                        <i class="search link icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="right menu">
+                <div class="item">
+                    <div class="ui transparent big icon input">
+                        <button class="ui button" id="logout-button">Log Out</button>
+
+                        <!--confirmation box -->
+                        <div class="ui basic modal">
+                            <div id="log-out-screen" class="content">
+                                <h3 class="tiny">Are you sure you would like to log out?</h3>
+                            </div>
+                            <div id="log-out-screen" class="actions">
+                                <div class="ui red basic cancel inverted button">
+                                    <i class="remove icon"></i>
+                                    No
+                                </div>
+                                <div class="ui green ok inverted button" id="logOutButton">
+                                    <i class="checkmark icon"></i>
+                                    Yes
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <div id="main-view" class="ui container">
@@ -90,21 +75,16 @@
             <div id="main-grid" class="ui stackable four column grid">
               <!-- Items will be shown here -->
             </div>
-          </div>
+
+
         </div>
-
-      </div>
-
-
     </div>
-  </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
-  <script src='js/taxonomic.js'></script>
-  <script src='js/ui.js'></script>
-  <script src='js/bindings.js'></script>
-  <script src='js/config.js'></script>
-  <script type="text/javascript" src="js/scripts.js"></script>
-</body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    <script src='js/taxonomic.js'></script>
+    <script src='js/ui.js'></script>
+    <script src='js/bindings.js'></script>
+    <script src='js/config.js'></script>
+    <script type="text/javascript" src="js/scripts.js"></script>
 
 </html>
