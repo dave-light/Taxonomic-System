@@ -12,11 +12,6 @@
   width: auto;
 }
 
-#results-label {
-  text-align: right;
-  padding: 10px 0px;
-}
-
 .item-image {
   height: calc(30vh - 2em) !important;
   display: block !important;
@@ -46,4 +41,9 @@
   display: flex;
   align-items:center;
   justify-content: center;
+}
+
+#header {
+  padding: 15px 5px 5px 5px !important;
+  margin-bottom: 30px;
 }
