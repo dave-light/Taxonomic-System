@@ -161,3 +161,7 @@
     $('#main-grid').removeClass('one two three four column grid');
     $('#main-grid').addClass(size + ' column grid');
   }
+
+  $("#filter-button").click(function(){
+    $('.ui.sidebar').sidebar('toggle');
+  });
