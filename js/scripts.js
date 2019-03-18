@@ -4,6 +4,7 @@
   var dropdown_selection = "All";
   var items;
   var tags;
+  var co-tags;
   var items_and_tags;
   var container = document.body;
 
@@ -84,7 +85,6 @@
     $( '#search-input' ).keypress(function (e) {
 
       if (e.key === ' ' || e.keyCode == 13) {
-        e.preventDefault()
 
         if(dropdown_selection == "All")   {
           items_and_tags.forEach(function(object){
