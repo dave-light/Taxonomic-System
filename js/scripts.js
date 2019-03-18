@@ -163,6 +163,13 @@
   }
 
 
+  function removeItemTag(itemId, tagId, buttonId){
+   let item = Items.find(itemId);
+   let tag = Tags.find(tagId);
+    Tags.detach(tag,item);
+    $("#item-modal-tag-button-"+buttonId).remove();
+  }
+
   function showItem(id){
     let item = Items.find(id);
     $('#item-modal-image').empty();
@@ -170,12 +177,11 @@
     $("#item-modal-desc").text(item.description);    
     let tags = Tags.forItem(item);
     for(var i = 0; i < tags.length; i++){
-      $("#item-modal-tags").append( "<i class='delete icon item-modal-tag-delete'> " + tags[i].name + " </i>");
+      $("#item-modal-tags").append("<button id='item-modal-tag-button-" + i + "'class='ui button tag label' onclick='removeItemTag(" + id + ", "+ tags[i].id + ", "+ i + ")'>" + tags[i].name + "<i class='delete icon red item-delete-tag-icon'> </i></button>");
     }
     
     $('#item-modal-image').append("<img src='" + item.picture + "'></img>");
     $('.ui.modal#itemOverlay').modal('show');
    
   }
-
 

@@ -81,6 +81,6 @@ border-radius: 0px;
   margin-bottom: 30px;
 }
 
-.item-modal-tag-delete{
-  padding: 15px 40px !important;
+.item-delete-tag-icon{
+  padding-left: 10px !important;
 }
