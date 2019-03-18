@@ -175,3 +175,18 @@
   $("#filter-button").click(function(){
     $('.ui.sidebar').sidebar('toggle');
   });
+
+  $(".filtered-tag").click(function(){
+    $(this).parents("tr").remove();
+    updateEmptyTable();
+  });
+
+  function updateEmptyTable() {
+    var empty_table = '<tr id="empty-tag-list" class="center aligned">' +
+    '<td>No tags currently filtered</td></tr>';
+    if ($("#tag-rows").children().length == 0) {
+      $("#tag-rows").html(empty_table);
+    } else {
+      $("#empty-tag-list").remove();
+    }
+  }

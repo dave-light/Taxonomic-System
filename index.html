@@ -43,9 +43,12 @@
               <h4 class="ui dividing header">Search for Tags to Filter by</h4>
 
               <div id="filter-search-tags" class="ui search">
-                <div class="ui fluid icon input">
+                <div class="ui fluid right labeled left icon input">
+                   <i class="tags icon"></i>
                   <input id="filter-search-bar" class="prompt" type="text" placeholder="Search Tags...">
-                  <i class="search icon"></i>
+                  <a id="add-tag-filter" class="ui tag label">
+                    Add Tag to Filter
+                  </a>
                 </div>
                 <div class="results"></div>
               </div>
@@ -60,16 +63,19 @@
                     <th class="center aligned">Tag Name</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="tag-rows">
                   <tr class="center aligned">
-                    <td><a class="ui tag label">Food <i class="red close icon"></i></a></td>
+                    <td><a class="ui tag label filtered-tag">Samsung <i class="red close icon"></i></a></td>
                   </tr>
                   <tr class="center aligned">
-                    <td><a class="ui tag label">Burger <i class="red close icon"></i></a></td>
+                    <td><a class="ui tag label filtered-tag">Burger <i class="red close icon"></i></a></td>
                   </tr>
                   <tr class="center aligned">
-                    <td><a class="ui tag label">American <i class="red close icon"></i></a></td>
+                    <td><a class="ui tag label filtered-tag">American <i class="red close icon"></i></a></td>
                   </tr>
+                  <!-- <tr id="empty-tag-list" class="center aligned">
+                    <td>No tags currently filtered</td>
+                  </tr> -->
                 </tbody>
               </table>
             </div>
