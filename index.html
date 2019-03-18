@@ -10,7 +10,7 @@
 
 <body>
     <div class='box' id='loggedOut'>
-        <div class="ui huge header item" id='logo'>
+        <div class="ui huge header item" id='logo-logged-out'>
             Taxanomics
         </div>
         <div>
@@ -20,28 +20,31 @@
         </div>
     </div>
     <div id="loggedIn">
-        <div class="ui menu">
-            <div class="ui medium header item">
-                Taxanomics
-            </div>
+        <div class="ui menu search fixed">
+          <div class="ui medium header item bin" id="logo-logged-in">
+            Taxanomics
+            <button class="ui button" id="filter-button">
+              <i class="filter icon" style="margin: 0px;"></i>
+            </button>
+          </div>
             <div class="menu">
-                <div id="search-bar" class="item">
-                    <div class="ui transparent huge icon input">
-                         <div class="ui basic floating dropdown button">
-                            <div id="dropdown-text" class="text">All</div>
-                            <i class="dropdown icon"></i>
-                            <div class="menu">
-                                <div class="item">All</div>
-                                <div class="item">Items</div>
-                                <div class="item">Tags</div>
-                            </div>
-                        </div>
-                        <input id="search-input" type="text" placeholder="Search...">
-                        <i class="search link icon"></i>
+              <div class="item" id="search-bar">
+                <div class="ui transparent huge icon input">
+                  <div class="ui basic floating dropdown button" id="search-choice-button">
+                    <div id="dropdown-text" class="text">All</div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                      <div class="item">All</div>
+                      <div class="item">Items</div>
+                      <div class="item">Tags</div>
                     </div>
+                  </div>
+                  <input id="search-input" type="text" placeholder="Search...">
+                  <i class="search link icon" id="search-icon"></i>
                 </div>
+              </div>
             </div>
-            <div class="right menu">
+            <div class="right menu" id="logout-button-surrounding">
                 <div class="item">
                     <div class="ui transparent big icon input">
                         <button class="ui button" id="logout-button">Log Out</button>
