@@ -1,7 +1,9 @@
-#search-bar {
-  width: calc(100vw - 320px);
-  background-color: lightgrey;
 
+
+#search-bar {
+  width: calc(100vw - 123px);
+  background-color: lightgrey;
+  padding-right: 0px;
 }
 
 #search-input {
@@ -54,15 +56,21 @@
 #logo-logged-in{
 background-color: lightgrey;
 border-radius: 0px;
+padding-right: 0px;
+padding-left: 0px
 }
+
 
 #logout-button{
   background-color: darkgrey !important;
+  font-size: 14px;
+  padding: 10px !important;
 }
 
 #logout-button-surrounding{
   background-color: lightgrey !important;
 }
+
 
 #search-choice-button{
   background-color: darkgrey !important;
@@ -79,4 +87,22 @@ border-radius: 0px;
 #header {
   padding: 15px 5px 5px 5px !important;
   margin-bottom: 30px;
+}
+
+#search-choice-button{
+  min-width: 70px !important;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: center !important;
+}
+
+@media screen and (max-width:653px) {
+  #search-bar {
+    max-width: calc(100vw - 123px);
+  }
+  #search-input{
+    padding-right: 0px !important;
+    max-width: calc(100vw - 220px) !important;
+  } 
+
 }
