@@ -85,6 +85,10 @@ border-radius: 0px;
   padding-left: 10px !important;
 }
 
+#icon-text-padding{
+  padding-left: 10px !important;
+}
+
 #item-modal-undo-remove-tag{
   position: relative;
   top: 100%;

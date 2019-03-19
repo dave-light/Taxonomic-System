@@ -22,6 +22,7 @@
       //Enables dropdown in login
       $( '.ui.dropdown' ).dropdown();
 
+
       // Enables function calls on the main view that require
       // enabled objects.
       // Workaround for the login/logout one page design.
@@ -39,6 +40,9 @@
                   enable_dropdown();
 
                   displayAllResults();
+                  let testArray = [{title:'a'}, {title:'b'}];
+                  
+                  $('.ui.search').search({source: testArray});
 
                   search(); // REMOVE WHEN SEARCH IS FUNCTIONAL.
                             // stored in -> items
@@ -163,6 +167,30 @@
   }
 
 
+  function drawAddTagMenu(){
+
+    var tagNames = [];
+    var allTags = Tags.search("");
+    for(i = 0; i < allTags.length; i++){
+      tagNames.push({"title": allTags[i].element.name});
+    }
+    $("#item-add-tag-menu").append("<div class='ui dropdown search'><div class='ui icon input'><input id='add-tag-item-search' class='prompt' type='text' placeholder='Search Tags to Add...'><i class='search icon'></i></div><div class='results'></div></div>")
+    $('.ui.search').search({source: tagNames, on: click});
+    let input = $('.ui.search').search('get value');
+    //let input = $("#prompt.add-tag-item-search").val();
+    console.log(input);
+    //addTagToItem();
+
+  }
+
+  function addTagToItem(itemId, tagId){
+    let item = Items.find(itemId);
+    let tag = Tags.find(tagId);
+    Tags.attach(tag, item);
+    $(".ui .modal").prepend("<div class='remove-tag-msg ui message yellow'><div class='header'>Undid Removing Tag From Item</div><p>Tag "+ tag.name  +" readded to item " + item.name +".</p></div>");
+
+  }
+
   function undoRemoveTag(itemId, tagId){
     let item = Items.find(itemId);
     let tag = Tags.find(tagId);
@@ -193,7 +221,9 @@
     $("#item-modal-desc").text(item.description);    
     let tags = Tags.forItem(item);
     for(var i = 0; i < tags.length; i++){
-      $("#item-modal-tags").append("<button id='item-modal-tag-button-" + i + "'class='ui button tag label' onclick='removeItemTag(" + id + ", "+ tags[i].id + ", "+ i + ")'>" + tags[i].name + "<i class='delete icon red item-delete-tag-icon'> </i></button>");
+      $("#item-modal-tags").append("<button id='item-modal-tag-button-" 
+      + i + "'class='ui button tag label' onclick='removeItemTag(" + id + ", "+ tags[i].id + ", "+ i 
+      + ")'>" + tags[i].name + "<i class='delete icon red item-delete-tag-icon'> </i></button>");
     }
     
     $('#item-modal-image').append("<img src='" + item.picture + "'></img>");
