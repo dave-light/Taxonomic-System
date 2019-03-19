@@ -228,31 +228,19 @@ function showTag(id){
 }
 
 function onClickModal() {
+    var id;
+    var tag_id;
+    var tag;
+
     $("#main-grid").on('click', '.column', function() {
-        var id = $(this).children()[0].id;
+        id = $(this).children()[0].id;
         if(id.indexOf("tag") >= 0) {
-            var tag_id = parseInt(id.substring(id.indexOf("-") + 1));
+
+            tag_id = parseInt(id.substring(id.indexOf("-") + 1));
             console.log(tag_id);
 
-            var tag = Tags.find(tag_id);
+            tag = Tags.find(tag_id);
             console.log(tag);
-
-
-            $('#flag').on('click', function() {
-                if($('#flag').text() === "Flag"){
-                    console.log("Flagged.");
-                    Tags.flag(tag);
-                    $('#flag').text("Un-flag");
-                }else{
-                    console.log("Un-flagged.");
-                    Tags.unflag(tag);
-                    $('#flag').text("Flag");
-                }
-
-
-                console.log(Tags.history(tag));
-            });
-
 
 
             if(Tags.isFlagged(tag)){
@@ -260,6 +248,9 @@ function onClickModal() {
             }else{
                 $('#flag').text("Flag");
             }
+
+
+
             //Stuff on the modal
             $(".remove-tag-msg").remove();
             $('#tag-modal-image').empty();
@@ -276,18 +267,22 @@ function onClickModal() {
             $('.ui.modal#tagsOverlay').modal('show');
         }
     });
-}
-function flagging(id) {
-    var tag = Tags.find(id);
-    Tags.flag(tag);
-    console.log(Tags.isFlagged(tag));
-    console.log(Tags.history(tag));
-}
-function unflagging(id) {
-    var tag = Tags.find(id);
-    Tags.unflag(tag);
-    console.log(Tags.isFlagged(tag));
-    console.log(Tags.history(tag));
+
+
+    $('#flag').on('click', function() {
+        if($('#flag').text() == "Flag"){
+            console.log("Flagged.");
+            Tags.flag(tag);
+            $('#flag').text("Un-flag");
+        }else{
+            console.log("Un-flagged.");
+            Tags.unflag(tag);
+            $('#flag').text("Flag");
+        }
+
+
+        console.log(Tags.history(tag));
+    });
 }
   function setGridWidth(size) {
     $('#main-grid').removeClass('one two three four column grid');
