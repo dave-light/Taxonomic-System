@@ -1,4 +1,4 @@
-  const { Users, Items, Tags } = Taxonomic;
+ const { Users, Items, Tags } = Taxonomic;
 
   //Global variables
   var dropdown_selection = "All";
@@ -203,5 +203,4 @@ function displayAllResults() {
   function setGridWidth(size) {
     $('#main-grid').removeClass('one two three four column grid');
     $('#main-grid').addClass(size + ' column grid');
-  }
-
+}
