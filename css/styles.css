@@ -110,3 +110,7 @@ border-radius: 0px;
 .filter-type, .sort-type {
   margin-right: 15px !important;
 }
+
+#filter-button-container {
+  margin-top: 50px;
+}
