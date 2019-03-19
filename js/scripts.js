@@ -6,8 +6,11 @@
   var tags;
   var co_tags;
   var all_tags = [];
-  var filtered_tags = [];
   var items_and_tags;
+  var filtered_tags = [];
+  var filter_type = [];
+  var sort_option;
+  var sort_order;
   var container = document.body;
 
   $( document ).ready(function () {
@@ -177,6 +180,13 @@
     $('.ui.sidebar').sidebar('toggle');
   });
 
+  $("#clear-filters-button").click(function(){
+    $("#filter-search-bar").val("");
+    $("#error-container").hide();
+    clearFilterTable();
+    resetFilterForms();
+  });
+
   $("#add-tag-filter").click(function(){
     var tag_name = $("#filter-search-bar").val();
     var found = all_tags.find(function(element) {
@@ -218,6 +228,17 @@
     }
   }
 
+  function clearFilterTable() {
+    $("#tag-rows").empty();
+    updateEmptyTable();
+  }
+
+  function resetFilterForms() {
+    $('.ui.form').form('clear');
+    $("#date").prop("checked", true);
+    $("#ascending").prop("checked", true);
+  }
+
   function tagFilterListIsEmpty() {
     return $("#tag-rows").children().length == 0;
   }
@@ -240,3 +261,11 @@
     filtered_tags.push(tag);
     updateEmptyTable();
   }
+
+  // $("#filter-sidebar input:not(#filter-search-bar)").change(function(){
+  //   alert($("#filter-sort-order").children().is(":checked").val());
+  // });
+  //
+  // function filterResults() {
+  //
+  // }

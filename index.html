@@ -81,25 +81,25 @@
               <div class="field filter-type">
                 <div class="ui checkbox">
                   <label>PDF</label>
-                  <input type="checkbox" tabindex="0" class="hidden">
+                  <input id="pdf" type="checkbox" tabindex="0" class="hidden">
                 </div>
               </div>
               <div class="field filter-type">
                 <div class="ui checkbox">
                   <label>Image</label>
-                  <input type="checkbox" tabindex="1" class="hidden">
+                  <input id="image" type="checkbox" tabindex="1" class="hidden">
                 </div>
               </div>
               <div class="field filter-type">
                 <div class="ui checkbox">
                   <label>Video</label>
-                  <input type="checkbox" tabindex="2" class="hidden">
+                  <input id="video" type="checkbox" tabindex="2" class="hidden">
                 </div>
               </div>
               <div class="field filter-type">
                 <div class="ui checkbox">
                   <label>Audio</label>
-                  <input type="checkbox" tabindex="3" class="hidden">
+                  <input id="audio" type="checkbox" tabindex="3" class="hidden">
                 </div>
               </div>
             </div>
@@ -114,25 +114,25 @@
               <div class="grouped fields">
                 <div class="field sort-type">
                   <div class="ui radio checkbox">
-                    <input type="radio" name="sort" checked="" tabindex="0" class="hidden">
+                    <input id="date" type="radio" name="sort" checked="" tabindex="0" class="hidden">
                     <label>Date</label>
                   </div>
                 </div>
                 <div class="field sort-type">
                   <div class="ui radio checkbox">
-                    <input type="radio" name="sort" tabindex="0" class="hidden">
+                    <input id="item-name" type="radio" name="sort" tabindex="0" class="hidden">
                     <label>Name</label>
                   </div>
                 </div>
                 <div class="field sort-type">
                   <div class="ui radio checkbox">
-                    <input type="radio" name="sort" tabindex="0" class="hidden">
+                    <input id="number-items" type="radio" name="sort" tabindex="0" class="hidden">
                     <label>No. of attached items</label>
                   </div>
                 </div>
                 <div class="field sort-type">
                   <div class="ui radio checkbox">
-                    <input type="radio" name="sort" tabindex="0" class="hidden">
+                    <input id="co-tags" type="radio" name="sort" tabindex="0" class="hidden">
                     <label>No. of Co-tags</label>
                   </div>
                 </div>
@@ -146,13 +146,13 @@
               <div class="grouped fields">
                 <div class="field sort-type">
                   <div class="ui radio checkbox">
-                    <input type="radio" name="sort-order" checked="" tabindex="0" class="hidden">
+                    <input type="radio" id="ascending" name="sort-order" checked="" tabindex="0" class="hidden">
                     <label>Ascending</label>
                   </div>
                 </div>
                 <div class="field sort-type">
                   <div class="ui radio checkbox">
-                    <input type="radio" name="sort-order" tabindex="0" class="hidden">
+                    <input type="radio" id="descending" name="sort-order" tabindex="0" class="hidden">
                     <label>Descending</label>
                   </div>
                 </div>
@@ -163,16 +163,16 @@
           </div>
 
           <div id="filter-button-container" class="ui two column grid">
-            <div class="two column row">
+            <div class="one column row">
 
               <div class="column">
 
-                <button class="negative ui fluid button">Clear Filters</button>
+                <button id="clear-filters-button" class="negative ui fluid button">Clear Filters</button>
               </div>
-              <div class="column">
+              <!-- <div class="column">
 
                 <button class="positive ui fluid button">Apply Filters</button>
-              </div>
+              </div> -->
             </div>
           </div>
 
