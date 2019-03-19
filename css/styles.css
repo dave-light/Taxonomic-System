@@ -96,3 +96,14 @@ border-radius: 0px;
 #filter-search-bar {
   border-radius: 5px;
 }
+
+#error-container {
+  padding-top: 10px;
+  padding-left: 5px;
+  color: #8b0000;
+  display: none;
+}
+
+.filter-type {
+  margin-right: 15px !important;
+}

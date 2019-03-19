@@ -182,12 +182,23 @@
     var found = all_tags.find(function(element) {
       return element.title == tag_name;
     });
-    // alert(tag_name);
-    // alert(tagInFilterList(tag_name));
-    if (found && (tagInFilterList(tag_name) != true)) {
+
+    if (!found) {
+      $("#filter-error-message").html("This tag doesn't exist in the system");
+      $("#error-container").show();
+    } else if ((tagInFilterList(tag_name) == true)) {
+      $("#filter-error-message").html("This tag has already been added to the list");
+      $("#error-container").show();
+    } else {
+      $("#error-container").hide();
       insertTagToFilterList(tag_name);
       $("#filter-search-bar").val("");
     }
+
+  });
+
+  $("#filter-search-bar").focus(function(){
+    $("#error-container").hide();
   });
 
   $( "#tag-rows" ).on( "click", ".filtered-tag", function() {
