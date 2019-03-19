@@ -3,17 +3,15 @@
 #search-bar {
   width: calc(100vw - 123px);
   background-color: lightgrey;
-  padding-right: 0px;
+  padding-right: 10px;
+  padding-left: 7px;
 }
 
 #search-input {
   padding-left: 12px !important;
   background-color: white !important;
   border-radius: 5px !important;
-}
-
-#search-icon{
-  padding-right: 50px !important;
+  padding-right: 1px;
 }
 
 #main-view {
@@ -56,8 +54,8 @@
 #logo-logged-in{
 background-color: lightgrey;
 border-radius: 0px;
-padding-right: 0px;
-padding-left: 0px
+padding-right: 7px;
+padding-left: 7px
 }
 
 
@@ -81,7 +79,7 @@ padding-left: 0px
   background-color: darkgrey;
   font-size: 14px;
   padding: 10px !important;
-  margin-left: 15px;
+  margin-left: 5px;
 }
 
 #header {
