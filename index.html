@@ -24,6 +24,9 @@
   <div id="loggedIn">
     <div class="ui menu search fixed">
       <div class="ui medium header item bin" id="logo-logged-in">
+        <button class="ui button" id="add-tag">
+          <i class="plus icon" style="margin: 0px;"></i>
+        </button>
         <button class="ui button" id="filter-button">
           <i class="filter icon" style="margin: 0px;"></i>
         </button>
@@ -70,29 +73,28 @@
       </div>
 
     </div>
-       <!-- Modal for Tags -->
-        <div class="ui modal" id="tagsOverlay">
-            <div class="header">
-                Tag
-            </div>
-            <div class="image content">
-                <div class="ui medium image" id="tag-modal-image">
-                </div>
-                <div class="description">
-                    <div id="tag-modal-name" class="ui header"></div>
-                    <p id="tag-modal-desc"></p>
-                </div>
-            </div>
-            <div class="actions">
-                <div id="flag" class="ui red button" style="min-width: 90px;">
-                    Flag
-                </div>
-
-                <div class="ui red deny button" style="background-color:#CFF7F0; color: #000000">
-                    Close
-                </div>
-            </div>
+    <!-- Modal for Tags -->
+    <div class="ui modal" id="tagsOverlay">
+      <div class="header">
+        Tag
+      </div>
+      <div class="image content">
+        <div class="ui medium image" id="tag-modal-image">
         </div>
+        <div class="description">
+          <div id="tag-modal-name" class="ui header"></div>
+          <p id="tag-modal-desc"></p>
+        </div>
+      </div>
+      <div class="actions">
+        <div id="flag" class="ui red button" style="min-width: 90px;">
+          Flag
+        </div>
+        <div class="ui red deny button" style="background-color:#CFF7F0; color: #000000">
+          Close
+        </div>
+      </div>
+    </div>
     <div id="main-view" class="ui container">
       <div id="header" class="ui clearing segment">
         <h3 class="ui left floated header" id="co-tags">Suggested Co-tags: </h3>
@@ -116,5 +118,6 @@
     <script src='js/config.js'></script>
     <script src='https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js'></script>
     <script type="text/javascript" src="js/scripts.js"></script>
-  </body>
+</body>
+
 </html>

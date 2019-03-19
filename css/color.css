@@ -30,6 +30,10 @@ body{
     background-color: #eaece5;
 }
 /* BUTTONS */
+#add-tag{
+    background-color: lightgreen !important;
+}
+
 #logout-button{
 background-color: #cff7f0 !important;
 }
