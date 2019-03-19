@@ -68,6 +68,36 @@
       </div>
 
     </div>
+        
+        <!-- Modal for Tags -->
+        <div class="ui modal" id="tagsOverlay">
+            <div class="header">
+                Tag
+            </div>
+            <div class="image content">
+                <div class="ui medium image" id="tag-modal-image">
+                </div>
+                <div class="description">
+                    <div id="tag-modal-name" class="ui header"></div>
+                    <p id="tag-modal-desc"></p>
+                </div>
+            </div>
+            <div class="actions">
+                <div class="ui red deny button">
+                    close
+                </div>
+            </div>
+        </div>
+        <div id="main-view" class="ui container">
+          <div id="header" class="ui clearing segment">
+            <h3 class="ui left floated header" id="co-tags">Suggested Co-tags: </h3>
+            <a class="ui green tag label">Food</a>
+            <a class="ui green tag label">Burger</a>
+            <a class="ui green tag label">American</a>
+            <a class="ui green tag label">Dinner</a>
+            <a class="ui green tag label">Takeaway</a>
+            <h3 class="ui right floated header" id="results-label"><span id="total-results"></span> Results</h3>
+          </div>
 
     <div id="main-view" class="ui container">
       <div id="header" class="ui clearing segment">
