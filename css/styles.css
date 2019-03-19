@@ -89,7 +89,10 @@ border-radius: 0px;
   margin: 15px;
 }
 
-#filter-search-container, #filter-tags-table, #filter-type-form {
+#filter-search-container,
+#filter-tags-table,
+#filter-type-form,
+#sort-container {
   margin-top: 40px;
 }
 
@@ -104,6 +107,6 @@ border-radius: 0px;
   display: none;
 }
 
-.filter-type {
+.filter-type, .sort-type {
   margin-right: 15px !important;
 }
