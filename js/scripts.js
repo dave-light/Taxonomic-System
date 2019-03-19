@@ -11,7 +11,7 @@
   $( document ).ready(function () {
 
       var user = Users.find(0);
-      Taxonomic.login(user);
+      Taxonomic.login(user);        
       x = Taxonomic.loadItems();
       x.then(function() {
           items              = Items.search("");
@@ -84,42 +84,47 @@
   function bindKeys() {
     $( '#search-input' ).keypress(function (e) {
 
-      if (e.key === ' ' || e.keyCode == 13) {
+        if (e.keyCode == 13) {
+            displayAllResults();
+        }
+        else if(e.keyCode == 32) {
+            displayAllResults();
+        }
 
-        if(dropdown_selection == "All")   {
-          items_and_tags.forEach(function(object){
-            console.log(object.element.name);
-          });
-        }
-        else if(dropdown_selection == "Items") {
-          items.forEach(function(object){
-            console.log(object.element.name);
-          });
-        }
-        else if(dropdown_selection == "Tags")  {
-          tags.forEach(function(object){
-            console.log(object.element.name);
-          });
-        }
-      }
-    })
+    });
   }
 
   function search() {
     // Binds event handler to the search field
     $( "#search-input" ).on('input', function(e){
-      var input = $( this ).val();
+        var input = $( this ).val();
+        var items_names;
+        var items_descs;
+        var items2;
+        var items3;
+        if(dropdown_selection == "All") {
+            items_names = Items.search(input);
+            items_descs  = Items.search2(input);
 
-      // Possibly have to do some tweaking when actually adding the contents
-      // to the layout.
-      if(dropdown_selection == "All")   {
-        items = Items.search(input);
-        tags = Tags.search(input);
-        items_and_tags = items.concat(tags);
-      }
-      else if(dropdown_selection == "Items") {
-        items = Items.search(input);
-      }
+            items3 = compareAndAppendObjectToList(items_descs, items_names);
+            items2 = Items.searchByTag(input);
+            items3 = compareAndAppendObjectToList(items2, items3);
+            items  = items3;
+            
+            tags = Tags.search(input);
+            items_and_tags = items.concat(tags);
+        }
+
+        else if(dropdown_selection == "Items") {
+            items_names = Items.search(input);
+            items_descs  = Items.search2(input);
+
+            items3 = compareAndAppendObjectToList(items_descs, items_names);
+            items2 = Items.searchByTag(input);
+            items3 = compareAndAppendObjectToList(items2, items3);
+            items = items3;
+        }
+      
       else if(dropdown_selection == "Tags")  {
         tags = Tags.search(input);
       }
@@ -127,13 +132,50 @@
 
   }
 
-  function displayAllResults() {
-    items.forEach(function(object){
-      var id = object.element.id;
-      var image = object.element.picture;
-      $("#main-grid").append(generateItemCard(id, image));
+function compareAndAppendObjectToList(target_list, result_list) {
+    var list = result_list;
+    target_list.forEach(function (object) {
+        if(!result_list.some(item => _.isEqual(item.element, object.element))) {
+            list = list.concat(object);
+        }
     });
-    updateTotalResults();
+    return list;
+}
+function displayAllResults() {
+    if(dropdown_selection == "All") {
+        $("#main-grid").html("");
+
+        items.forEach(function(object){
+            var id = object.element.id;
+            var image = object.element.picture;
+            $("#main-grid").append(generateItemCard(id, image));
+        });
+        tags.forEach(function(object){
+            var id = object.element.id;
+            var image = "https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwj3q4HN4ovhAhUB0xoKHaVbB9AQjRx6BAgBEAU&url=https%3A%2F%2Fwww.tag-games.com%2F&psig=AOvVaw1zYGFBj16qVqcV5NzmHlJt&ust=1553001240587027";
+            $("#main-grid").append(generateItemCard(id, image));
+        });
+
+        updateTotalResults();
+    }
+    else if(dropdown_selection == "Items") {
+        $("#main-grid").html("");
+        items.forEach(function(object){
+            var id = object.element.id;
+            var image = object.element.picture;
+            $("#main-grid").append(generateItemCard(id, image));
+        });
+        updateTotalResults();
+    }
+    else if(dropdown_selection == "Tags") {
+        $("#main-grid").html("");
+        tags.forEach(function(object){
+            var id = object.element.id;
+            var image = "https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwj3q4HN4ovhAhUB0xoKHaVbB9AQjRx6BAgBEAU&url=https%3A%2F%2Fwww.tag-games.com%2F&psig=AOvVaw1zYGFBj16qVqcV5NzmHlJt&ust=1553001240587027";
+            $("#main-grid").append(generateItemCard(id, image));
+        });
+        updateTotalResults();
+    }
   }
 
   // This will eventually be updated to take further parameters, such as name
@@ -141,8 +183,9 @@
         return '<div class="column"><div id="item-' + id + '" class="ui fluid card item-card"><div class="content"><img class="ui centered image item-image" src="' + image + '" alt=""></div></div></div>';
   }
 
+
   function updateTotalResults() {
-    $("#total-results").html($("#main-grid .column").length);
+      $("#total-results").html($("#main-grid .column").length);
   }
 
   function updateGridWidth() {
@@ -161,3 +204,4 @@
     $('#main-grid').removeClass('one two three four column grid');
     $('#main-grid').addClass(size + ' column grid');
   }
+
