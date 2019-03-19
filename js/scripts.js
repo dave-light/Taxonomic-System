@@ -135,6 +135,8 @@
     });
 
   }
+
+
 function compareAndAppendObjectToList(target_list, result_list) {
     var list = result_list;
     target_list.forEach(function (object) {
@@ -202,7 +204,7 @@ function generateTagCard(id, image) {
     } else if ($(window).width() < 1600) {
         setGridWidth("three");
     } else {
-    setGridWidth("four");
+        setGridWidth("four");
     }
   }
 function showTag(id){
@@ -226,15 +228,28 @@ function showTag(id){
 }
 
 function onClickModal() {
+    var id;
+    var tag_id;
+    var tag;
+
     $("#main-grid").on('click', '.column', function() {
-        var id = $(this).children()[0].id;
+        id = $(this).children()[0].id;
         if(id.indexOf("tag") >= 0) {
-            var tag_id = parseInt(id.substring(id.indexOf("-") + 1));
+
+            tag_id = parseInt(id.substring(id.indexOf("-") + 1));
             console.log(tag_id);
 
-            
-            var tag = Tags.find(tag_id);
+            tag = Tags.find(tag_id);
             console.log(tag);
+
+
+            if(Tags.isFlagged(tag)){
+                $('#flag').text("Un-flag");
+            }else{
+                $('#flag').text("Flag");
+            }
+
+
 
             //Stuff on the modal
             $(".remove-tag-msg").remove();
@@ -252,8 +267,23 @@ function onClickModal() {
             $('.ui.modal#tagsOverlay').modal('show');
         }
     });
-}
 
+
+    $('#flag').on('click', function() {
+        if($('#flag').text() == "Flag"){
+            console.log("Flagged.");
+            Tags.flag(tag);
+            $('#flag').text("Un-flag");
+        }else{
+            console.log("Un-flagged.");
+            Tags.unflag(tag);
+            $('#flag').text("Flag");
+        }
+
+
+        console.log(Tags.history(tag));
+    });
+}
   function setGridWidth(size) {
     $('#main-grid').removeClass('one two three four column grid');
     $('#main-grid').addClass(size + ' column grid');

@@ -3,7 +3,7 @@
 #search-bar {
   width: calc(100vw - 123px);
   background-color: lightgrey;
-  padding-right: 10px;
+  padding-right: 0px;
   padding-left: 7px;
 }
 
@@ -63,6 +63,7 @@ padding-left: 7px
   background-color: darkgrey !important;
   font-size: 14px;
   padding: 10px !important;
+  padding-right: 7px !important;
 }
 
 #logout-button-surrounding{
