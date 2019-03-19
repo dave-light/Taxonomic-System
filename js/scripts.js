@@ -5,17 +5,25 @@
   var items;
   var tags;
   var co_tags;
+  var all_tags = [];
   var items_and_tags;
+  var filtered_tags = [];
+  var filter_type = [];
+  var sort_option;
+  var sort_order;
   var container = document.body;
 
   $( document ).ready(function () {
 
       var user = Users.find(0);
-      Taxonomic.login(user);        
+      Taxonomic.login(user);
       x = Taxonomic.loadItems();
       x.then(function() {
           items              = Items.search("");
           tags               = Tags.search("");
+          tags.forEach(function(obj) {
+            all_tags.push({ title: obj.element.name});
+          });
           items_and_tags     = items.concat(tags);
         });
 
@@ -37,7 +45,15 @@
 
                   bindKeys();
                   enable_dropdown();
+
                   onClickModal();
+
+                  // Initialises check boxes in filter menu
+                  $('.ui.checkbox').checkbox();
+
+                  // Initialises the tag search box in filter sidebar
+                  $('#filter-search-tags').search({source: all_tags});
+
                   displayAllResults();
 
                   search_listener(); // REMOVE WHEN SEARCH IS FUNCTIONAL.
@@ -112,7 +128,7 @@
             items2 = Items.searchByTag(input);
             items3 = compareAndAppendObjectToList(items2, items3);
             items  = items3;
-            
+
             tags = Tags.search(input);
             items_and_tags = items.concat(tags);
         }
@@ -126,7 +142,7 @@
             items3 = compareAndAppendObjectToList(items2, items3);
             items = items3;
         }
-      
+
       else if(dropdown_selection == "Tags")  {
         tags = Tags.search(input);
       }
@@ -209,7 +225,7 @@ function generateTagCard(id, image) {
   }
 function showTag(id){
     let tag = Tags.find(id);
-    
+
     //Stuff on the modal
     $(".remove-tag-msg").remove();
     $('#tag-modal-image').empty();
@@ -220,7 +236,7 @@ function showTag(id){
     //Description
     $("#tag-modal-desc").text(tag.description);
 
-    
+
     //Appends image
     $('#tag-modal-image').append("<img src=></img>");
     $('.ui.modal#tagOverlay').modal('show');
@@ -287,4 +303,99 @@ function onClickModal() {
   function setGridWidth(size) {
     $('#main-grid').removeClass('one two three four column grid');
     $('#main-grid').addClass(size + ' column grid');
+
 }
+
+  $("#filter-button").click(function(){
+    $('.ui.sidebar').sidebar('toggle');
+  });
+
+  $("#clear-filters-button").click(function(){
+    $("#filter-search-bar").val("");
+    $("#error-container").hide();
+    clearFilterTable();
+    resetFilterForms();
+  });
+
+  $("#add-tag-filter").click(function(){
+    var tag_name = $("#filter-search-bar").val();
+    var found = all_tags.find(function(element) {
+      return element.title == tag_name;
+    });
+
+    if (!found) {
+      $("#filter-error-message").html("This tag doesn't exist in the system");
+      $("#error-container").show();
+    } else if ((tagInFilterList(tag_name) == true)) {
+      $("#filter-error-message").html("This tag has already been added to the list");
+      $("#error-container").show();
+    } else {
+      $("#error-container").hide();
+      insertTagToFilterList(tag_name);
+      $("#filter-search-bar").val("");
+    }
+
+  });
+
+  $("#filter-search-bar").focus(function(){
+    $("#error-container").hide();
+  });
+
+  $( "#tag-rows" ).on( "click", ".filtered-tag", function() {
+    var i = filtered_tags.indexOf($(this).text());
+    filtered_tags.splice(i,1);
+    $(this).parents("tr").remove();
+    updateEmptyTable();
+  });
+
+  function updateEmptyTable() {
+    var empty_table = '<tr id="empty-tag-list" class="center aligned">' +
+    '<td>No tags currently filtered</td></tr>';
+    if (tagFilterListIsEmpty()) {
+      $("#tag-rows").html(empty_table);
+    } else {
+      $("#empty-tag-list").remove();
+    }
+  }
+
+  function clearFilterTable() {
+    $("#tag-rows").empty();
+    updateEmptyTable();
+  }
+
+  function resetFilterForms() {
+    $('.ui.form').form('clear');
+    $("#date").prop("checked", true);
+    $("#ascending").prop("checked", true);
+  }
+
+  function tagFilterListIsEmpty() {
+    return $("#tag-rows").children().length == 0;
+  }
+
+  function tagInFilterList(tag) {
+    var flag = false;
+    $(".tag-entry").each(function() {
+        if (tag == $(this).text()) {
+          flag = true;
+        }
+    });
+    return flag;
+  }
+
+  function insertTagToFilterList(tag) {
+    var tag_filter = '<tr class="center aligned"><td>' +
+    '<a class="ui tag label filtered-tag"><span class="tag-entry">' + tag +
+    '</span><i class="red close icon"></i></a></td></tr>';
+    $("#tag-rows").append(tag_filter);
+    filtered_tags.push(tag);
+    updateEmptyTable();
+  }
+
+  // $("#filter-sidebar input:not(#filter-search-bar)").change(function(){
+  //   alert($("#filter-sort-order").children().is(":checked").val());
+  // });
+  //
+  // function filterResults() {
+  //
+  // }
