@@ -37,10 +37,10 @@
 
                   bindKeys();
                   enable_dropdown();
-
+                  onClickModal();
                   displayAllResults();
 
-                  search(); // REMOVE WHEN SEARCH IS FUNCTIONAL.
+                  search_listener(); // REMOVE WHEN SEARCH IS FUNCTIONAL.
                             // stored in -> items
                             //              tags
                             //              items_and_tags
@@ -73,9 +73,10 @@
           onChange: function(value, text, $selectedItem) {
           console.log(text);
           dropdown_selection = text;
+              displayAllResults();
           }
       });
-    }
+  }
 
 
   // Use this function to update the main view if updating it
@@ -94,9 +95,10 @@
     });
   }
 
-  function search() {
+  function search_listener() {
     // Binds event handler to the search field
-    $( "#search-input" ).on('input', function(e){
+      $( "#search-input" ).on('input', function(e){
+
         var input = $( this ).val();
         var items_names;
         var items_descs;
@@ -128,10 +130,11 @@
       else if(dropdown_selection == "Tags")  {
         tags = Tags.search(input);
       }
+
+        displayAllResults();
     });
 
   }
-
 function compareAndAppendObjectToList(target_list, result_list) {
     var list = result_list;
     target_list.forEach(function (object) {
@@ -153,7 +156,7 @@ function displayAllResults() {
         tags.forEach(function(object){
             var id = object.element.id;
             var image = "https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwj3q4HN4ovhAhUB0xoKHaVbB9AQjRx6BAgBEAU&url=https%3A%2F%2Fwww.tag-games.com%2F&psig=AOvVaw1zYGFBj16qVqcV5NzmHlJt&ust=1553001240587027";
-            $("#main-grid").append(generateItemCard(id, image));
+            $("#main-grid").append(generateTagCard(id, image));
         });
 
         updateTotalResults();
@@ -172,7 +175,7 @@ function displayAllResults() {
         tags.forEach(function(object){
             var id = object.element.id;
             var image = "https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwj3q4HN4ovhAhUB0xoKHaVbB9AQjRx6BAgBEAU&url=https%3A%2F%2Fwww.tag-games.com%2F&psig=AOvVaw1zYGFBj16qVqcV5NzmHlJt&ust=1553001240587027";
-            $("#main-grid").append(generateItemCard(id, image));
+            $("#main-grid").append(generateTagCard(id, image));
         });
         updateTotalResults();
     }
@@ -183,6 +186,9 @@ function displayAllResults() {
         return '<div class="column"><div id="item-' + id + '" class="ui fluid card item-card"><div class="content"><img class="ui centered image item-image" src="' + image + '" alt=""></div></div></div>';
   }
 
+function generateTagCard(id, image) {
+    return '<div class="column"><div id="tag-' + id + '" class="ui fluid card item-card"><div class="content"><img class="ui centered image item-image" src="' + image + '" alt=""></div></div></div>';
+}
 
   function updateTotalResults() {
       $("#total-results").html($("#main-grid .column").length);
@@ -194,11 +200,59 @@ function displayAllResults() {
     } else if ($(window).width() < 1250) {
       setGridWidth("two");
     } else if ($(window).width() < 1600) {
-      setGridWidth("three");
+        setGridWidth("three");
     } else {
     setGridWidth("four");
     }
   }
+function showTag(id){
+    let tag = Tags.find(id);
+    
+    //Stuff on the modal
+    $(".remove-tag-msg").remove();
+    $('#tag-modal-image').empty();
+
+    //Title
+    $("#tag-modal-name").text(tag.name);
+
+    //Description
+    $("#tag-modal-desc").text(tag.description);
+
+    
+    //Appends image
+    $('#tag-modal-image').append("<img src=></img>");
+    $('.ui.modal#tagOverlay').modal('show');
+
+}
+
+function onClickModal() {
+    $("#main-grid").on('click', '.column', function() {
+        var id = $(this).children()[0].id;
+        if(id.indexOf("tag") >= 0) {
+            var tag_id = parseInt(id.substring(id.indexOf("-") + 1));
+            console.log(tag_id);
+
+            
+            var tag = Tags.find(tag_id);
+            console.log(tag);
+
+            //Stuff on the modal
+            $(".remove-tag-msg").remove();
+            $('#tag-modal-image').empty();
+
+            //Title
+            $("#tag-modal-name").text(tag.name);
+
+            //Description
+            $("#tag-modal-desc").text(tag.description);
+
+
+            //Appends image
+            $('#tag-modal-image').append("<img src=></img>");
+            $('.ui.modal#tagsOverlay').modal('show');
+        }
+    });
+}
 
   function setGridWidth(size) {
     $('#main-grid').removeClass('one two three four column grid');
