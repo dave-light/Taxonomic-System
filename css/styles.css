@@ -92,7 +92,7 @@ padding-left: 7px
 
 #header {
   padding: 15px 5px 5px 5px !important;
-  margin-bottom: 30px;
+  margin-bottom: 0px;
 }
 
 #search-choice-button{
@@ -158,4 +158,19 @@ padding-left: 7px
   position: relative;
   top: 100%;
   left: 92%;
+}
+
+#cotagsBorder{
+  position:fixed !important;
+  top:44px;
+  z-index:10 !important;
+  width: 89vw;
+  padding-left: 0px;
+  padding-right: 1.5px;
+  padding-bottom: 0px;
+  border-width: 0px;
+}
+
+#main-grid{
+  margin-top: 138px;
 }
