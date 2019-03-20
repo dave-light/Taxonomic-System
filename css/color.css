@@ -26,6 +26,11 @@ body, body.pushable, .pusher, #main-view {
     background-color: #eaece5 !important;
 }
 
+#cotagsBorder{
+    background-color: #eaece5 !important;
+    border-color: #eaece5 !important;
+}
+
 /* BUTTONS */
 #add-tag{
     background-color: lightgreen !important;
