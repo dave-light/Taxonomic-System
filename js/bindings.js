@@ -33,8 +33,8 @@ $(document).ready(function() {
 
 
   $( "#logout-button" ).click(function() {
-    var r = true;
-    if (r == true) {
+    var logOut_user = true;
+    if (logOut_user == true) {
       $('.ui.basic.modal').modal('show');
     //window.location="../login.html";
     }
