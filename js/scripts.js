@@ -55,6 +55,7 @@
                   // Initialises the tag search box in filter sidebar
                   $('#filter-search-tags').search({source: all_tags});
                   resetFilterForms();
+                  setFilterOrderRadioButtons();
                   displayAllResults();
 
                   search_listener(); // REMOVE WHEN SEARCH IS FUNCTIONAL.
@@ -216,6 +217,7 @@ function displayAllResults() {
         });
         updateTotalResults();
     }
+    sortResults();
   }
 
   function addAllItems() {
@@ -425,10 +427,6 @@ function onClickModal() {
     updateEmptyTable();
   }
 
-  // $("#filter-sidebar input:not(#filter-search-bar)").change(function(){
-  //   alert($("#filter-sort-order").children().is(":checked").val());
-  // });
-
   $(".filter-type-option").change(function(){
     var type = $(this).attr("id");
     if($(this).is(":checked")) {
@@ -441,14 +439,27 @@ function onClickModal() {
 
   $(".filter-sort-option-radio").change(function(){
     sort_option = $(this).attr("id");
+    setFilterOrderRadioButtons();
     $(".filter-sort-option-radio:not(#" + sort_option + ")").prop("checked", false);
     updateFilters();
+    sortResults();
   });
+
+  function setFilterOrderRadioButtons() {
+    if (sort_option == "date") {
+      $("#ascending").next().text("Oldest");
+      $("#descending").next().text("Newest");
+    } else {
+      $("#ascending").next().text("Ascending");
+      $("#descending").next().text("Descending");
+    }
+  }
 
   $(".filter-sort-order-radio").change(function(){
     sort_order = $(this).attr("id");
     $(".filter-sort-order-radio:not(#" + sort_order + ")").prop("checked", false);
     updateFilters();
+    sortResults();
   });
 
   function updateFilters() {
@@ -474,46 +485,29 @@ function onClickModal() {
   }
 
   function sortResults() {
-    var sortedResults = [];
     if (sort_option == "name") {
-      if (sort_order) {
-        results.sort((a, b) => (a.name < b.name) ? 1 : -1);
+      if (sort_order == "ascending") {
+        results.sort((a, b) => (a.name.toUpperCase() > b.name.toUpperCase()) ? 1 : -1);
       } else {
-        results.sort((a, b) => (a.name > b.name) ? 1 : -1);
+        results.sort((a, b) => (a.name.toUpperCase() < b.name.toUpperCase()) ? 1 : -1);
       }
-    } 
+    } else if (sort_option == "date") {
+      if (sort_order == "ascending") {
+        results.sort((a, b) => (new Date(a.createdAt) > new Date(b.createdAt)) ? 1 : -1);
+      } else {
+        results.sort((a, b) => (new Date(a.createdAt) < new Date(b.createdAt)) ? 1 : -1);
+      }
+    }
 
     $("#main-grid").empty();
     results.forEach(function(object){
-      var id = object.element.id;
-      var image = object.element.picture;
-      if (object.element.hasOwnProperty("tags")) {
+      var id = object.id;
+      var image = object.picture;
+      if (object.hasOwnProperty("tags")) {
         $("#main-grid").append(generateItemCard(id, image));  
       } else {
         $("#main-grid").append(generateTagCard(id, image));
       }
-      results.push(object.element);
     }); 
-
-    // switch(sort_option) {
-    //   case "name":
-    //     if (sort_order == "ascending") {
-    //       results.sort((a, b) => (a.name < b.name) ? 1 : -1)
-    //     } else {
-    //       results.sort((a, b) => (a.name > b.name) ? 1 : -1)
-    //     }
-    //     break;
-    //   case "date":
-    //     results.sort((a, b) => (a.creation_date < b.creation_date) ? 1 : -1)
-    //     break;
-    //   case "attached-items":
-    //     // code block
-    //     break;        
-    //   case "co-tags":
-    //     // code block
-    //     break;        
-    //   default:
-    //     results;
-    // } 
     
   }
