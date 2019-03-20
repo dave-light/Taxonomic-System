@@ -11,6 +11,7 @@
   var filter_type = new Set(["pdf", "image", "video", "audio"]);
   var sort_option = "date";
   var sort_order = "ascending";
+  var results = [];
   var container = document.body;
 
   $( document ).ready(function () {
@@ -163,6 +164,7 @@ function compareAndAppendObjectToList(target_list, result_list) {
     return list;
 }
 function displayAllResults() {
+    results = [];
     if(dropdown_selection == "All") {
         $("#main-grid").html("");
         var count = 0;
@@ -171,6 +173,7 @@ function displayAllResults() {
             var image = object.element.picture;
             if (itemMatchesFilters(object.element)) {
               $("#main-grid").append(generateItemCard(id, image));
+              results.push(object.element);
               count++;
             }
         });
@@ -181,6 +184,7 @@ function displayAllResults() {
             var id = object.element.id;
             var image = "https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwj3q4HN4ovhAhUB0xoKHaVbB9AQjRx6BAgBEAU&url=https%3A%2F%2Fwww.tag-games.com%2F&psig=AOvVaw1zYGFBj16qVqcV5NzmHlJt&ust=1553001240587027";
             $("#main-grid").append(generateTagCard(id, image));
+            results.push(object.element);
         });
 
         updateTotalResults();
@@ -194,6 +198,7 @@ function displayAllResults() {
             if (itemMatchesFilters(object.element)) {
               $("#main-grid").append(generateItemCard(id, image));
               count++;
+              results.push(object.element);
             }
         });
         if (count == 0) {
@@ -207,6 +212,7 @@ function displayAllResults() {
             var id = object.element.id;
             var image = "https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwj3q4HN4ovhAhUB0xoKHaVbB9AQjRx6BAgBEAU&url=https%3A%2F%2Fwww.tag-games.com%2F&psig=AOvVaw1zYGFBj16qVqcV5NzmHlJt&ust=1553001240587027";
             $("#main-grid").append(generateTagCard(id, image));
+            results.push(object.element);
         });
         updateTotalResults();
     }
@@ -217,6 +223,7 @@ function displayAllResults() {
       var id = object.element.id;
       var image = object.element.picture;
       $("#main-grid").append(generateItemCard(id, image));
+      results.push(object.element);
     }); 
   }
 
@@ -432,13 +439,15 @@ function onClickModal() {
     updateFilters();
   });
 
-  $(".filter-sort-option").change(function(){
+  $(".filter-sort-option-radio").change(function(){
     sort_option = $(this).attr("id");
+    $(".filter-sort-option-radio:not(#" + sort_option + ")").prop("checked", false);
     updateFilters();
   });
 
-  $(".filter-sort-order").change(function(){
+  $(".filter-sort-order-radio").change(function(){
     sort_order = $(this).attr("id");
+    $(".filter-sort-order-radio:not(#" + sort_order + ")").prop("checked", false);
     updateFilters();
   });
 
@@ -462,4 +471,49 @@ function onClickModal() {
       return true;
     }
     return false;
+  }
+
+  function sortResults() {
+    var sortedResults = [];
+    if (sort_option == "name") {
+      if (sort_order) {
+        results.sort((a, b) => (a.name < b.name) ? 1 : -1);
+      } else {
+        results.sort((a, b) => (a.name > b.name) ? 1 : -1);
+      }
+    } 
+
+    $("#main-grid").empty();
+    results.forEach(function(object){
+      var id = object.element.id;
+      var image = object.element.picture;
+      if (object.element.hasOwnProperty("tags")) {
+        $("#main-grid").append(generateItemCard(id, image));  
+      } else {
+        $("#main-grid").append(generateTagCard(id, image));
+      }
+      results.push(object.element);
+    }); 
+
+    // switch(sort_option) {
+    //   case "name":
+    //     if (sort_order == "ascending") {
+    //       results.sort((a, b) => (a.name < b.name) ? 1 : -1)
+    //     } else {
+    //       results.sort((a, b) => (a.name > b.name) ? 1 : -1)
+    //     }
+    //     break;
+    //   case "date":
+    //     results.sort((a, b) => (a.creation_date < b.creation_date) ? 1 : -1)
+    //     break;
+    //   case "attached-items":
+    //     // code block
+    //     break;        
+    //   case "co-tags":
+    //     // code block
+    //     break;        
+    //   default:
+    //     results;
+    // } 
+    
   }
