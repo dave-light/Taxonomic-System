@@ -11,8 +11,6 @@
   var filter_type = new Set(["pdf", "image", "video", "audio"]);
   var sort_option = "date";
   var sort_order = "ascending";
-  // var filters = {"filtered_tags": filtered_tags, "filter_type": filter_type,
-  //                "sort_option": sort_option, "sort_order": sort_order};
   var container = document.body;
 
   $( document ).ready(function () {
@@ -374,7 +372,7 @@ function onClickModal() {
 
   function resetFilterForms() {
     $('.ui.form').form('clear');
-    // $(".filter-type-option").attr("checked", "''");
+    $('.ui.checkbox:not(.radio)').checkbox("check", true);
     $("#date").prop("checked", true);
     $("#ascending").prop("checked", true);
   }
@@ -436,12 +434,15 @@ function onClickModal() {
       return false;
     }
     if (filtered_tags.length > 0) {
-      for (var i in item.tags) {
-        if (filtered_tags.includes(item.tags[i])) {
-          return true;
+      for (var i in filtered_tags) {
+        if (!item.tags.includes(filtered_tags[i])) {
+          return false;
         }
       }
-      return false;
+      return true;
     }
-    return true;
+    if (filter_type.has(item.type)) {
+      return true;
+    }
+    return false;
   }
