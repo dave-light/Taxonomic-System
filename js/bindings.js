@@ -22,7 +22,7 @@ $(document).ready(function() {
       $(document.body).append(loggedIn.show());
 
       $('#loggedInAs')
-        .append(' Results for ')
+        .append('')
         .append($('<span/>', {
           'class': 'user-name'
         }).text(Taxonomic.currentUser().name));
