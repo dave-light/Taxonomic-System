@@ -21,25 +21,25 @@
   "picture": "https://image.flaticon.com/icons/svg/136/136545.svg",
   "description": "The Lord of the Rings is a film series of three epic fantasy adventure films directed by Peter Jackson, based on the novel The Lord of the Rings by J. R. R. Tolkien. The films are subtitled The Fellowship of the Ring (2001), The Two Towers (2002) and The Return of the King (2003). ",
   "tags": ["lord", "of", "the", "rings"],
-  "type": "mp4"
+  "type": "video"
 }, {
   "name": "Assignment 2",
   "picture": "https://image.flaticon.com/icons/svg/136/136522.svg",
   "description": "This assignment covers algorithms on strings, directed graphs and max-flow problems.  The learning outcomes assessed are to reason about fundamental algorithms for a range of problems, and to describe and apply various algorithm design strategies for the construction of efficient algorithms",
   "tags": ["algorithms", "assignment", "advanced", "2"],
-  "type": "document"
+  "type": "pdf"
 }, {
   "name": "Fur Elise",
   "picture": "https://image.flaticon.com/icons/svg/136/136548.svg",
   "description": "The score was not published until 1867, 40 years after the composer's death in 1827. The discoverer of the piece, Ludwig Nohl, affirmed that the original autographed manuscript, now lost, was dated 27 April 1810.",
   "tags": ["mozart"],
-  "type": "mp3"
+  "type": "audio"
 }, {
   "name": "iPhone 8",
   "picture": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/image/AppleInc/aos/published/images/i/ph/iphone8/select/iphone8-select-2019-family?wid=882&amp;hei=1058&amp;fmt=jpeg&amp;qlt=80&amp;op_usm=0.5,0.5&amp;.v=1550795431127",
   "description": "The iPhone 8 features a 4.7 Inch Retina HD display, 12MP Camera, 7MP Front-facing lens, 64GB or 256GB internal storage and wireless charging. It has a beautiful glass finish on the front and back, and is certified as IP67, protected against water and dust.",
-  "tags": ["apple", "iphone"],
-  "type": "picture"
+  "tags": ["apple", "iphone", "phone"],
+  "type": "image"
 }, {
   "name": "Harry Potter and the Order of the Phoenix",
   "picture": "https://upload.wikimedia.org/wikipedia/en/7/70/Harry_Potter_and_the_Order_of_the_Phoenix.jpg",
@@ -51,13 +51,13 @@
   "picture": "https://intranet.royalholloway.ac.uk/international/graphics/InternationalStudentSupportImagesandVideo/handbook-cropped-251x357.jpg",
   "description": "",
   "tags": ["student"],
-  "type": "document"
+  "type": "pdf"
 }, {
   "name": "Abbey Road",
   "picture": "https://i2.wp.com/www.beatlesbible.com/wp/media/abbey_road.jpg?resize=200%2C200&quality=100&strip=all&ssl=1",
   "description": "It is commonly thought that The Beatles knew that Abbey Road would be their final album, and wanted to present a fitting farewell to the world. However, the group members denied that they intended to split after its completion, despite a realisation that their time together was drawing to a close.",
   "tags": ["beatles"],
-  "type": "mp3"
+  "type": "audio"
 }, {
   "name": "BMW i8",
   "picture": "https://image.flaticon.com/icons/svg/136/136524.svg",
@@ -69,5 +69,5 @@
   "picture": "https://upload.wikimedia.org/wikipedia/en/thumb/2/2e/NightmareOnElmStreetBoxSetSide.jpg/225px-NightmareOnElmStreetBoxSetSide.jpg",
   "description": "A Nightmare on Elm Street is a 1984 American slasher film written and directed by Wes Craven, and produced by Robert Shaye.",
   "tags": ["Nightmare"],
-  "type": "mp4"
+  "type": "video"
 }]
