@@ -1,17 +1,17 @@
-#search-bar {
-  width: calc(100vw - 320px);
-  background-color: lightgrey;
 
+
+#search-bar {
+  width: calc(100vw - 123px);
+  background-color: lightgrey;
+  padding-right: 0px;
+  padding-left: 7px;
 }
 
 #search-input {
   padding-left: 12px !important;
   background-color: white !important;
   border-radius: 5px !important;
-}
-
-#search-icon{
-  padding-right: 50px !important;
+  padding-right: 1px;
 }
 
 #main-view {
@@ -54,15 +54,22 @@
 #logo-logged-in{
 background-color: lightgrey;
 border-radius: 0px;
+padding-right: 7px;
+padding-left: 7px
 }
+
 
 #logout-button{
   background-color: darkgrey !important;
+  font-size: 14px;
+  padding: 10px !important;
+  padding-right: 7px !important;
 }
 
 #logout-button-surrounding{
   background-color: lightgrey !important;
 }
+
 
 #search-choice-button{
   background-color: darkgrey !important;
@@ -73,12 +80,63 @@ border-radius: 0px;
   background-color: darkgrey;
   font-size: 14px;
   padding: 10px !important;
-  margin-left: 15px;
+  margin-left: 5px;
 }
 
 #header {
   padding: 15px 5px 5px 5px !important;
   margin-bottom: 30px;
+}
+
+#search-choice-button{
+  min-width: 70px !important;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: center !important;
+}
+
+@media screen and (max-width:653px) {
+  #search-bar {
+    max-width: calc(100vw - 123px);
+  }
+  #search-input{
+    padding-right: 0px !important;
+    max-width: calc(100vw - 220px) !important;
+  }
+}
+
+#filter-sidebar {
+  padding: 20px;
+}
+
+#filter-header {
+  margin: 15px;
+}
+
+#filter-search-container,
+#filter-tags-table,
+#filter-type-form,
+#sort-container {
+  margin-top: 40px;
+}
+
+#filter-search-bar {
+  border-radius: 5px;
+}
+
+#error-container {
+  padding-top: 10px;
+  padding-left: 5px;
+  color: #8b0000;
+  display: none;
+}
+
+.filter-type, .sort-type {
+  margin-right: 15px !important;
+}
+
+#filter-button-container {
+  margin-top: 50px;
 }
 
 .item-delete-tag-icon{

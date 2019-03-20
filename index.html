@@ -2,134 +2,301 @@
 <html lang="en" dir="ltr">
 
 <head>
-    <meta charset="utf-8">
-    <title>Taxonomics</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
-    <link rel="stylesheet" href="css/styles.css">
+  <meta charset="utf-8">
+  <title>Taxonomics</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- COLOUR THEME -->
+  <link rel="stylesheet" href="css/color.css">
 </head>
 
 <body>
-    <div class='box' id='loggedOut'>
-        <div class="ui huge header item" id='logo-logged-out'>
-            Taxanomics
-        </div>
-        <div>
-            <select class="ui dropdown" id="userName" name="userName">
-            </select>
-            <button class="ui green button" id='logInButton' style="margin-left:10px">Log in</button>
-        </div>
+  <div class='box' id='loggedOut'>
+    <div class="ui huge header item" id='logo-logged-out'>
+      Taxanomics
     </div>
-    <div id="loggedIn">
-        <div class="ui menu search fixed">
-          <div class="ui medium header item bin" id="logo-logged-in">
-            Taxanomics
-            <button class="ui button" id="filter-button">
-              <i class="filter icon" style="margin: 0px;"></i>
-            </button>
-          </div>
-            <div class="menu">
-              <div class="item" id="search-bar">
-                <div class="ui transparent huge icon input">
-                  <div class="ui basic floating dropdown button" id="search-choice-button">
-                    <div id="dropdown-text" class="text">All</div>
-                    <i class="dropdown icon"></i>
-                    <div class="menu">
-                      <div class="item">All</div>
-                      <div class="item">Items</div>
-                      <div class="item">Tags</div>
-                    </div>
-                  </div>
-                  <input id="search-input" type="text" placeholder="Search...">
-                  <i class="search link icon" id="search-icon"></i>
+
+    <div>
+      <select class="ui dropdown" id="userName" name="userName">
+      </select>
+      <button class="ui green button" id='logInButton' style="margin-left:10px">Log in</button>
+    </div>
+  </div>
+
+
+<div id="loggedIn">
+  <div class="ui menu search fixed">
+    <div class="ui medium header item bin" id="logo-logged-in">
+      <button class="ui button" id="filter-button">
+        <i class="filter icon" style="margin: 0px;"></i>
+      </button>
+    </div>
+
+          <div id="filter-sidebar" class="ui grey very wide sidebar inverted vertical menu">
+            <h2 class="ui icon header" id="filter-header">
+              <i class="filter icon"></i>
+              <div class="content">
+                Filter Options
+                <div class="sub header">
+                  Filter your search results according to the preferences below.
+                </div>
+              </div>
+            </h2>
+
+            <div id="filter-search-container">
+              <h4 class="ui dividing header">Search for Tags to Filter by</h4>
+
+              <div id="filter-search-tags" class="ui search">
+                <div class="ui fluid right labeled left icon input">
+                   <i class="tags icon"></i>
+                  <input id="filter-search-bar" class="prompt" type="text" placeholder="Search Tags...">
+                  <a id="add-tag-filter" class="ui tag label">
+                    Add Tag to Filter
+                  </a>
+                </div>
+                <div class="results"></div>
+                <div id="error-container">
+                  <span id="filter-error-message"></span>
+                </div>
+
+              </div>
+
+            </div>
+
+            <div id="filter-tags-table">
+              <h4 class="ui dividing header">Current Filtered Tags</h4>
+              <table class="ui celled small table">
+                <thead class="full-width">
+                  <tr>
+                    <th class="center aligned">Tag Name</th>
+                  </tr>
+                </thead>
+                <tbody id="tag-rows">
+                  <tr id="empty-tag-list" class="center aligned">
+                    <td>No tags currently filtered</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div id="filter-type-form" class="ui form">
+              <h4 class="ui dividing header">Filter by Item Type</h4>
+              <div class="fields">
+              <div class="field filter-type">
+                <div class="ui checkbox">
+                  <label>PDF</label>
+                  <input id="pdf" type="checkbox" tabindex="0" class="hidden">
+                </div>
+              </div>
+              <div class="field filter-type">
+                <div class="ui checkbox">
+                  <label>Image</label>
+                  <input id="image" type="checkbox" tabindex="1" class="hidden">
+                </div>
+              </div>
+              <div class="field filter-type">
+                <div class="ui checkbox">
+                  <label>Video</label>
+                  <input id="video" type="checkbox" tabindex="2" class="hidden">
+                </div>
+              </div>
+              <div class="field filter-type">
+                <div class="ui checkbox">
+                  <label>Audio</label>
+                  <input id="audio" type="checkbox" tabindex="3" class="hidden">
                 </div>
               </div>
             </div>
-            <div class="right menu" id="logout-button-surrounding">
-                <div class="item">
-                    <div class="ui transparent big icon input">
-                        <button class="ui button" id="logout-button">Log Out</button>
-
-                        <!--confirmation box -->
-                        <div class="ui basic modal">
-                            <div id="log-out-screen" class="content">
-                                <h3 class="tiny">Are you sure you would like to log out?</h3>
-                            </div>
-                            <div id="log-out-screen" class="actions">
-                                <div class="ui red basic cancel inverted button">
-                                    <i class="remove icon"></i>
-                                    No
-                                </div>
-                                <div class="ui green ok inverted button" id="logOutButton">
-                                    <i class="checkmark icon"></i>
-                                    Yes
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
-        </div> 
+            <div id="sort-container" class="ui two column grid">
+                <h4 class="ui dividing header">Sort Results by</h4>
+              <div class="two column row" style="padding-top: 0">
 
-        <div class="ui modal" id="itemOverlay">
+            <div class="column">
+            <div id="filter-sort-options" class="ui form">
+              <div class="grouped fields">
+                <div class="field sort-type">
+                  <div class="ui radio checkbox">
+                    <input id="date" type="radio" name="sort" checked="" tabindex="0" class="hidden">
+                    <label>Date</label>
+                  </div>
+                </div>
+                <div class="field sort-type">
+                  <div class="ui radio checkbox">
+                    <input id="item-name" type="radio" name="sort" tabindex="0" class="hidden">
+                    <label>Name</label>
+                  </div>
+                </div>
+                <div class="field sort-type">
+                  <div class="ui radio checkbox">
+                    <input id="number-items" type="radio" name="sort" tabindex="0" class="hidden">
+                    <label>No. of attached items</label>
+                  </div>
+                </div>
+                <div class="field sort-type">
+                  <div class="ui radio checkbox">
+                    <input id="co-tags" type="radio" name="sort" tabindex="0" class="hidden">
+                    <label>No. of Co-tags</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="column">
+            <div id="filter-sort-order" class="ui form">
+              <!-- <h4 class="ui dividing header">Sort Results by</h4> -->
+              <div class="grouped fields">
+                <div class="field sort-type">
+                  <div class="ui radio checkbox">
+                    <input type="radio" id="ascending" name="sort-order" checked="" tabindex="0" class="hidden">
+                    <label>Ascending</label>
+                  </div>
+                </div>
+                <div class="field sort-type">
+                  <div class="ui radio checkbox">
+                    <input type="radio" id="descending" name="sort-order" tabindex="0" class="hidden">
+                    <label>Descending</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          </div>
+
+          <div id="filter-button-container" class="ui two column grid">
+            <div class="one column row">
+
+              <div class="column">
+
+                <button id="clear-filters-button" class="negative ui fluid button">Clear Filters</button>
+              </div>
+              <!-- <div class="column">
+
+                <button class="positive ui fluid button">Apply Filters</button>
+              </div> -->
+            </div>
+          </div>
+
+          </div>
+
+          <div class="menu" id="menu_id">
+            <div class="item" id="search-bar">
+              <div class="ui transparent huge icon input">
+                <div class="ui basic floating dropdown button" id="search-choice-button">
+                  <div id="dropdown-text" class="text">All</div>
+                  <i class="dropdown icon" style="margin: 0px;"></i>
+                  <div class="menu">
+                    <div class="item">All</div>
+                    <div class="item">Items</div>
+                    <div class="item">Tags</div>
+                    </div>
+                  </div>
+                    <input id="search-input" type="text" placeholder="Search...">
+                </div>
+
+              </div>
+            </div>
+
+      <div class="right menu" id="logout-button-surrounding">
+        <div class="item">
+          <div class="ui transparent big icon input">
+            <button class="ui button" id="logout-button"><i class="sign-out icon" style="margin: 0px;"></i></button>
+
+            <!--confirmation box -->
+            <div class="ui basic modal">
+              <div id="log-out-screen" class="content">
+                <h3 class="tiny">Are you sure you would like to log out?</h3>
+              </div>
+              <div id="log-out-screen" class="actions">
+                <div class="ui red basic cancel inverted button">
+                  <i class="remove icon"></i>
+                  No
+                </div>
+                <div class="ui green ok inverted button" id="logOutButton">
+                  <i class="checkmark icon"></i>
+                  Yes
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+       <!-- Modal for Tags -->
+        <div class="ui modal" id="tagsOverlay">
             <div class="header">
-              Item
+                Tag
             </div>
             <div class="image content">
-                <div class="ui medium image" id="item-modal-image">
-                    
-                  </div>
-              <div class="description">
-                <div id="item-modal-name" class="ui header"></div>
-                <div id="item-modal-desc"></div>
-                <p></p><div id="item-modal-tags"></div><br><button onclick="drawAddTagMenu()" class="ui button green"><i class="icon-text-padding plus icon square outline white"></i>Add Tag</button><p></p>
-                <div id="item-add-tag-menu" class="ui header">
-                  
+                <div class="ui medium image" id="tag-modal-image">
                 </div>
-              </div>
-              
+                <div class="description">
+                    <div id="tag-modal-name" class="ui header"></div>
+                    <p id="tag-modal-desc"></p>
+                </div>
             </div>
-
-        
-
             <div class="actions">
-              <div class="ui red deny button">
-                close
-              </div>
+                <div id="flag" class="ui red button" style="min-width: 90px;">
+                    Flag
+                </div>
+
+                <div class="ui red deny button" style="background-color:#CFF7F0; color: #000000">
+                    Close
+                </div>
             </div>
-          </div>
-
-        <div id="main-view" class="ui container">
-          <div id="header" class="ui clearing segment">
-            <h3 class="ui left floated header" id="co-tags">Suggested Co-tags: </h3>
-            <a class="ui green tag label">Food</a>
-            <a class="ui green tag label">Burger</a>
-            <a class="ui green tag label">American</a>
-            <a class="ui green tag label">Dinner</a>
-            <a class="ui green tag label">Takeaway</a>
-            <h3 class="ui right floated header" id="results-label"><span id="total-results"></span> Results</h3>
-          </div>
-
-
-            <div id="main-grid" class="ui stackable four column grid">
-              <!-- Items will be shown here -->
-
-            </div>
-
-            
-
-
-            </div>
-
-
         </div>
+    <div id="main-view" class="ui container">
+      <div id="header" class="ui clearing segment">
+        <h3 class="ui left floated header" id="co-tags">Suggested Co-tags: </h3>
+        <a class="ui green tag label">Food</a>
+        <a class="ui green tag label">Burger</a>
+        <a class="ui green tag label">American</a>
+        <a class="ui green tag label">Dinner</a>
+        <a class="ui green tag label">Takeaway</a>
+        <h3 class="ui right floated header" id="results-label"><span id="total-results"></span> Results</h3>
+      </div>
+      <div id="main-grid" class="ui stackable four column grid">
+        <!-- Items will be shown here -->
+      </div>
     </div>
+    <div class="ui modal" id="itemOverlay">
+	<div class="header">
+	Item
+	</div>
+	<div class="image content">
+	<div class="ui medium image" id="item-modal-image">
+	    
+	  </div>
+	<div class="description">
+	<div id="item-modal-name" class="ui header"></div>
+	<div id="item-modal-desc"></div>
+	<p></p><div id="item-modal-tags"></div><br><button onclick="drawAddTagMenu()" class="ui button green"><i class="icon-text-padding plus icon square outline white"></i>Add Tag</button><p></p>
+	<div id="item-add-tag-menu" class="ui header">
+	</div>
+	</div>
+	</div>
+	<div class="actions">
+	<div class="ui red deny button">
+	close
+	</div>
+	</div>
+	</div>
+
+  </div>
+
+</div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
     <script src='js/taxonomic.js'></script>
     <script src='js/ui.js'></script>
     <script src='js/bindings.js'></script>
     <script src='js/config.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js'></script>
     <script type="text/javascript" src="js/scripts.js"></script>
-
+  </body>
 </html>
