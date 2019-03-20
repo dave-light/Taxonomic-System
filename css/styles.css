@@ -4,7 +4,7 @@
   width: calc(100vw - 151px);
   background-color: lightgrey;
   padding-right: 0px;
-  padding-left: 7px;
+  padding-left: 5px;
 }
 
 #search-input {
@@ -74,12 +74,13 @@ padding-left: 7px
 
 #logout-button-surrounding{
   background-color: lightgrey !important;
+  margin-left: 3px;
 }
 
 
 #search-choice-button{
   background-color: darkgrey !important;
-  margin-right: 12px;
+  margin-right: 5px;
 }
 
 #filter-button{
