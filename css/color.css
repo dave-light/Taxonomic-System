@@ -27,6 +27,10 @@ body, body.pushable, .pusher, #main-view {
 }
 
 /* BUTTONS */
+#add-tag{
+    background-color: lightgreen !important;
+}
+
 #logout-button{
 background-color: #cff7f0 !important;
 }
