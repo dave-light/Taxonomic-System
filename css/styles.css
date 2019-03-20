@@ -1,10 +1,10 @@
 
 
 #search-bar {
-  width: calc(100vw - 123px);
+  width: calc(100vw - 151px);
   background-color: lightgrey;
   padding-right: 0px;
-  padding-left: 7px;
+  padding-left: 5px;
 }
 
 #search-input {
@@ -54,10 +54,16 @@
 #logo-logged-in{
 background-color: lightgrey;
 border-radius: 0px;
-padding-right: 7px;
+padding-right: 0px;
 padding-left: 7px
 }
 
+#add-tag{
+  background-color: darkgrey !important;
+  font-size: 14px;
+  padding: 10px !important;
+  padding-right: 7px !important;
+}
 
 #logout-button{
   background-color: darkgrey !important;
@@ -68,12 +74,13 @@ padding-left: 7px
 
 #logout-button-surrounding{
   background-color: lightgrey !important;
+  margin-left: 3px;
 }
 
 
 #search-choice-button{
   background-color: darkgrey !important;
-  margin-right: 12px;
+  margin-right: 5px;
 }
 
 #filter-button{
@@ -97,7 +104,7 @@ padding-left: 7px
 
 @media screen and (max-width:653px) {
   #search-bar {
-    max-width: calc(100vw - 123px);
+    max-width: calc(100vw - 151px);
   }
   #search-input{
     padding-right: 0px !important;
