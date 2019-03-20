@@ -165,14 +165,18 @@ function compareAndAppendObjectToList(target_list, result_list) {
 function displayAllResults() {
     if(dropdown_selection == "All") {
         $("#main-grid").html("");
-
+        var count = 0;
         items.forEach(function(object){
             var id = object.element.id;
             var image = object.element.picture;
             if (itemMatchesFilters(object.element)) {
               $("#main-grid").append(generateItemCard(id, image));
+              count++;
             }
         });
+        if (count == 0) {
+          addAllItems();
+        }
         tags.forEach(function(object){
             var id = object.element.id;
             var image = "https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwj3q4HN4ovhAhUB0xoKHaVbB9AQjRx6BAgBEAU&url=https%3A%2F%2Fwww.tag-games.com%2F&psig=AOvVaw1zYGFBj16qVqcV5NzmHlJt&ust=1553001240587027";
@@ -183,13 +187,18 @@ function displayAllResults() {
     }
     else if(dropdown_selection == "Items") {
         $("#main-grid").html("");
+        var count = 0;
         items.forEach(function(object){
             var id = object.element.id;
             var image = object.element.picture;
             if (itemMatchesFilters(object.element)) {
               $("#main-grid").append(generateItemCard(id, image));
+              count++;
             }
         });
+        if (count == 0) {
+          addAllItems();
+        }
         updateTotalResults();
     }
     else if(dropdown_selection == "Tags") {
@@ -201,6 +210,14 @@ function displayAllResults() {
         });
         updateTotalResults();
     }
+  }
+
+  function addAllItems() {
+    items.forEach(function(object){
+      var id = object.element.id;
+      var image = object.element.picture;
+      $("#main-grid").append(generateItemCard(id, image));
+    }); 
   }
 
   // This will eventually be updated to take further parameters, such as name
