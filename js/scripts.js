@@ -412,7 +412,7 @@ function addTagToItem(itemId, tagId){
   let item = Items.find(itemId);
   let tag = Tags.find(tagId);
   Tags.attach(tag, item);
-  $(".ui .modal").prepend("<div class='remove-tag-msg ui message yellow'><div class='header'>Undid Removing Tag From Item</div><p>Tag "+ tag.name  +" readded to item " + item.name +".</p></div>");
+  $("#itemOverlay").prepend("<div class='remove-tag-msg ui message yellow'><div class='header'>Undid Removing Tag From Item</div><p>Tag "+ tag.name  +" readded to item " + item.name +".</p></div>");
 
 }
 
@@ -420,10 +420,10 @@ function undoRemoveTag(itemId, tagId){
   let item = Items.find(itemId);
   let tag = Tags.find(tagId);
   Tags.attach(tag, item);
-  $("#item-modal-tags").append("<button id='item-modal-tag-button-" + tagId + "'class='ui button tag label' onclick='removeItemTag(" 
+  $("#item-modal-tags").append("<button id='item-modal-tag-button-" + tagId + "'class='ui button tag label' onclick='removeItemTag("
   + item.id + ", "+ tag.id + ", "+ tagId + ")'>" + tag.name + "<i class='delete icon red item-delete-tag-icon'> </i></button>");
   $(".remove-tag-msg").remove();
-  $(".ui .modal").prepend("<div class='remove-tag-msg ui message yellow'><div class='header'>Undid Removing Tag From Item</div><p>Tag "+ tag.name  +" readded to item " + item.name +".</p></div>");
+  $("#itemOverlay").prepend("<div class='remove-tag-msg ui message yellow'><div class='header'>Undid Removing Tag From Item</div><p>Tag "+ tag.name  +" readded to item " + item.name +".</p></div>");
 }
 
 function removeItemTag(itemId, tagId, buttonId){
@@ -432,7 +432,7 @@ function removeItemTag(itemId, tagId, buttonId){
   Tags.detach(tag,item);
   $("#item-modal-tag-button-"+buttonId).remove();
   $(".remove-tag-msg").remove();
-  $(".ui .modal").prepend("<div class='remove-tag-msg ui message red'><div class='header'>Removed Tag From Item</div><div><p>Tag "+ tag.name  +" removed from item " + item.name 
+  $("#itemOverlay").prepend("<div class='remove-tag-msg ui message red'><div class='header'>Removed Tag From Item</div><div><p>Tag "+ tag.name  +" removed from item " + item.name
   + ".</p><button class='ui button tag yellow center aligned' onclick='undoRemoveTag(" + itemId + ", "+ tagId +")'>undo</button></div>");
 
 }
@@ -443,17 +443,17 @@ function showItem(id){
   $("#item-modal-tags").empty();
   $('#item-modal-image').empty();
   $("#item-modal-name").text(item.name);
-  $("#item-modal-desc").text(item.description);    
+  $("#item-modal-desc").text(item.description);
   let tags = Tags.forItem(item);
   for(var i = 0; i < tags.length; i++){
-    $("#item-modal-tags").append("<button id='item-modal-tag-button-" 
-    + i + "'class='ui button tag label' onclick='removeItemTag(" + id + ", "+ tags[i].id + ", "+ i 
+    $("#item-modal-tags").append("<button id='item-modal-tag-button-"
+    + i + "'class='ui button tag label' onclick='removeItemTag(" + id + ", "+ tags[i].id + ", "+ i
     + ")'>" + tags[i].name + "<i class='delete icon red item-delete-tag-icon'> </i></button>");
   }
-  
+
   $('#item-modal-image').append("<img src='" + item.picture + "'></img>");
   $('.ui.modal#itemOverlay').modal('show');
- 
+
 }
 
 // $("#filter-sidebar input:not(#filter-search-bar)").change(function(){
