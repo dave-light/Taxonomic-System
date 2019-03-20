@@ -109,6 +109,53 @@ padding-left: 7px
   #search-input{
     padding-right: 0px !important;
     max-width: calc(100vw - 220px) !important;
-  } 
+  }
+}
 
+#filter-sidebar {
+  padding: 20px;
+}
+
+#filter-header {
+  margin: 15px;
+}
+
+#filter-search-container,
+#filter-tags-table,
+#filter-type-form,
+#sort-container {
+  margin-top: 40px;
+}
+
+#filter-search-bar {
+  border-radius: 5px;
+}
+
+#error-container {
+  padding-top: 10px;
+  padding-left: 5px;
+  color: #8b0000;
+  display: none;
+}
+
+.filter-type, .sort-type {
+  margin-right: 15px !important;
+}
+
+#filter-button-container {
+  margin-top: 50px;
+}
+
+.item-delete-tag-icon{
+  padding-left: 10px !important;
+}
+
+#icon-text-padding{
+  padding-left: 10px !important;
+}
+
+#item-modal-undo-remove-tag{
+  position: relative;
+  top: 100%;
+  left: 92%;
 }

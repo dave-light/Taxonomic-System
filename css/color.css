@@ -3,11 +3,11 @@
 #search-bar {
     background-color: black;
 }
-  
+
 #search-input {
     background-color: white !important;
 }
-  
+
 .item-card:hover {
     box-shadow: 0 0 8px #9ab9ea;
 }
@@ -15,20 +15,17 @@
 #logo-logged-in{
   background-color: black;
 }
-  
+
 #logout-button-surrounding{
 background-color:  black !important;
-} 
+}
 
 /* MAIN BODY */
 
-body{
-    background-color: #eaece5;
+body, body.pushable, .pusher, #main-view {
+    background-color: #eaece5 !important;
 }
 
-#main-view{
-    background-color: #eaece5;
-}
 /* BUTTONS */
 #add-tag{
     background-color: lightgreen !important;
