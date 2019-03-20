@@ -138,3 +138,17 @@ padding-left: 7px
 #filter-button-container {
   margin-top: 50px;
 }
+
+.item-delete-tag-icon{
+  padding-left: 10px !important;
+}
+
+#icon-text-padding{
+  padding-left: 10px !important;
+}
+
+#item-modal-undo-remove-tag{
+  position: relative;
+  top: 100%;
+  left: 92%;
+}
