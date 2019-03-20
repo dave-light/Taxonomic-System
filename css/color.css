@@ -1,0 +1,43 @@
+
+/* SEARCH BAR BACKGROUND */
+#search-bar {
+    background-color: black;
+}
+  
+#search-input {
+    background-color: white !important;
+}
+  
+.item-card:hover {
+    box-shadow: 0 0 8px #9ab9ea;
+}
+
+#logo-logged-in{
+  background-color: black;
+}
+  
+#logout-button-surrounding{
+background-color:  black !important;
+} 
+
+/* MAIN BODY */
+
+body{
+    background-color: #eaece5;
+}
+
+#main-view{
+    background-color: #eaece5;
+}
+/* BUTTONS */
+#logout-button{
+background-color: #cff7f0 !important;
+}
+
+#search-choice-button{
+background-color: #cff7f0 !important;
+}
+
+#filter-button{
+background-color: #cff7f0;
+}

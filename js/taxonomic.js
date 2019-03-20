@@ -306,7 +306,10 @@ var Taxonomic = (function () {
       }).reduce(concat, []);
     },
     search: function (string) {
-      return copy(CRUD.search(data.items, string, ['name', 'description']));
+        return copy(CRUD.search(data.items, string, ['name']));
+    },
+    search2: function(string) {
+      return copy(CRUD.search(data.items, string, ['description']));
     },
     update: function (item) {
       item = copy(item);
@@ -316,7 +319,7 @@ var Taxonomic = (function () {
 
       Events.createFor(item, `Updated ${item.name}`);
       delete item.id;
-      return copy(CRUD.update(data.items, id, item));
+        return copy(CRUD.update(data.items, id, item));
     },
     setTagsByNames: function (item, tagNames) {
       var newTags = tagNames
