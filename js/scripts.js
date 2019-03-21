@@ -472,13 +472,18 @@ function addTagToItem() {
     $("#item-tag-change-message").prepend("<div class='remove-tag-msg ui message red'><div class='header'>Tag Does Not Exist</div><p>" + searchVal + " is not a tag.</p></div>");
   } else {
     let item = Items.find(currentSelectedItem);
-    let tag = Tags.find(tagId);
-    Tags.attach(tag, item);
+    let tag = Tags.find(tagId); 
     $('#item-modal-add-tag-search-bar').val("");
-    $("#item-tag-change-message").prepend("<div class='remove-tag-msg ui message green'><div class='header'>Added Tag To Item</div><p>Tag " + tag.name + " added to item " + item.name + ".</p></div>");
-    $("#item-modal-tags").append("<button id='item-modal-tag-button-" + tagId + "'class='ui button tag label' onclick='removeItemTag("
-      + item.id + ", " + tag.id + ", " + tagId + ")'>" + tag.name + "<i class='delete icon red item-delete-tag-icon'> </i></button>");
-  }
+    if(Tags.attach(tag, item)){
+      $("#item-tag-change-message").prepend("<div class='remove-tag-msg ui message green'><div class='header'>Added Tag To Item</div><p>Tag " + tag.name + " added to item " + item.name + ".</p></div>");
+      $("#item-modal-tags").append("<button id='item-modal-tag-button-" + tagId + "'class=' remove-item-tag-button ui button tag label' onclick='removeItemTag("
+        + item.id + ", " + tag.id + ", " + tagId + ")'>" + tag.name + "<i class='delete icon red item-delete-tag-icon'> </i></button>");
+    } else {
+      $("#item-tag-change-message").prepend("<div class='remove-tag-msg ui message yellow'><div class='header'>Tag Already Attached to Item</div><p>Tag " 
+      + tag.name + " already attached to item " + item.name + ".</p></div>");
+
+    }
+  } 
 }
 
 function undoRemoveTag(itemId, tagId) {
