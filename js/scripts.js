@@ -770,8 +770,10 @@ function createTag() {
     });
 
     all_tags.push({ title: name.val()});
-    tags = Tags.search("");
-    all_tags = Tags.search("");
+    var tags = Tags.search("");
+    tags.forEach(function(obj){
+        all_tags.push({title: obj.element.name})
+    })
     
     $('#item-modal-add-tag-search-area').search({source: all_tags});
     $('#filter-search-tags').search({source: all_tags});
