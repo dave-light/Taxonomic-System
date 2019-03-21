@@ -22,7 +22,7 @@ $(document).ready(function() {
       $(document.body).append(loggedIn.show());
 
       $('#loggedInAs')
-        .append('Logged in as ')
+        .append(' Results for ')
         .append($('<span/>', {
           'class': 'user-name'
         }).text(Taxonomic.currentUser().name));
@@ -33,8 +33,8 @@ $(document).ready(function() {
 
 
   $( "#logout-button" ).click(function() {
-    var r = true;
-    if (r == true) {
+    var logOut_user = true;
+    if (logOut_user == true) {
       $('.ui.basic.modal').modal('show');
     //window.location="../login.html";
     }

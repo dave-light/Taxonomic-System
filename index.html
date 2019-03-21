@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  <div class='box' id='loggedOut'>
+  <div class='box' id='loggedOut' class="pusher">
     <div class="ui huge header item" id='logo-logged-out'>
       Taxanomics
     </div>
@@ -23,11 +23,15 @@
     </div>
   </div>
 
-
-  <div id="loggedIn">
+  <div id="loggedIn" class="pusher">
     <div class="ui menu search fixed">
       <div class="ui medium header item bin" id="logo-logged-in">
-        <button class="ui button" id="filter-button">
+        <button class="ui button" id="add-tag" data-inverted="" data-tooltip="Create a new tag"
+          data-position="bottom left">
+          <i class="plus icon" style="margin: 0px;"></i>
+        </button>
+        <button class="ui button" id="filter-button" data-inverted="" data-tooltip="Filter"
+          data-position="bottom center">
           <i class="filter icon" style="margin: 0px;"></i>
         </button>
       </div>
@@ -174,7 +178,6 @@
               <button id="clear-filters-button" class="negative ui fluid button">Clear Filters</button>
             </div>
             <!-- <div class="column">
-
                 <button class="positive ui fluid button">Apply Filters</button>
               </div> -->
           </div>
@@ -185,7 +188,8 @@
       <div class="menu" id="menu_id">
         <div class="item" id="search-bar">
           <div class="ui transparent huge icon input">
-            <div class="ui basic floating dropdown button" id="search-choice-button">
+            <div class="ui basic floating dropdown button" id="search-choice-button" data-inverted=""
+              data-tooltip="Search for" data-position="right center">
               <div id="dropdown-text" class="text">All</div>
               <i class="dropdown icon" style="margin: 0px;"></i>
               <div class="menu">
@@ -203,15 +207,16 @@
       <div class="right menu" id="logout-button-surrounding">
         <div class="item">
           <div class="ui transparent big icon input">
-            <button class="ui button" id="logout-button"><i class="sign-out icon" style="margin: 0px;"></i></button>
+            <button class="ui button" id="logout-button" data-inverted="" data-tooltip="Log out"
+              data-position="bottom right"><i class="sign-out icon" style="margin: 0px;"></i></button>
 
             <!--confirmation box -->
             <div class="ui basic modal">
               <div id="log-out-screen" class="content">
-                <h3 class="tiny">Are you sure you would like to log out?</h3>
+                <h1 class="tiny">Log out?</h1>
               </div>
               <div id="log-out-screen" class="actions">
-                <div class="ui red basic cancel inverted button">
+                <div class="ui red cancel inverted button">
                   <i class="remove icon"></i>
                   No
                 </div>
@@ -257,7 +262,7 @@
         <a class="ui green tag label">American</a>
         <a class="ui green tag label">Dinner</a>
         <a class="ui green tag label">Takeaway</a>
-        <h3 class="ui right floated header" id="results-label"><span id="total-results"></span> Results</h3>
+        <h3 class="ui right floated header" id="results-label"><span id="total-results"></span><span id="loggedInAs"> </span> </h3>
       </div>
       <div id="main-grid" class="ui stackable four column grid">
         <!-- Items will be shown here -->
@@ -325,12 +330,12 @@
           <br>
       </div>
     </div>
-    <br>
+    </div>
+
   </div>
-  </div>
-  </div>
-  </div>
-  </div>
+
+  <!-- </div> -->
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
   <script src='js/taxonomic.js'></script>
