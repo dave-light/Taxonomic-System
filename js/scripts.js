@@ -47,6 +47,9 @@ $( document ).ready(function () {
                 bindKeys();
                 enable_dropdown();
 
+                //Tag Modal stuff
+                $('.menu .item').tab();
+
                 onClickModal();
 
                 // Initialises check boxes in filter menu
@@ -486,3 +489,113 @@ function showItem(id){
 // function filterResults() {
 //
 // }
+
+
+
+
+
+//Tag Modal
+
+function onClickModal() {
+    var id;
+    var tag_id;
+    var tag;
+
+    $("#main-grid").on('click', '.column', function() {
+        id = $(this).children()[0].id;
+        if(id.indexOf("tag") >= 0) {
+
+            tag_id = parseInt(id.substring(id.indexOf("-") + 1));
+            console.log(tag_id);
+
+            tag = Tags.find(tag_id);
+            console.log(tag);
+
+
+            if(Tags.isFlagged(tag)){
+                $('#flag').text("Un-flag");
+            }else{
+                $('#flag').text("Flag");
+            }
+
+
+            //Clear and populate fields
+            $('#modal-tag-title').       empty().text("Tag: " + tag.name);
+            $('#modal-tag-id').          empty().text(tag.id);
+            $('#modal-tag-name').        empty().text(tag.name);
+            $('#modal-tag-description'). empty().text(tag.description);
+            $('#modal-tag-creator').     empty().text(tag.creator.name);
+            $('#modal-tag-created').     empty().text(tag.createdAt);
+            if(tag.status){
+                $('#modal-tag-status').empty().text("open");
+            }else{
+
+                $('#modal-tag-status').empty().text("closed");
+            }
+
+
+
+
+            //Appends image
+            $('#tag-modal-image').append("<img src=></img>");
+
+            //Resets tab position
+            $('.ui.modal#tagsOverlay').modal({
+                onHidden: function () {
+                  $('.menu .item').tab('change tab', 'first');
+                }
+            }).modal('show');
+
+            //Initial history
+            setHistory(tag);
+
+        }
+        });
+
+
+    $('#flag').on('click', function() {
+        if($('#flag').text() == "Flag"){
+            console.log("Flagged.");
+            Tags.flag(tag);
+            $('#flag').text("Un-flag");
+        }else{
+            console.log("Un-flagged.");
+            Tags.unflag(tag);
+            $('#flag').text("Flag");
+        }
+
+    
+        setHistory(tag);
+        console.log(Tags.history(tag));
+    });
+
+
+}
+
+
+function setHistory(tag) {
+    console.log(Tags.history(tag));
+    var history = Tags.history(tag);
+
+    $('tbody#history-body').empty();
+    history.slice().reverse().forEach(function(element){
+        //History ID var
+        var history_id = element.id;
+        //Description
+        var description = element.payload;
+        //Action by
+        var author = element.creator.name;
+        //Time
+        var time = element.createdAt.split(" GMT")[0];
+        $('tbody#history-body').append('\
+                <tr>\
+                <td data-label="History ID">'+ history_id +'</td>\
+                <td data-label="Description">'+ description +'</td>\
+                <td data-label="Action by">' + author +'</td>\
+                <td data-label="Time">' + time + '</td>\
+                </tr>\
+                ');
+    });
+}
+
+
