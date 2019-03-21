@@ -359,7 +359,7 @@ $( "#tag-rows" ).on( "click", ".filtered-tag", function() {
 function updateEmptyTable() {
   var empty_table = '<tr id="empty-tag-list" class="center aligned">' +
   '<td>No tags currently filtered</td></tr>';
-  if (tagFilterListIsEmpty()) {
+    if (tagFilterListIsEmpty()) {
     $("#tag-rows").html(empty_table);
   } else {
     $("#empty-tag-list").remove();
@@ -518,26 +518,10 @@ function onClickModal() {
                 $('#flag').text("Flag");
             }
 
-
-            //Clear and populate fields
-            $('#modal-tag-title').       empty().text("Tag: " + tag.name);
-            $('#modal-tag-id').          empty().text(tag.id);
-            $('#modal-tag-name').        empty().text(tag.name);
-            $('#modal-tag-description'). empty().text(tag.description);
-            $('#modal-tag-creator').     empty().text(tag.creator.name);
-            $('#modal-tag-created').     empty().text(tag.createdAt);
-            if(tag.status){
-                $('#modal-tag-status').empty().text("open");
-            }else{
-
-                $('#modal-tag-status').empty().text("closed");
-            }
+            populateTagInfo(tag);
 
 
 
-
-            //Appends image
-            $('#tag-modal-image').append("<img src=></img>");
 
             //Resets tab position
             $('.ui.modal#tagsOverlay').modal({
@@ -549,6 +533,9 @@ function onClickModal() {
             //Initial history
             setHistory(tag);
 
+            
+            setManageTag(tag);
+            mapTag(tag);
         }
         });
 
@@ -572,7 +559,69 @@ function onClickModal() {
 
 }
 
+function mapTag(tag){
+    var tag_names = [];
+    
+    tags.forEach(function(e){
+        tag_names.push({"name": e.element.name, "value": e.element.name});
+    });
 
+    $('.ui.dropdown.map-dropdown').dropdown({
+        values: tag_names
+    });
+
+    $('#map-save').on('click', function() {
+        $('.ui.dropdown.map-dropdown').dropdown("get value");
+        var values = $('.ui.search.dropdown.map-dropdown');
+
+    });
+    $('#map-tag-cancel').on('click', function() {
+        $('.ui.dropdown.map-dropdown').dropdown(
+            "clear"
+        );
+    });
+
+    console.log($(this));
+
+}
+function populateTagInfo(tag) {
+    //Clear and populate fields
+    $('#modal-tag-title').       empty().text("Tag: " + tag.name);
+    $('#modal-tag-id').          empty().text(tag.id);
+    $('#modal-tag-name').        empty().text(tag.name);
+    $('#modal-tag-description'). empty().text(tag.description);
+    $('#modal-tag-creator').     empty().text(tag.creator.name);
+    $('#modal-tag-created').     empty().text(tag.createdAt);
+    if(tag.status){
+        $('#modal-tag-status').empty().text("open");
+    }else{
+
+        $('#modal-tag-status').empty().text("closed");
+    }
+
+}
+function setManageTag(tag) {
+    //tag.element.name
+    //tag.element.description
+
+    $('#edit-tag-name').val(tag.name);
+    $('#edit-tag-description').val(tag.description);
+
+    //onchange on name to check if the name already exists
+    console.log(tag);
+    $('#edit-tag-save').on('click', function(){
+        tag.name = $('#edit-tag-name').val();
+        tag.description = $('#edit-tag-description').val();
+        Tags.update(tag);
+        populateTagInfo(tag);
+        displayAllResults();
+    });
+
+    $('#edit-tag-cancel').on('click', function() {
+        $('#edit-tag-name').val(tag.name);
+        $('#edit-tag-description').val(tag.description);
+    });
+}
 function setHistory(tag) {
     console.log(Tags.history(tag));
     var history = Tags.history(tag);

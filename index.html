@@ -237,9 +237,10 @@
 
     <!-- Modal for Tags -->
     <div class="ui modal" id="tagsOverlay" style="text-align:unset;">
+        <i class="close icon"></i>
         <div class="header" style="border-bottom: none;">
             <h2 class="ui center aligned icon header">
-                <i class="circular flag icon"></i>
+                <i class="circular tag icon"></i>
                 <i id="modal-tag-title"> Tag: </i>
             </h2>
             </div>
@@ -312,12 +313,82 @@
                     </div>
                     
                 </div>
-                <div class="ui segment bottom attached tab" data-tab="third">
+                <div class="ui bottom attached tab" data-tab="third">
+                    <!-- Manage Tag        -->
+                    <h4 class="ui horizontal divider header">
+                        <i class="bar chart icon"></i>
+                        Tag Details
+                    </h4>
 
 
-                    
+                    <div class="ui stackable three column centered grid">
+                        <form class="ui form column">
+                            <div class="ui card">
+                                <div class="content">
+                                    <div class="header">Edit Tag</div>
+                                    <div class="field">
+                                        <label>Tag Name</label>
+                                        <input id="edit-tag-name" type="text" name="first-name" placeholder="First Name">
+                                    </div>
+                                    <div class="field">
+                                        <label>Short Text</label>
+                                        <textarea id="edit-tag-description" rows="3"></textarea>
+                                    </div>
+                                    <button type="button" id="edit-tag-save" class="ui button green">Save</button>
+                                    
+                                    <button type="button" id="edit-tag-cancel" class="ui yellow button">Undo</button>
+                                </div>
+                            </div>
+
+
+                        </form>
+                        <form class="ui form column">
+                            <div class="ui card">
+                                <div class="content">
+                                    <div class="header">Map Tags</div>
+                                    <div class="field">
+                                        <div class="ui form">
+                                            <div class="field">
+                                                <label>Tags</label>
+                                                <select class="ui search dropdown map-dropdown" multiple="">
+                                                </select>
+                                            </div>
+                                        </div>                                    </div>
+
+                                    <button type="button" id="map-save" class="ui green button">Save</button>
+                                    <button type="button" id="map-tag-cancel" class="ui yellow button">Undo</button>
+                                </div>
+                            </div>
+
+
+                        </form>
+
+
+                        
+                        <form class="ui form column">
+                            <div class="ui card">
+                                <div class="content">
+                                    <div class="header">Edit Tag</div>
+                                    <div class="field">
+                                        <label>Tag Name</label>
+                                        <input type="text" name="first-name" placeholder="First Name">
+                                    </div>
+                                    <div class="field">
+                                        <label>Short Text</label>
+                                        <textarea rows="3"></textarea>
+                                    </div>
+                                    <button class="ui button" type="submit">Submit</button>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+
+
 
                 </div>
+                    <!-- End of Manage Tag -->
             </div>
 
             <div class="actions">
@@ -327,7 +398,7 @@
                     Flag
                 </div>
 
-                <div id="close-button" class="ui red deny button" style="background-color:#CFF7F0; color: #000000">
+                <div id="close-button" class="ui deny button">
                     Close
                 </div>
 
