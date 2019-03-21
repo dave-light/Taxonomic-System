@@ -47,7 +47,7 @@
               <h4 class="ui dividing header">Search for Tags to Filter by</h4>
 
               <div id="filter-search-tags" class="ui search">
-                <div class="ui fluid right labeled left icon input">
+                <div class="ui item-filter fluid right labeled left icon input">
                    <i class="tags icon"></i>
                   <input id="filter-search-bar" class="prompt" type="text" placeholder="Search Tags...">
                   <a id="add-tag-filter" class="ui tag label">
@@ -81,7 +81,7 @@
 
             <div id="filter-type-form" class="ui form">
               <h4 class="ui dividing header">Filter by Item Type</h4>
-              <div class="fields">
+              <div class="fields item-filter">
               <div class="field filter-type">
                 <div class="ui checked checkbox">
                   <label>PDF</label>
@@ -128,13 +128,13 @@
                     <label>Name</label>
                   </div>
                 </div>
-                <div class="field sort-type">
+                <div class="field sort-type tag-filter">
                   <div class="ui radio checkbox">
                     <input id="attached-items" class="filter-sort-option-radio" type="radio" tabindex="0" class="hidden">
                     <label>No. of attached items</label>
                   </div>
                 </div>
-                <div class="field sort-type">
+                <div class="field sort-type tag-filter">
                   <div class="ui radio checkbox">
                     <input id="co-tags" class="filter-sort-option-radio" type="radio" tabindex="0" class="hidden">
                     <label>No. of Co-tags</label>
@@ -188,7 +188,7 @@
                 <div class="ui basic floating dropdown button" id="search-choice-button">
                   <div id="dropdown-text" class="text">All</div>
                   <i class="dropdown icon" style="margin: 0px;"></i>
-                  <div class="menu">
+                  <div class="menu" id="search-type">
                     <div class="item">All</div>
                     <div class="item">Items</div>
                     <div class="item">Tags</div>

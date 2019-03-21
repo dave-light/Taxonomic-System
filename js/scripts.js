@@ -12,6 +12,7 @@
   var sort_option = "date";
   var sort_order = "ascending";
   var results = [];
+  var search_type = "all";
   var container = document.body;
 
   $( document ).ready(function () {
@@ -89,9 +90,10 @@
       $( '.ui.dropdown' ).dropdown({
           action: 'activate',
           onChange: function(value, text, $selectedItem) {
-          console.log(text);
-          dropdown_selection = text;
-              displayAllResults();
+            console.log(text);
+            dropdown_selection = text;
+            displayAllResults();
+            showCorrectFilterOptions();
           }
       });
   }
@@ -333,8 +335,22 @@ function onClickModal() {
   function setGridWidth(size) {
     $('#main-grid').removeClass('one two three four column grid');
     $('#main-grid').addClass(size + ' column grid');
+  }
 
-}
+  function showCorrectFilterOptions() {
+    if (dropdown_selection == "Tags") {
+      $(".item-filter").addClass("disabled");
+      $(".tag-filter").removeClass("disabled");
+      $("#clear-filters-button").click();
+    } else if (dropdown_selection == "Items") {
+      $(".item-filter").removeClass("disabled");
+      $(".tag-filter").addClass("disabled");
+      $("#clear-filters-button").click();
+    } else {
+      $(".item-filter").removeClass("disabled");
+      $(".tag-filter").removeClass("disabled");
+    }
+  }
 
   $("#filter-button").click(function(){
     $('.ui.sidebar').sidebar('toggle');
