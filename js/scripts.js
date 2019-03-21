@@ -399,8 +399,12 @@ function onClickModal() {
   function resetFilterForms() {
     $('.ui.form').form('clear');
     $('.ui.checkbox:not(.radio)').checkbox("check", true);
-    $("#date").prop("checked", true);
-    $("#ascending").prop("checked", true);
+    // $("#date").prop("checked", true);
+    // $("#ascending").prop("checked", true);
+    // sort_option = "date";
+    // sort_order = "ascending";
+    $("#date").click();
+    $("#ascending").click();
   }
 
   function tagFilterListIsEmpty() {
