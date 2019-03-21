@@ -51,3 +51,8 @@ background-color: #cff7f0;
 .remove-item-tag-button{
 background-color: lightgreen !important;    
 }
+
+
+#item-modal-add-tag{
+    background-color: lightgreen !important;  
+}
