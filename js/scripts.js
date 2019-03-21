@@ -4,13 +4,15 @@ const { Users, Items, Tags } = Taxonomic;
 var dropdown_selection = "All";
 var items;
 var tags;
-var co_tags;
+var top_co_tags = new Set();
 var all_tags = [];
 var items_and_tags;
 var filtered_tags = [];
-var filter_type = [];
-var sort_option;
-var sort_order;
+var filter_type = new Set(["pdf", "image", "video", "audio"]);
+var sort_option = "date";
+var sort_order = "ascending";
+var results = [];
+var search_type = "all";
 var container = document.body;
 var currentSelectedItem;
 
@@ -64,6 +66,14 @@ $(document).ready(function () {
         $("#item-modal-add-tag-search-area").search({ source: all_tags });
         $('#item-modal-add-tag-search-bar').val("");
 
+        // Initialises the tag search box in filter sidebar
+        $('#filter-search-tags').search({source: all_tags});
+        resetFilterForms();
+        setFilterOrderRadioButtons();
+        showCorrectFilterOptions();
+        displayAllResults();
+        updateTopCoTags();
+
         displayAllResults();
 
         search_listener(); // REMOVE WHEN SEARCH IS FUNCTIONAL.
@@ -91,19 +101,20 @@ $(document).ready(function () {
   });
   //
 
+
 });
 
-function enable_dropdown() {
-  $('.ui.dropdown').dropdown({
-    action: 'activate',
-    onChange: function (value, text, $selectedItem) {
-      console.log(text);
-      dropdown_selection = text;
-      displayAllResults();
-    }
-  });
-}
-
+  function enable_dropdown() {
+      $( '.ui.dropdown' ).dropdown({
+          action: 'activate',
+          onChange: function(value, text, $selectedItem) {
+            console.log(text);
+            dropdown_selection = text;
+            displayAllResults();
+            showCorrectFilterOptions();
+          }
+      });
+  }
 
 // Use this function to update the main view if updating it
 // on each single key press is too much.
@@ -172,41 +183,59 @@ function compareAndAppendObjectToList(target_list, result_list) {
   });
   return list;
 }
+
 function displayAllResults() {
+  results = [];
   if (dropdown_selection == "All") {
     $("#main-grid").html("");
-
-    items.forEach(function (object) {
-      var id = object.element.id;
-      var image = object.element.picture;
-      $("#main-grid").append(generateItemCard(id, image));
+    var count = 0;
+    items.forEach(function(object){
+        var id = object.element.id;
+        var image = object.element.picture;
+        if (itemMatchesFilters(object.element)) {
+          $("#main-grid").append(generateItemCard(id, image));
+          results.push(object.element);
+          count++;
+        }
     });
+    if (count == 0) {
+      addAllItems();
+    }
     tags.forEach(function (object) {
       var id = object.element.id;
       var tagName = object.element.name;
       $("#main-grid").append(generateTagCard(id, tagName));
+      results.push(object.element);
     });
-
-    updateTotalResults();
   }
   else if (dropdown_selection == "Items") {
     $("#main-grid").html("");
+    var count = 0;
     items.forEach(function (object) {
       var id = object.element.id;
       var image = object.element.picture;
-      $("#main-grid").append(generateItemCard(id, image));
+      if (itemMatchesFilters(object.element)) {
+        $("#main-grid").append(generateItemCard(id, image));
+        count++;
+        results.push(object.element);
+      }
     });
-    updateTotalResults();
+    if (count == 0) {
+      addAllItems();
+    }
   }
+
   else if (dropdown_selection == "Tags") {
     $("#main-grid").html("");
     tags.forEach(function (object) {
       var id = object.element.id;
       var tagName = object.element.name;
       $("#main-grid").append(generateTagCard(id, tagName));
+      results.push(object.element);
     });
-    updateTotalResults();
   }
+  updateTotalResults();
+  sortResults();
 }
 
 // Generate html for tag / item cards
@@ -312,6 +341,7 @@ function onClickModal() {
     console.log(Tags.history(tag));
   });
 }
+
 function setGridWidth(size) {
   $('#main-grid').removeClass('one two three four column grid');
   $('#main-grid').addClass(size + ' column grid');
@@ -345,9 +375,17 @@ $("#add-tag-filter").click(function () {
     $("#error-container").hide();
     insertTagToFilterList(tag_name);
     $("#filter-search-bar").val("");
-  }
-
+}
 });
+
+function addAllItems() {
+  items.forEach(function(object){
+    var id = object.element.id;
+    var image = object.element.picture;
+    $("#main-grid").append(generateItemCard(id, image));
+    results.push(object.element);
+  });
+}
 
 $("#filter-search-bar").focus(function () {
   $("#error-container").hide();
@@ -447,7 +485,7 @@ function undoRemoveTag(itemId, tagId) {
   let item = Items.find(itemId);
   let tag = Tags.find(tagId);
   Tags.attach(tag, item);
-  $("#item-modal-tags").append("<button id='item-modal-tag-button-" + tagId + "'class='ui button tag label' onclick='removeItemTag("
+  $("#item-modal-tags").append("<button id='item-modal-tag-button-" + tagId + "'class='ui button tag label remove-item-tag-button' onclick='removeItemTag("
     + item.id + ", " + tag.id + ", " + tagId + ")'>" + tag.name + "<i class='delete icon red item-delete-tag-icon'> </i></button>");
   $(".remove-tag-msg").remove();
   $("#item-tag-change-message").prepend("<div class='remove-tag-msg ui message yellow'><div class='header'>Undid Removing Tag From Item</div><p>Tag " + tag.name + " readded to item " + item.name + ".</p></div>");
@@ -485,19 +523,6 @@ function showItem(id) {
 
 }
 
-
-// $("#filter-sidebar input:not(#filter-search-bar)").change(function(){
-//   alert($("#filter-sort-order").children().is(":checked").val());
-// });
-//
-// function filterResults() {
-//
-// }
-
-
-
-
-
 //Tag Modal
 
 function onClickModal() {
@@ -524,9 +549,6 @@ function onClickModal() {
 
             populateTagInfo(tag);
 
-
-
-
             //Resets tab position
             $('.ui.modal#tagsOverlay').modal({
                 onHidden: function () {
@@ -537,7 +559,7 @@ function onClickModal() {
             //Initial history
             setHistory(tag);
 
-            
+
             setManageTag(tag);
             mapTag(tag);
         }
@@ -555,17 +577,45 @@ function onClickModal() {
             $('#flag').text("Flag");
         }
 
-    
+
         setHistory(tag);
         console.log(Tags.history(tag));
     });
 
-
 }
+  function setGridWidth(size) {
+    $('#main-grid').removeClass('one two three four column grid');
+    $('#main-grid').addClass(size + ' column grid');
+  }
+
+  function showCorrectFilterOptions() {
+    if (dropdown_selection == "Tags") {
+      $(".item-filter").addClass("disabled");
+      $(".tag-filter").removeClass("disabled");
+    } else if (dropdown_selection == "Items") {
+      $(".item-filter").removeClass("disabled");
+      $(".tag-filter").addClass("disabled");
+    } else {
+      $(".item-filter").removeClass("disabled");
+      $(".tag-filter").addClass("disabled");
+    }
+    $("#clear-filters-button").click();
+  }
+
+
+
+
+  $("#clear-filters-button").click(function(){
+    $("#filter-search-bar").val("");
+    $("#error-container").hide();
+    clearFilterTable();
+    resetFilterForms();
+    updateFilters();
+  });
 
 function mapTag(tag){
     var tag_names = [];
-    
+
     tags.forEach(function(e){
         tag_names.push({"name": e.element.name, "value": e.element.name});
     });
@@ -584,6 +634,7 @@ function mapTag(tag){
             "clear"
         );
     });
+
 
     console.log($(this));
 
@@ -651,6 +702,29 @@ function setHistory(tag) {
     });
 }
 
+  $( "#tag-rows" ).on( "click", ".filtered-tag", function() {
+    var i = filtered_tags.indexOf($(this).text());
+    filtered_tags.splice(i,1);
+    updateTopCoTags();
+    $(this).parents("tr").remove();
+    updateEmptyTable();
+    updateFilters();
+  });
+
+  function clearFilterTable() {
+    $("#tag-rows").empty();
+    updateEmptyTable();
+    filtered_tags = [];
+    updateTopCoTags();
+  }
+
+  function resetFilterForms() {
+    $('.ui.form').form('clear');
+    $('.ui.checkbox:not(.radio)').checkbox("check", true);
+    $("#date").click();
+    $("#ascending").click();
+  }
+
 
 
 // Create new tag
@@ -684,8 +758,163 @@ function createTag() {
       description: description.val()
     });
 
+
     $('#createNewTag').hide();
 
   });
 }
 
+
+  function insertTagToFilterList(tag) {
+    var tag_filter = '<tr class="center aligned"><td>' +
+    '<a class="ui tag label filtered-tag"><span class="tag-entry">' + tag +
+    '</span><i class="red close icon"></i></a></td></tr>';
+    $("#tag-rows").append(tag_filter);
+    filtered_tags.push(tag);
+    updateTopCoTags();
+    updateFilters();
+    updateEmptyTable();
+  }
+
+  function updateTopCoTags() {
+    top_co_tags.clear();
+    $("#co-tags-container").empty();
+    if (filtered_tags.length == 0) {
+      $("#co-tag-title").hide();
+      return;
+    }
+    filtered_tags.forEach(function(object) {
+      var co_tags = Tags.cotags(Tags.findAll({"name": object})[0]);
+      co_tags.forEach(function(obj) {
+        if (!top_co_tags.has(obj.tag.name)) {
+          top_co_tags.add(obj);
+        }
+      });
+    });
+    top_co_tags.forEach(function(object) {
+      if (filtered_tags.includes(object.tag.name)) {
+        top_co_tags.delete(object);
+      }
+    });
+    console.log(top_co_tags);
+    var co_tags = Array.from(top_co_tags);
+    co_tags.sort((a, b) => (a.count < b.count) ? 1 : -1);
+    co_tags.slice(0,5).forEach(function(ob) {
+      if ($('.co-tag').text().indexOf(ob.tag.name) === -1) {
+        $("#co-tags-container").append('<a class="ui green tag label co-tag">' + ob.tag.name + '</a>');
+      }
+    });
+    $("#co-tag-title").show();
+  }
+
+  $("#co-tags-container").on('click', ".co-tag", function() {
+    insertTagToFilterList($(this).text());
+  });
+
+  $(".filter-type-option").change(function(){
+    var type = $(this).attr("id");
+    if($(this).is(":checked")) {
+      filter_type.add(type);
+    } else {
+      filter_type.delete(type);
+    }
+    updateFilters();
+  });
+
+  $(".filter-sort-option-radio").change(function(){
+    sort_option = $(this).attr("id");
+    setFilterOrderRadioButtons();
+    $(".filter-sort-option-radio:not(#" + sort_option + ")").prop("checked", false);
+    updateFilters();
+    sortResults();
+  });
+
+  function setFilterOrderRadioButtons() {
+    if (sort_option == "date") {
+      $("#ascending").next().text("Oldest");
+      $("#descending").next().text("Newest");
+    } else {
+      $("#ascending").next().text("Ascending");
+      $("#descending").next().text("Descending");
+    }
+  }
+
+  $(".filter-sort-order-radio").change(function(){
+    sort_order = $(this).attr("id");
+    $(".filter-sort-order-radio:not(#" + sort_order + ")").prop("checked", false);
+    updateFilters();
+    sortResults();
+  });
+
+  function updateFilters() {
+    displayAllResults();
+  }
+
+  function itemMatchesFilters(item) {
+    if (filter_type.size > 0 && !filter_type.has(item.type)) {
+      return false;
+    }
+    if (filtered_tags.length > 0) {
+      for (var i in filtered_tags) {
+        if (!item.tags.includes(filtered_tags[i])) {
+          return false;
+        }
+      }
+      return true;
+    }
+    if (filter_type.has(item.type)) {
+      return true;
+    }
+    return false;
+  }
+
+  function sortResults() {
+    if (sort_option == "name") {
+      if (sort_order == "ascending") {
+        results.sort((a, b) => (a.name.toUpperCase() > b.name.toUpperCase()) ? 1 : -1);
+      } else {
+        results.sort((a, b) => (a.name.toUpperCase() < b.name.toUpperCase()) ? 1 : -1);
+      }
+    } else if (sort_option == "date") {
+      if (sort_order == "ascending") {
+        results.sort((a, b) => (new Date(a.createdAt) > new Date(b.createdAt)) ? 1 : -1);
+      } else {
+        results.sort((a, b) => (new Date(a.createdAt) < new Date(b.createdAt)) ? 1 : -1);
+      }
+    } else if (sort_option == "associated-items") {
+      if (sort_order == "ascending") {
+        results.sort((a, b) => (numberOfAssociatedItems(a) > numberOfAssociatedItems(b)) ? 1 : -1);
+      } else {
+        results.sort((a, b) => (numberOfAssociatedItems(a) < numberOfAssociatedItems(b)) ? 1 : -1);
+      }
+    } else if (sort_option == "co-tags") {
+      if (sort_order == "ascending") {
+        results.sort((a, b) => (Tags.cotags(a).length > Tags.cotags(b).length) ? 1 : -1);
+      } else {
+        results.sort((a, b) => (Tags.cotags(a).length < Tags.cotags(b).length) ? 1 : -1);
+      }
+    }
+
+    $("#main-grid").empty();
+    results.forEach(function(object){
+      var id = object.id;
+      var image = object.picture;
+      if (object.hasOwnProperty("tags")) {
+        $("#main-grid").append(generateItemCard(id, image));
+      } else {
+        var tag_name = object.name;
+        $("#main-grid").append(generateTagCard(id, tag_name));
+      }
+    });
+
+  }
+
+  function numberOfAssociatedItems(tag) {
+    var count = 0;
+    items.forEach(function(object) {
+      if (Tags.attached(tag, object.element) == true) {
+        count++;
+      }
+    });
+    return count;
+  }
