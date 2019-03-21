@@ -14,91 +14,94 @@ var sort_order;
 var container = document.body;
 var currentSelectedItem;
 
-$( document ).ready(function () {
+$(document).ready(function () {
 
-    var user = Users.find(0);
-    Taxonomic.login(user);
-    x = Taxonomic.loadItems();
-    x.then(function() {
-        items              = Items.search("");
-        tags               = Tags.search("");
-        tags.forEach(function(obj) {
-          all_tags.push({ title: obj.element.name});
-        });
-        items_and_tags     = items.concat(tags);
-      });
-
-    //Enables dropdown in login
-    $( '.ui.dropdown' ).dropdown();
-
-    // Enables function calls on the main view that require
-    // enabled objects.
-    // Workaround for the login/logout one page design.
-    var mutationObserver = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-            if(mutation.addedNodes[0] != undefined &&
-            mutation.addedNodes[0].id == "loggedIn") {
-
-                updateGridWidth();
-                $(window).resize(function() {
-                  updateGridWidth();
-                });
-
-                bindKeys();
-                enable_dropdown();
-
-                //Tag Modal stuff
-                $('.menu .item').tab();
-
-                onClickModal();
-
-                // Initialises check boxes in filter menu
-                $('.ui.checkbox').checkbox();
-
-                // Initialises the tag search box in filter sidebar
-                $('#filter-search-tags').search({source: all_tags});
-
-		$("#item-modal-add-tag-search-area").search({ source: all_tags });
-        	$('#item-modal-add-tag-search-bar').val("");
-
-                displayAllResults();
-
-                search_listener(); // REMOVE WHEN SEARCH IS FUNCTIONAL.
-                          // stored in -> items
-                          //              tags
-                          //              items_and_tags
-                          // depending on search
-
-                mutationObserver.disconnect();
-
-                // Debugging logs.
-                console.log("Grid activated.");
-                console.log("Key bindings activated.");
-                console.log("Dropdown activated.");
-                console.log("Search activated.");
-
-            }
-        });
+  var user = Users.find(0);
+  Taxonomic.login(user);
+  x = Taxonomic.loadItems();
+  x.then(function () {
+    items = Items.search("");
+    tags = Tags.search("");
+    tags.forEach(function (obj) {
+      all_tags.push({ title: obj.element.name });
     });
+    items_and_tags = items.concat(tags);
+  });
 
-    mutationObserver.observe(container, {
-        attributes: true,
-        childList: true,
-        characterData: true
+  //Enables dropdown in login
+  $('.ui.dropdown').dropdown();
+
+  // Enables function calls on the main view that require
+  // enabled objects.
+  // Workaround for the login/logout one page design.
+  var mutationObserver = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+      if (mutation.addedNodes[0] != undefined &&
+        mutation.addedNodes[0].id == "loggedIn") {
+
+        updateGridWidth();
+        $(window).resize(function () {
+          updateGridWidth();
+        });
+
+        bindKeys();
+        enable_dropdown();
+
+        //Tag Modal stuff
+        $('.menu .item').tab();
+
+        onClickModal();
+
+
+        createTag();
+
+        // Initialises check boxes in filter menu
+        $('.ui.checkbox').checkbox();
+
+        // Initialises the tag search box in filter sidebar
+        $('#filter-search-tags').search({ source: all_tags });
+
+        $("#item-modal-add-tag-search-area").search({ source: all_tags });
+        $('#item-modal-add-tag-search-bar').val("");
+
+        displayAllResults();
+
+        search_listener(); // REMOVE WHEN SEARCH IS FUNCTIONAL.
+        // stored in -> items
+        //              tags
+        //              items_and_tags
+        // depending on search
+
+        mutationObserver.disconnect();
+
+        // Debugging logs.
+        console.log("Grid activated.");
+        console.log("Key bindings activated.");
+        console.log("Dropdown activated.");
+        console.log("Search activated.");
+
+      }
     });
-    //
+  });
+
+  mutationObserver.observe(container, {
+    attributes: true,
+    childList: true,
+    characterData: true
+  });
+  //
 
 });
 
 function enable_dropdown() {
-    $( '.ui.dropdown' ).dropdown({
-        action: 'activate',
-        onChange: function(value, text, $selectedItem) {
-        console.log(text);
-        dropdown_selection = text;
-            displayAllResults();
-        }
-    });
+  $('.ui.dropdown').dropdown({
+    action: 'activate',
+    onChange: function (value, text, $selectedItem) {
+      console.log(text);
+      dropdown_selection = text;
+      displayAllResults();
+    }
+  });
 }
 
 
@@ -106,55 +109,55 @@ function enable_dropdown() {
 // on each single key press is too much.
 // This whole function is only for debugging!!!
 function bindKeys() {
-  $( '#search-input' ).keypress(function (e) {
+  $('#search-input').keypress(function (e) {
 
-      if (e.keyCode == 13) {
-          displayAllResults();
-      }
-      else if(e.keyCode == 32) {
-          displayAllResults();
-      }
+    if (e.keyCode == 13) {
+      displayAllResults();
+    }
+    else if (e.keyCode == 32) {
+      displayAllResults();
+    }
 
   });
 }
 
 function search_listener() {
   // Binds event handler to the search field
-    $( "#search-input" ).on('input', function(e){
+  $("#search-input").on('input', function (e) {
 
-      var input = $( this ).val();
-      var items_names;
-      var items_descs;
-      var items2;
-      var items3;
-      if(dropdown_selection == "All") {
-          items_names = Items.search(input);
-          items_descs  = Items.search2(input);
+    var input = $(this).val();
+    var items_names;
+    var items_descs;
+    var items2;
+    var items3;
+    if (dropdown_selection == "All") {
+      items_names = Items.search(input);
+      items_descs = Items.search2(input);
 
-          items3 = compareAndAppendObjectToList(items_descs, items_names);
-          items2 = Items.searchByTag(input);
-          items3 = compareAndAppendObjectToList(items2, items3);
-          items  = items3;
+      items3 = compareAndAppendObjectToList(items_descs, items_names);
+      items2 = Items.searchByTag(input);
+      items3 = compareAndAppendObjectToList(items2, items3);
+      items = items3;
 
-          tags = Tags.search(input);
-          items_and_tags = items.concat(tags);
-      }
+      tags = Tags.search(input);
+      items_and_tags = items.concat(tags);
+    }
 
-      else if(dropdown_selection == "Items") {
-          items_names = Items.search(input);
-          items_descs  = Items.search2(input);
+    else if (dropdown_selection == "Items") {
+      items_names = Items.search(input);
+      items_descs = Items.search2(input);
 
-          items3 = compareAndAppendObjectToList(items_descs, items_names);
-          items2 = Items.searchByTag(input);
-          items3 = compareAndAppendObjectToList(items2, items3);
-          items = items3;
-      }
+      items3 = compareAndAppendObjectToList(items_descs, items_names);
+      items2 = Items.searchByTag(input);
+      items3 = compareAndAppendObjectToList(items2, items3);
+      items = items3;
+    }
 
-    else if(dropdown_selection == "Tags")  {
+    else if (dropdown_selection == "Tags") {
       tags = Tags.search(input);
     }
 
-      displayAllResults();
+    displayAllResults();
   });
 
 }
@@ -163,61 +166,61 @@ function search_listener() {
 function compareAndAppendObjectToList(target_list, result_list) {
   var list = result_list;
   target_list.forEach(function (object) {
-      if(!result_list.some(item => _.isEqual(item.element, object.element))) {
-          list = list.concat(object);
-      }
+    if (!result_list.some(item => _.isEqual(item.element, object.element))) {
+      list = list.concat(object);
+    }
   });
   return list;
 }
 function displayAllResults() {
-  if(dropdown_selection == "All") {
-      $("#main-grid").html("");
+  if (dropdown_selection == "All") {
+    $("#main-grid").html("");
 
-      items.forEach(function(object){
-          var id = object.element.id;
-          var image = object.element.picture;
-          $("#main-grid").append(generateItemCard(id, image));
-      });
-      tags.forEach(function(object){
-          var id = object.element.id;
-          var tagName = object.element.name;
-          $("#main-grid").append(generateTagCard(id, tagName));
-      });
+    items.forEach(function (object) {
+      var id = object.element.id;
+      var image = object.element.picture;
+      $("#main-grid").append(generateItemCard(id, image));
+    });
+    tags.forEach(function (object) {
+      var id = object.element.id;
+      var tagName = object.element.name;
+      $("#main-grid").append(generateTagCard(id, tagName));
+    });
 
-      updateTotalResults();
+    updateTotalResults();
   }
-  else if(dropdown_selection == "Items") {
-      $("#main-grid").html("");
-      items.forEach(function(object){
-          var id = object.element.id;
-          var image = object.element.picture;
-          $("#main-grid").append(generateItemCard(id, image));
-      });
-      updateTotalResults();
+  else if (dropdown_selection == "Items") {
+    $("#main-grid").html("");
+    items.forEach(function (object) {
+      var id = object.element.id;
+      var image = object.element.picture;
+      $("#main-grid").append(generateItemCard(id, image));
+    });
+    updateTotalResults();
   }
-  else if(dropdown_selection == "Tags") {
-      $("#main-grid").html("");
-      tags.forEach(function(object){
-          var id = object.element.id;
-          var tagName = object.element.name;
-          $("#main-grid").append(generateTagCard(id, tagName));
-      });
-      updateTotalResults();
+  else if (dropdown_selection == "Tags") {
+    $("#main-grid").html("");
+    tags.forEach(function (object) {
+      var id = object.element.id;
+      var tagName = object.element.name;
+      $("#main-grid").append(generateTagCard(id, tagName));
+    });
+    updateTotalResults();
   }
 }
 
 // This will eventually be updated to take further parameters, such as name
 function generateItemCard(id, image) {
-      return '<div class="column"><div id="item-' + id + '" class="ui fluid card item-card" onclick="showItem('+ id + ')"><div class="content"><img class="ui centered image item-image" src="' + image +'" alt=""></div></div></div>';
+  return '<div class="column"><div id="item-' + id + '" class="ui fluid card item-card" onclick="showItem(' + id + ')"><div class="content"><img class="ui centered image item-image" src="' + image + '" alt=""></div></div></div>';
 
 }
 
 function generateTagCard(id, tagName) {
-  return '<div class="column"><div id="tag-' + id + '" class="ui fluid card item-card"><div class="content"><img class="ui centered image item-image" src="https://www.publicdomainpictures.net/pictures/30000/velka/plain-white-background.jpg"><h1 id="centeredTag">'+'#'+tagName+'</h1></div></div></div>';
+  return '<div class="column"><div id="tag-' + id + '" class="ui fluid card item-card"><div class="content"><img class="ui centered image item-image" src="https://www.publicdomainpictures.net/pictures/30000/velka/plain-white-background.jpg"><h1 id="centeredTag">' + '#' + tagName + '</h1></div></div></div>';
 }
 
 function updateTotalResults() {
-    $("#total-results").html($("#main-grid .column").length);
+  $("#total-results").html($("#main-grid .column").length);
 }
 
 function updateGridWidth() {
@@ -226,12 +229,12 @@ function updateGridWidth() {
   } else if ($(window).width() < 1250) {
     setGridWidth("two");
   } else if ($(window).width() < 1600) {
-      setGridWidth("three");
+    setGridWidth("three");
   } else {
-      setGridWidth("four");
+    setGridWidth("four");
   }
 }
-function showTag(id){
+function showTag(id) {
   let tag = Tags.find(id);
 
   //Stuff on the modal
@@ -256,56 +259,56 @@ function onClickModal() {
   var tag_id;
   var tag;
 
-  $("#main-grid").on('click', '.column', function() {
-      id = $(this).children()[0].id;
-      if(id.indexOf("tag") >= 0) {
+  $("#main-grid").on('click', '.column', function () {
+    id = $(this).children()[0].id;
+    if (id.indexOf("tag") >= 0) {
 
-          tag_id = parseInt(id.substring(id.indexOf("-") + 1));
-          console.log(tag_id);
+      tag_id = parseInt(id.substring(id.indexOf("-") + 1));
+      console.log(tag_id);
 
-          tag = Tags.find(tag_id);
-          console.log(tag);
-
-
-          if(Tags.isFlagged(tag)){
-              $('#flag').text("Un-flag");
-          }else{
-              $('#flag').text("Flag");
-          }
+      tag = Tags.find(tag_id);
+      console.log(tag);
 
 
-
-          //Stuff on the modal
-          $(".remove-tag-msg").remove();
-          $('#tag-modal-image').empty();
-
-          //Title
-          $("#tag-modal-name").text(tag.name);
-
-          //Description
-          $("#tag-modal-desc").text(tag.description);
-
-
-          //Appends image
-          $('#tag-modal-image').append("<img src=></img>");
-          $('.ui.modal#tagsOverlay').modal('show');
+      if (Tags.isFlagged(tag)) {
+        $('#flag').text("Un-flag");
+      } else {
+        $('#flag').text("Flag");
       }
+
+
+
+      //Stuff on the modal
+      $(".remove-tag-msg").remove();
+      $('#tag-modal-image').empty();
+
+      //Title
+      $("#tag-modal-name").text(tag.name);
+
+      //Description
+      $("#tag-modal-desc").text(tag.description);
+
+
+      //Appends image
+      $('#tag-modal-image').append("<img src=></img>");
+      $('.ui.modal#tagsOverlay').modal('show');
+    }
   });
 
 
-  $('#flag').on('click', function() {
-      if($('#flag').text() == "Flag"){
-          console.log("Flagged.");
-          Tags.flag(tag);
-          $('#flag').text("Un-flag");
-      }else{
-          console.log("Un-flagged.");
-          Tags.unflag(tag);
-          $('#flag').text("Flag");
-      }
+  $('#flag').on('click', function () {
+    if ($('#flag').text() == "Flag") {
+      console.log("Flagged.");
+      Tags.flag(tag);
+      $('#flag').text("Un-flag");
+    } else {
+      console.log("Un-flagged.");
+      Tags.unflag(tag);
+      $('#flag').text("Flag");
+    }
 
 
-      console.log(Tags.history(tag));
+    console.log(Tags.history(tag));
   });
 }
 function setGridWidth(size) {
@@ -314,20 +317,20 @@ function setGridWidth(size) {
 
 }
 
-$("#filter-button").click(function(){
+$("#filter-button").click(function () {
   $('.ui.sidebar').sidebar('toggle');
 });
 
-$("#clear-filters-button").click(function(){
+$("#clear-filters-button").click(function () {
   $("#filter-search-bar").val("");
   $("#error-container").hide();
   clearFilterTable();
   resetFilterForms();
 });
 
-$("#add-tag-filter").click(function(){
+$("#add-tag-filter").click(function () {
   var tag_name = $("#filter-search-bar").val();
-  var found = all_tags.find(function(element) {
+  var found = all_tags.find(function (element) {
     return element.title == tag_name;
   });
 
@@ -345,21 +348,20 @@ $("#add-tag-filter").click(function(){
 
 });
 
-$("#filter-search-bar").focus(function(){
+$("#filter-search-bar").focus(function () {
   $("#error-container").hide();
 });
 
-$( "#tag-rows" ).on( "click", ".filtered-tag", function() {
+$("#tag-rows").on("click", ".filtered-tag", function () {
   var i = filtered_tags.indexOf($(this).text());
-  filtered_tags.splice(i,1);
+  filtered_tags.splice(i, 1);
   $(this).parents("tr").remove();
   updateEmptyTable();
 });
 
 function updateEmptyTable() {
-  var empty_table = '<tr id="empty-tag-list" class="center aligned">' +
-  '<td>No tags currently filtered</td></tr>';
-    if (tagFilterListIsEmpty()) {
+  var empty_table = '<tr id="empty-tag-list" class="center aligned">' +'<td>No tags currently filtered</td></tr>';
+  if (tagFilterListIsEmpty()) {
     $("#tag-rows").html(empty_table);
   } else {
     $("#empty-tag-list").remove();
@@ -383,31 +385,31 @@ function tagFilterListIsEmpty() {
 
 function tagInFilterList(tag) {
   var flag = false;
-  $(".tag-entry").each(function() {
-      if (tag == $(this).text()) {
-        flag = true;
-      }
+  $(".tag-entry").each(function () {
+    if (tag == $(this).text()) {
+      flag = true;
+    }
   });
   return flag;
 }
 
 function insertTagToFilterList(tag) {
   var tag_filter = '<tr class="center aligned"><td>' +
-  '<a class="ui tag label filtered-tag"><span class="tag-entry">' + tag +
-  '</span><i class="red close icon"></i></a></td></tr>';
+    '<a class="ui tag label filtered-tag"><span class="tag-entry">' + tag +
+    '</span><i class="red close icon"></i></a></td></tr>';
   $("#tag-rows").append(tag_filter);
   filtered_tags.push(tag);
   updateEmptyTable();
 }
-function drawAddTagMenu(){
+function drawAddTagMenu() {
 
   var tagNames = [];
   var allTags = Tags.search("");
-  for(i = 0; i < allTags.length; i++){
-    tagNames.push({"title": allTags[i].element.name});
+  for (i = 0; i < allTags.length; i++) {
+    tagNames.push({ "title": allTags[i].element.name });
   }
   $("#item-add-tag-menu").append("<div class='ui dropdown search'><div class='ui icon input'><input id='add-tag-item-search' class='prompt' type='text' placeholder='Search Tags to Add...'><i class='search icon'></i></div><div class='results'></div></div>")
-  $('.ui.search').search({source: tagNames, on: click});
+  $('.ui.search').search({ source: tagNames, on: click });
   let input = $('.ui.search').search('get value');
   //let input = $("#prompt.add-tag-item-search").val();
   console.log(input);
@@ -428,7 +430,7 @@ function addTagToItem() {
 
   if (tagId == null) {
     $("#item-tag-change-message").empty();
-    $("#item-tag-change-message").prepend("<div class='remove-tag-msg ui message red'><div class='header'>Tag Does Not Exist</div><p>"+ searchVal +" is not a tag.</p></div>");
+    $("#item-tag-change-message").prepend("<div class='remove-tag-msg ui message red'><div class='header'>Tag Does Not Exist</div><p>" + searchVal + " is not a tag.</p></div>");
   } else {
     let item = Items.find(currentSelectedItem);
     let tag = Tags.find(tagId);
@@ -461,7 +463,7 @@ function removeItemTag(itemId, tagId, buttonId) {
 
 }
 
-function showItem(id){
+function showItem(id) {
   let item = Items.find(id);
   currentSelectedItem = id;
   $(".remove-tag-msg").remove();
@@ -471,16 +473,17 @@ function showItem(id){
   $("#item-modal-name").text(item.name);
   $("#item-modal-desc").text(item.description);
   let tags = Tags.forItem(item);
-  for(var i = 0; i < tags.length; i++){
+  for (var i = 0; i < tags.length; i++) {
     $("#item-modal-tags").append("<button id='item-modal-tag-button-"
-    + i + "'class='ui button tag label' onclick='removeItemTag(" + id + ", "+ tags[i].id + ", "+ i
-    + ")'>" + tags[i].name + "<i class='delete icon red item-delete-tag-icon'> </i></button>");
+      + i + "'class='ui button tag label remove-item-tag-button' onclick='removeItemTag(" + id + ", " + tags[i].id + ", " + i
+      + ")'>" + tags[i].name + "<i class='delete icon red item-delete-tag-icon'> </i></button>");
   }
 
   $('#item-modal-image').append("<img src='" + item.picture + "'></img>");
   $('.ui.modal#itemOverlay').modal('show');
 
 }
+
 
 // $("#filter-sidebar input:not(#filter-search-bar)").change(function(){
 //   alert($("#filter-sort-order").children().is(":checked").val());
@@ -647,4 +650,41 @@ function setHistory(tag) {
     });
 }
 
+
+
+// Create new tag
+$("#add-tag").click(function () {
+  var createTag = true;
+  if (createTag == true) {
+    $('#createNewTag').modal('show');
+  }
+});
+
+$('.ui.form').form({
+  fields: {
+    name: {
+      identifier: 'name',
+      rules: [
+        {
+          type: 'empty',
+          prompt: 'Please enter tag name'
+        }
+      ]
+    }
+  }
+});
+
+function createTag() {
+  let name = $('<input/>', { type: 'text' });
+  // let description = $('<textarea/>');
+  $('#createNewTagButton').click(function () {
+    Taxonomic.Tags.create({
+      name: name.val(),
+      description: description.val()
+    });
+
+    $('#createNewTag').hide();
+
+  });
+}
 

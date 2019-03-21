@@ -28,10 +28,41 @@
   <div id="loggedIn" class="pusher">
     <div class="ui menu search fixed">
       <div class="ui medium header item bin" id="logo-logged-in">
+        <!-- create tag modal -->
         <button class="ui button" id="add-tag" data-inverted="" data-tooltip="Create a new tag"
           data-position="bottom left">
           <i class="plus icon" style="margin: 0px;"></i>
         </button>
+
+
+        <div class="ui large modal" id="createNewTag">
+            <i class="close icon"></i>
+            <div class="header">
+              Create a new tag
+            </div>
+            <div class="" style="padding: 10px;">
+                <form class="ui form">
+                    <div class="field">
+                      <label>Name (without hash-tag)</label>
+                      <input type="text" name="name" placeholder="Name your new tag">
+                    </div>
+                    <div class="field">
+                      <label>Description</label>
+                    <textarea name="description" placeholder="This is optional"></textarea>
+                    </div>
+                  </form>
+            </div>
+            <div class="actions">
+              <div class="ui red deny button">
+                Cancel
+              </div>
+              <div class="ui positive button" id="createNewTagButton">
+                Create
+              </div>
+            </div>
+          </div>
+
+        <!--  -->
         <button class="ui button" id="filter-button" data-inverted="" data-tooltip="Filter"
           data-position="bottom center">
           <i class="filter icon" style="margin: 0px;"></i>
@@ -424,6 +455,7 @@
       </div>
     </div>
     <div class="ui modal " id="itemOverlay">
+      <i class="close icon"></i>
       <div class="scrolling content">
         <div class="ui four column grid">
           <div class="row">
@@ -478,11 +510,14 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="actions">
-            <button class="ui right floated red deny button ">close</button>
+          <div class="row">
+            <div class="sixteen wide column ">
+            <div class="actions">
+              <button class="ui right floated deny button ">close</button>
+            </div>
           </div>
-          <br>
+        </div>
+        </div>
       </div>
     </div>
     </div>

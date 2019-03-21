@@ -47,3 +47,7 @@ background-color: #cff7f0 !important;
 #filter-button{
 background-color: #cff7f0;
 }
+
+.remove-item-tag-button{
+background-color: lightgreen !important;    
+}
