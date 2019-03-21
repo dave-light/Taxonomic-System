@@ -245,16 +245,16 @@
               data-position="bottom right"><i class="sign-out icon" style="margin: 0px;"></i></button>
 
             <!-- log out modal -->
-            <div class="ui basic modal">
+            <div class="ui modal">
               <div id="log-out-screen" class="content">
                 <h1 class="tiny">Log out <span id="loggedInAs"></span>?</h1>
               </div>
               <div id="log-out-screen" class="actions">
-                <div class="ui red cancel inverted button">
+                <div class="ui red cancel button">
                   <i class="remove icon"></i>
                   No
                 </div>
-                <div class="ui green ok inverted button" id="logOutButton">
+                <div class="ui green ok button" id="logOutButton">
                   <i class="checkmark icon"></i>
                   Yes
                 </div>
@@ -440,17 +440,25 @@
 
    <div id="main-view" class="ui container">
 
-     <div id="cotagsBorder" class="ui segment">
-        <div id="header" class="ui clearing segment">
-          <h3 class="ui left floated header" id="co-tag-title">Top Co-tags: </h3>
+        <div id="cotagsBorder" class="ui segment">
+       <div id="header" class="content ui clearing segment">
+         <div class="ui stackable five column row grid container">
+           <div class="three wide column">
+               <h3 class="ui left floated header" id="co-tag-title">Top Co-tags: </h3>
+           </div>
+           <div class="ten wide column mobile hidden">
 
-          <div id="co-tags-container">
-            <!-- Top Co-tags will be shown here -->
+               <div id="co-tags-container">
+                 <!-- Top Co-tags will be shown here -->
+               </div>
+
           </div>
-
-          <h3 class="ui right floated header" id="results-label"><span id="total-results"></span> Results </h3>
-        </div>
-      </div>
+          <div class="three wide column">
+               <h3 class="ui right floated header" id="results-label"><span id="total-results"></span> Results </h3>
+          </div>
+         </div>
+       </div>
+   </div>
 
       <div id="main-grid" class="ui stackable four column grid">
         <!-- Items will be shown here -->
