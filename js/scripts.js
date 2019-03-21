@@ -47,7 +47,11 @@ $(document).ready(function () {
         bindKeys();
         enable_dropdown();
 
+        //Tag Modal stuff
+        $('.menu .item').tab();
+
         onClickModal();
+
 
         createTag();
 
@@ -357,8 +361,7 @@ $("#tag-rows").on("click", ".filtered-tag", function () {
 });
 
 function updateEmptyTable() {
-  var empty_table = '<tr id="empty-tag-list" class="center aligned">' +
-    '<td>No tags currently filtered</td></tr>';
+  var empty_table = '<tr id="empty-tag-list" class="center aligned">' +'<td>No tags currently filtered</td></tr>';
   if (tagFilterListIsEmpty()) {
     $("#tag-rows").html(empty_table);
   } else {
@@ -482,6 +485,174 @@ function showItem(id) {
 
 }
 
+
+// $("#filter-sidebar input:not(#filter-search-bar)").change(function(){
+//   alert($("#filter-sort-order").children().is(":checked").val());
+// });
+//
+// function filterResults() {
+//
+// }
+
+
+
+
+
+//Tag Modal
+
+function onClickModal() {
+    var id;
+    var tag_id;
+    var tag;
+
+    $("#main-grid").on('click', '.column', function() {
+        id = $(this).children()[0].id;
+        if(id.indexOf("tag") >= 0) {
+
+            tag_id = parseInt(id.substring(id.indexOf("-") + 1));
+            console.log(tag_id);
+
+            tag = Tags.find(tag_id);
+            console.log(tag);
+
+
+            if(Tags.isFlagged(tag)){
+                $('#flag').text("Un-flag");
+            }else{
+                $('#flag').text("Flag");
+            }
+
+            populateTagInfo(tag);
+
+
+
+
+            //Resets tab position
+            $('.ui.modal#tagsOverlay').modal({
+                onHidden: function () {
+                  $('.menu .item').tab('change tab', 'first');
+                }
+            }).modal('show');
+
+            //Initial history
+            setHistory(tag);
+
+            
+            setManageTag(tag);
+            mapTag(tag);
+        }
+        });
+
+
+    $('#flag').on('click', function() {
+        if($('#flag').text() == "Flag"){
+            console.log("Flagged.");
+            Tags.flag(tag);
+            $('#flag').text("Un-flag");
+        }else{
+            console.log("Un-flagged.");
+            Tags.unflag(tag);
+            $('#flag').text("Flag");
+        }
+
+    
+        setHistory(tag);
+        console.log(Tags.history(tag));
+    });
+
+
+}
+
+function mapTag(tag){
+    var tag_names = [];
+    
+    tags.forEach(function(e){
+        tag_names.push({"name": e.element.name, "value": e.element.name});
+    });
+
+    $('.ui.dropdown.map-dropdown').dropdown({
+        values: tag_names
+    });
+
+    $('#map-save').on('click', function() {
+        $('.ui.dropdown.map-dropdown').dropdown("get value");
+        var values = $('.ui.search.dropdown.map-dropdown');
+
+    });
+    $('#map-tag-cancel').on('click', function() {
+        $('.ui.dropdown.map-dropdown').dropdown(
+            "clear"
+        );
+    });
+
+    console.log($(this));
+
+}
+function populateTagInfo(tag) {
+    //Clear and populate fields
+    $('#modal-tag-title').       empty().text("Tag: " + tag.name);
+    $('#modal-tag-id').          empty().text(tag.id);
+    $('#modal-tag-name').        empty().text(tag.name);
+    $('#modal-tag-description'). empty().text(tag.description);
+    $('#modal-tag-creator').     empty().text(tag.creator.name);
+    $('#modal-tag-created').     empty().text(tag.createdAt);
+    if(tag.status){
+        $('#modal-tag-status').empty().text("open");
+    }else{
+
+        $('#modal-tag-status').empty().text("closed");
+    }
+
+}
+function setManageTag(tag) {
+    //tag.element.name
+    //tag.element.description
+
+    $('#edit-tag-name').val(tag.name);
+    $('#edit-tag-description').val(tag.description);
+
+    //onchange on name to check if the name already exists
+    console.log(tag);
+    $('#edit-tag-save').on('click', function(){
+        tag.name = $('#edit-tag-name').val();
+        tag.description = $('#edit-tag-description').val();
+        Tags.update(tag);
+        populateTagInfo(tag);
+        displayAllResults();
+    });
+
+    $('#edit-tag-cancel').on('click', function() {
+        $('#edit-tag-name').val(tag.name);
+        $('#edit-tag-description').val(tag.description);
+    });
+}
+function setHistory(tag) {
+    console.log(Tags.history(tag));
+    var history = Tags.history(tag);
+
+    $('tbody#history-body').empty();
+    history.slice().reverse().forEach(function(element){
+        //History ID var
+        var history_id = element.id;
+        //Description
+        var description = element.payload;
+        //Action by
+        var author = element.creator.name;
+        //Time
+        var time = element.createdAt.split(" GMT")[0];
+        $('tbody#history-body').append('\
+                <tr>\
+                <td data-label="History ID">'+ history_id +'</td>\
+                <td data-label="Description">'+ description +'</td>\
+                <td data-label="Action by">' + author +'</td>\
+                <td data-label="Time">' + time + '</td>\
+                </tr>\
+                ');
+    });
+}
+
+
+
 // Create new tag
 $("#add-tag").click(function () {
   var createTag = true;
@@ -517,3 +688,4 @@ function createTag() {
 
   });
 }
+

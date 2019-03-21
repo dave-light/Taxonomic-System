@@ -182,3 +182,36 @@ padding-left: 7px
   transform: translate(-50%, -50%);
   margin-top: 0px;
 }
+
+
+.fixed_header tbody{
+    display:block;
+    width: 100%;
+    overflow: auto;
+    height: calc(100vh - 500px);
+}
+
+.fixed_header thead tr {
+    display: block;
+}
+
+
+.fixed_header th, .fixed_header td {
+    padding: 5px;
+    text-align: left;
+    width: 200px;
+}
+@media screen and (max-width:653px) {
+    .ui.icon.header .circular.icon {
+        font-size: 1em;
+    }
+
+    .fixed_header tbody{
+        display:block;
+        width: 100%;
+        overflow: auto;
+        height: calc(100vh - 300px);
+    }
+
+}
+
