@@ -467,7 +467,7 @@ function showItem(id) {
   $(".remove-tag-msg").remove();
   $("#item-modal-tags").empty();
   $('#item-modal-image').empty();
-  $("#item-modal-name").text(item.name);
+  $("#item-modal-name").text("Item: " + item.name);
   $("#item-modal-desc").text(item.description);
   let tags = Tags.forItem(item);
   for (var i = 0; i < tags.length; i++) {
