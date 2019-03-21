@@ -174,3 +174,11 @@ padding-left: 7px
 #main-grid{
   margin-top: 138px;
 }
+
+#centeredTag{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-top: 0px;
+}

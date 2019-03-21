@@ -173,8 +173,8 @@ function displayAllResults() {
       });
       tags.forEach(function(object){
           var id = object.element.id;
-          var image = "https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwj3q4HN4ovhAhUB0xoKHaVbB9AQjRx6BAgBEAU&url=https%3A%2F%2Fwww.tag-games.com%2F&psig=AOvVaw1zYGFBj16qVqcV5NzmHlJt&ust=1553001240587027";
-          $("#main-grid").append(generateTagCard(id, image));
+          var tagName = object.element.name;
+          $("#main-grid").append(generateTagCard(id, tagName));
       });
 
       updateTotalResults();
@@ -192,8 +192,8 @@ function displayAllResults() {
       $("#main-grid").html("");
       tags.forEach(function(object){
           var id = object.element.id;
-          var image = "https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwj3q4HN4ovhAhUB0xoKHaVbB9AQjRx6BAgBEAU&url=https%3A%2F%2Fwww.tag-games.com%2F&psig=AOvVaw1zYGFBj16qVqcV5NzmHlJt&ust=1553001240587027";
-          $("#main-grid").append(generateTagCard(id, image));
+          var tagName = object.element.name;
+          $("#main-grid").append(generateTagCard(id, tagName));
       });
       updateTotalResults();
   }
@@ -205,8 +205,8 @@ function generateItemCard(id, image) {
 
 }
 
-function generateTagCard(id, image) {
-  return '<div class="column"><div id="tag-' + id + '" class="ui fluid card item-card"><div class="content"><img class="ui centered image item-image" src="' + image + '" alt=""></div></div></div>';
+function generateTagCard(id, tagName) {
+  return '<div class="column"><div id="tag-' + id + '" class="ui fluid card item-card"><div class="content"><img class="ui centered image item-image" src="https://www.publicdomainpictures.net/pictures/30000/velka/plain-white-background.jpg"><h1 id="centeredTag">'+'#'+tagName+'</h1></div></div></div>';
 }
 
 function updateTotalResults() {
