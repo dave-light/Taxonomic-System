@@ -4,7 +4,7 @@
   var dropdown_selection = "All";
   var items;
   var tags;
-  var co_tags;
+  var top_co_tags = new Set();
   var all_tags = [];
   var items_and_tags;
   var filtered_tags = [];
@@ -58,6 +58,7 @@
                   resetFilterForms();
                   setFilterOrderRadioButtons();
                   displayAllResults();
+                  updateTopCoTags();
 
                   search_listener(); // REMOVE WHEN SEARCH IS FUNCTIONAL.
                             // stored in -> items
@@ -189,7 +190,6 @@ function displayAllResults() {
             $("#main-grid").append(generateTagCard(id, image));
             results.push(object.element);
         });
-
         updateTotalResults();
     }
     else if(dropdown_selection == "Items") {
@@ -391,6 +391,7 @@ function onClickModal() {
   $( "#tag-rows" ).on( "click", ".filtered-tag", function() {
     var i = filtered_tags.indexOf($(this).text());
     filtered_tags.splice(i,1);
+    updateTopCoTags();
     $(this).parents("tr").remove();
     updateEmptyTable();
     updateFilters();
@@ -410,6 +411,7 @@ function onClickModal() {
     $("#tag-rows").empty();
     updateEmptyTable();
     filtered_tags = [];
+    updateTopCoTags();
   }
 
   function resetFilterForms() {
@@ -443,8 +445,40 @@ function onClickModal() {
     '</span><i class="red close icon"></i></a></td></tr>';
     $("#tag-rows").append(tag_filter);
     filtered_tags.push(tag);
+    updateTopCoTags();
     updateFilters();
     updateEmptyTable();
+  }
+
+  function updateTopCoTags() {
+    top_co_tags.clear();
+    $("#co-tags-container").empty();
+    if (filtered_tags.length == 0) {
+      $("#co-tag-title").hide();
+      return;
+    }
+    filtered_tags.forEach(function(object) {
+      var co_tags = Tags.cotags(Tags.findAll({"name": object})[0]);
+      co_tags.forEach(function(obj) {
+        if (!top_co_tags.has(obj.tag.name)) {
+          top_co_tags.add(obj); 
+        }
+      });
+    });
+    top_co_tags.forEach(function(object) {
+      if (filtered_tags.includes(object.tag.name)) {
+        top_co_tags.delete(object);
+      }
+    });
+    console.log(top_co_tags);
+    var co_tags = Array.from(top_co_tags);
+    co_tags.sort((a, b) => (a.count < b.count) ? 1 : -1);
+    co_tags.slice(0,5).forEach(function(ob) {
+      if ($('.tag').text().indexOf(ob.tag.name) === -1) {
+        $("#co-tags-container").append('<a class="ui green tag label">' + ob.tag.name + '</a>');  
+      }
+    });
+    $("#co-tag-title").show();
   }
 
   $(".filter-type-option").change(function(){
