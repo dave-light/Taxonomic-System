@@ -472,7 +472,7 @@ function showItem(id) {
   let tags = Tags.forItem(item);
   for (var i = 0; i < tags.length; i++) {
     $("#item-modal-tags").append("<button id='item-modal-tag-button-"
-      + i + "'class='ui button tag label' onclick='removeItemTag(" + id + ", " + tags[i].id + ", " + i
+      + i + "'class='ui button tag label remove-item-tag-button' onclick='removeItemTag(" + id + ", " + tags[i].id + ", " + i
       + ")'>" + tags[i].name + "<i class='delete icon red item-delete-tag-icon'> </i></button>");
   }
 
