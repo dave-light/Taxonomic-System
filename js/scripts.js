@@ -736,6 +736,10 @@ function setHistory(tag) {
 $("#add-tag").click(function () {
   var createTag = true;
   if (createTag == true) {
+    
+    $('#name-id').val("");
+    $('#description-id').val("");
+
     $('#createNewTag').modal('show');
   }
 });
@@ -755,15 +759,22 @@ $('.ui.form').form({
 });
 
 function createTag() {
-  let name = $('<input/>', { type: 'text' });
-  // let description = $('<textarea/>');
+  let name = $('#name-id');
+  let description = $('#description-id');
+  console.log(name.val());
+
   $('#createNewTagButton').click(function () {
-    Taxonomic.Tags.create({
-      name: name.val(),
-      description: description.val()
+    Tags.create({
+      'name': name.val(),
+      'description': description.val()
     });
 
-
+    all_tags.push({ title: name.val()});
+    tags = Tags.search("");
+    all_tags = Tags.search("");
+    
+    $('#item-modal-add-tag-search-area').search({source: all_tags});
+    $('#filter-search-tags').search({source: all_tags});
     $('#createNewTag').hide();
 
   });
