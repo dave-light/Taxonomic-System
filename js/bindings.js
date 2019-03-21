@@ -35,7 +35,7 @@ $(document).ready(function() {
   $( "#logout-button" ).click(function() {
     var logOut_user = true;
     if (logOut_user == true) {
-      $('.ui.basic.modal').modal('show');
+      $('#loggingOut').modal('show');
     }
   });
 
