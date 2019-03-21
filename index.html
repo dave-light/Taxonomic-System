@@ -26,10 +26,41 @@
   <div id="loggedIn" class="pusher">
     <div class="ui menu search fixed">
       <div class="ui medium header item bin" id="logo-logged-in">
+        <!-- create tag modal -->
         <button class="ui button" id="add-tag" data-inverted="" data-tooltip="Create a new tag"
           data-position="bottom left">
           <i class="plus icon" style="margin: 0px;"></i>
         </button>
+
+
+        <div class="ui modal" id="createNewTag">
+            <i class="close icon"></i>
+            <div class="header">
+              Create a new tag
+            </div>
+            <div class="image content">
+                <form class="ui form">
+                    <div class="field">
+                      <label>Name (without hash-tag)</label>
+                      <input type="text" name="name" placeholder="Name your new tag">
+                    </div>
+                    <div class="field">
+                      <label>Description</label>
+                      <input type="text" name="description" placeholder="This is optional">
+                    </div>
+                  </form>
+            </div>
+            <div class="actions">
+              <div class="ui red deny button">
+                Cancel
+              </div>
+              <div class="ui positive button" id="createNewTagButton">
+                Create
+              </div>
+            </div>
+          </div>
+
+        <!--  -->
         <button class="ui button" id="filter-button" data-inverted="" data-tooltip="Filter"
           data-position="bottom center">
           <i class="filter icon" style="margin: 0px;"></i>
