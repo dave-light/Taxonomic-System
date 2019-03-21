@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="css/styles.css">
   <!-- COLOUR THEME -->
   <link rel="stylesheet" href="css/color.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
 </head>
 
 <body>
@@ -26,10 +28,41 @@
   <div id="loggedIn" class="pusher">
     <div class="ui menu search fixed">
       <div class="ui medium header item bin" id="logo-logged-in">
+        <!-- create tag modal -->
         <button class="ui button" id="add-tag" data-inverted="" data-tooltip="Create a new tag"
           data-position="bottom left">
           <i class="plus icon" style="margin: 0px;"></i>
         </button>
+
+
+        <div class="ui large modal" id="createNewTag">
+            <i class="close icon"></i>
+            <div class="header">
+              Create a new tag
+            </div>
+            <div class="" style="padding: 10px;">
+                <form class="ui form">
+                    <div class="field">
+                      <label>Name (without hash-tag)</label>
+                      <input type="text" name="name" placeholder="Name your new tag">
+                    </div>
+                    <div class="field">
+                      <label>Description</label>
+                    <textarea name="description" placeholder="This is optional"></textarea>
+                    </div>
+                  </form>
+            </div>
+            <div class="actions">
+              <div class="ui red deny button">
+                Cancel
+              </div>
+              <div class="ui positive button" id="createNewTagButton">
+                Create
+              </div>
+            </div>
+          </div>
+
+        <!--  -->
         <button class="ui button" id="filter-button" data-inverted="" data-tooltip="Filter"
           data-position="bottom center">
           <i class="filter icon" style="margin: 0px;"></i>
@@ -51,8 +84,8 @@
           <h4 class="ui dividing header">Search for Tags to Filter by</h4>
 
           <div id="filter-search-tags" class="ui search">
-            <div class="ui fluid right labeled left icon input">
-              <i class="tags icon"></i>
+            <div class="ui item-filter fluid right labeled left icon input">
+               <i class="tags icon"></i>
               <input id="filter-search-bar" class="prompt" type="text" placeholder="Search Tags...">
               <a id="add-tag-filter" class="ui tag label">
                 Add Tag to Filter
@@ -85,103 +118,104 @@
 
         <div id="filter-type-form" class="ui form">
           <h4 class="ui dividing header">Filter by Item Type</h4>
-          <div class="fields">
-            <div class="field filter-type">
-              <div class="ui checkbox">
-                <label>PDF</label>
-                <input id="pdf" type="checkbox" tabindex="0" class="hidden">
-              </div>
-            </div>
-            <div class="field filter-type">
-              <div class="ui checkbox">
-                <label>Image</label>
-                <input id="image" type="checkbox" tabindex="1" class="hidden">
-              </div>
-            </div>
-            <div class="field filter-type">
-              <div class="ui checkbox">
-                <label>Video</label>
-                <input id="video" type="checkbox" tabindex="2" class="hidden">
-              </div>
-            </div>
-            <div class="field filter-type">
-              <div class="ui checkbox">
-                <label>Audio</label>
-                <input id="audio" type="checkbox" tabindex="3" class="hidden">
-              </div>
+          <div class="fields item-filter">
+          <div class="field filter-type">
+            <div class="ui checked checkbox">
+              <label>PDF</label>
+              <input class="filter-type-option" id="pdf" type="checkbox" tabindex="0" class="hidden" checked="">
             </div>
           </div>
+          <div class="field filter-type">
+            <div class="ui checked checkbox">
+              <label>Image</label>
+              <input class="filter-type-option" id="image" type="checkbox" tabindex="1" class="hidden" checked="">
+            </div>
+          </div>
+          <div class="field filter-type">
+            <div class="ui checked checkbox">
+              <label>Video</label>
+              <input class="filter-type-option" id="video" type="checkbox" tabindex="2" class="hidden" checked="">
+            </div>
+          </div>
+          <div class="field filter-type">
+            <div class="ui checked checkbox">
+              <label>Audio</label>
+              <input class="filter-type-option" id="audio" type="checkbox" tabindex="3" class="hidden" checked="">
+            </div>
+          </div>
+        </div>
         </div>
 
         <div id="sort-container" class="ui two column grid">
-          <h4 class="ui dividing header">Sort Results by</h4>
+            <h4 class="ui dividing header">Sort Results by</h4>
           <div class="two column row" style="padding-top: 0">
 
-            <div class="column">
-              <div id="filter-sort-options" class="ui form">
-                <div class="grouped fields">
-                  <div class="field sort-type">
-                    <div class="ui radio checkbox">
-                      <input id="date" type="radio" name="sort" checked="" tabindex="0" class="hidden">
-                      <label>Date</label>
-                    </div>
-                  </div>
-                  <div class="field sort-type">
-                    <div class="ui radio checkbox">
-                      <input id="item-name" type="radio" name="sort" tabindex="0" class="hidden">
-                      <label>Name</label>
-                    </div>
-                  </div>
-                  <div class="field sort-type">
-                    <div class="ui radio checkbox">
-                      <input id="number-items" type="radio" name="sort" tabindex="0" class="hidden">
-                      <label>No. of attached items</label>
-                    </div>
-                  </div>
-                  <div class="field sort-type">
-                    <div class="ui radio checkbox">
-                      <input id="co-tags" type="radio" name="sort" tabindex="0" class="hidden">
-                      <label>No. of Co-tags</label>
-                    </div>
-                  </div>
-                </div>
+        <div class="column">
+        <div id="filter-sort-options" class="ui form">
+          <div class="grouped fields">
+            <div class="field sort-type">
+              <div class="ui radio checkbox">
+                <input id="date" class="filter-sort-option-radio" type="radio" checked="checked" tabindex="0" class="hidden">
+                <label>Date</label>
               </div>
             </div>
-
-            <div class="column">
-              <div id="filter-sort-order" class="ui form">
-                <!-- <h4 class="ui dividing header">Sort Results by</h4> -->
-                <div class="grouped fields">
-                  <div class="field sort-type">
-                    <div class="ui radio checkbox">
-                      <input type="radio" id="ascending" name="sort-order" checked="" tabindex="0" class="hidden">
-                      <label>Ascending</label>
-                    </div>
-                  </div>
-                  <div class="field sort-type">
-                    <div class="ui radio checkbox">
-                      <input type="radio" id="descending" name="sort-order" tabindex="0" class="hidden">
-                      <label>Descending</label>
-                    </div>
-                  </div>
-                </div>
+            <div class="field sort-type">
+              <div class="ui radio checkbox">
+                <input id="name" class="filter-sort-option-radio" type="radio" tabindex="0" class="hidden">
+                <label>Name</label>
+              </div>
+            </div>
+            <div class="field sort-type tag-filter">
+              <div class="ui radio checkbox">
+                <input id="associated-items" class="filter-sort-option-radio" type="radio" tabindex="0" class="hidden">
+                <label>No. of associated items</label>
+              </div>
+            </div>
+            <div class="field sort-type tag-filter">
+              <div class="ui radio checkbox">
+                <input id="co-tags" class="filter-sort-option-radio" type="radio" tabindex="0" class="hidden">
+                <label>No. of Co-tags</label>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <div id="filter-button-container" class="ui two column grid">
-          <div class="one column row">
-
-            <div class="column">
-
-              <button id="clear-filters-button" class="negative ui fluid button">Clear Filters</button>
+      <div class="column">
+        <div id="filter-sort-order" class="ui form">
+          <!-- <h4 class="ui dividing header">Sort Results by</h4> -->
+          <div class="grouped fields">
+            <div class="field sort-type">
+              <div class="ui radio checkbox">
+                <input type="radio" id="ascending" class="filter-sort-order-radio" checked="checked" tabindex="0" class="hidden">
+                <label>Ascending</label>
+              </div>
             </div>
-            <!-- <div class="column">
-                <button class="positive ui fluid button">Apply Filters</button>
-              </div> -->
+            <div class="field sort-type">
+              <div class="ui radio checkbox">
+                <input type="radio" id="descending" class="filter-sort-order-radio" tabindex="0" class="hidden">
+                <label>Descending</label>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
+      </div>
+      </div>
+
+      <div id="filter-button-container" class="ui two column grid">
+        <div class="one column row">
+
+          <div class="column">
+
+            <button id="clear-filters-button" class="negative ui fluid button">Clear Filters</button>
+          </div>
+          <!-- <div class="column">
+
+            <button class="positive ui fluid button">Apply Filters</button>
+          </div> -->
+        </div>
+      </div>
 
       </div>
 
@@ -192,7 +226,7 @@
               data-tooltip="Search for" data-position="right center">
               <div id="dropdown-text" class="text">All</div>
               <i class="dropdown icon" style="margin: 0px;"></i>
-              <div class="menu">
+              <div class="menu" id="search-type">
                 <div class="item">All</div>
                 <div class="item">Items</div>
                 <div class="item">Tags</div>
@@ -231,71 +265,263 @@
       </div>
 
     </div>
-    <!-- Modal for Tags -->
-    <div class="ui modal" id="tagsOverlay">
-      <div class="header">
-        Tag
-      </div>
-      <div class="image content">
-        <div class="ui medium image" id="tag-modal-image">
-        </div>
-        <div class="description">
-          <div id="tag-modal-name" class="ui header"></div>
-          <p id="tag-modal-desc"></p>
-        </div>
-      </div>
-      <div class="actions">
-        <div id="flag" class="ui red button" style="min-width: 90px;">
-          Flag
-        </div>
 
-        <div class="ui red deny button" style="background-color:#CFF7F0; color: #000000">
-          Close
+
+    <!-- Modal for Tags -->
+    <div class="ui modal" id="tagsOverlay" style="text-align:unset;">
+        <i class="close icon"></i>
+        <div class="header" style="border-bottom: none;">
+            <h2 class="ui center aligned icon header">
+                <i class="circular tag icon"></i>
+                <i id="modal-tag-title"> Tag: </i>
+            </h2>
+            </div>
+
+            <div class="content">
+                <div class="ui secondary tabular menu">
+                    <a class="item active" data-tab="first">General</a>
+                    <a class="item" data-tab="second">History</a>
+                    <a class="item" data-tab="third">Manage Tag</a>
+                </div>
+            </div>
+            <div class="content">
+
+
+                <div class="ui bottom attached tab active" data-tab="first">
+
+                    <h4 class="ui horizontal divider header">
+                        <i class="bar chart icon"></i>
+                        Tag Details
+                    </h4>
+                    <table class="ui definition table">
+
+                        <tbody>
+                            <tr>
+                                <td class="two wide column">ID</td>
+                                <td id="modal-tag-id"></td>
+                            </tr>
+                            <tr>
+                                <td>Name</td>
+                                <td id="modal-tag-name"></td>
+                            </tr>
+                            <tr>
+                                <td>Description</td>
+                                <td id="modal-tag-description"></td>
+                            </tr>
+                            <tr>
+                                <td>Creator</td>
+                                <td id="modal-tag-creator"></td>
+                            </tr>
+                            <tr>
+                                <td>Created</td>
+                                <td id="modal-tag-created"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Status</td>
+                                <td id="modal-tag-status"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="ui bottom attached tab" data-tab="second">
+
+                    <h4 class="ui horizontal divider header">
+                        <i class="bar chart icon"></i>
+                        History
+                    </h4>
+                    <div >
+                    <table id="history" class="fixed_header ui celled table" >
+                        <thead>
+                            <tr><th>History ID</th>
+                                <th>Description</th>
+                                <th>Action by</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-body">
+                        </tbody>
+                    </table>
+                    </div>
+
+                </div>
+                <div class="ui bottom attached tab" data-tab="third">
+                    <!-- Manage Tag        -->
+                    <h4 class="ui horizontal divider header">
+                        <i class="bar chart icon"></i>
+                        Tag Details
+                    </h4>
+
+
+                    <div class="ui stackable three column centered grid">
+                        <form class="ui form column">
+                            <div class="ui card">
+                                <div class="content">
+                                    <div class="header">Edit Tag</div>
+                                    <div class="field">
+                                        <label>Tag Name</label>
+                                        <input id="edit-tag-name" type="text" name="first-name" placeholder="First Name">
+                                    </div>
+                                    <div class="field">
+                                        <label>Short Text</label>
+                                        <textarea id="edit-tag-description" rows="3"></textarea>
+                                    </div>
+                                    <button type="button" id="edit-tag-save" class="ui button green">Save</button>
+
+                                    <button type="button" id="edit-tag-cancel" class="ui yellow button">Undo</button>
+                                </div>
+                            </div>
+
+
+                        </form>
+                        <form class="ui form column">
+                            <div class="ui card">
+                                <div class="content">
+                                    <div class="header">Map Tags</div>
+                                    <div class="field">
+                                        <div class="ui form">
+                                            <div class="field">
+                                                <label>Tags</label>
+                                                <select class="ui search dropdown map-dropdown" multiple="">
+                                                </select>
+                                            </div>
+                                        </div>                                    </div>
+
+                                    <button type="button" id="map-save" class="ui green button">Save</button>
+                                    <button type="button" id="map-tag-cancel" class="ui yellow button">Undo</button>
+                                </div>
+                            </div>
+
+
+                        </form>
+
+
+
+                        <form class="ui form column">
+                            <div class="ui card">
+                                <div class="content">
+                                    <div class="header">Edit Tag</div>
+                                    <div class="field">
+                                        <label>Tag Name</label>
+                                        <input type="text" name="first-name" placeholder="First Name">
+                                    </div>
+                                    <div class="field">
+                                        <label>Short Text</label>
+                                        <textarea rows="3"></textarea>
+                                    </div>
+                                    <button class="ui button" type="submit">Submit</button>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+
+
+
+                </div>
+                    <!-- End of Manage Tag -->
+            </div>
+
+            <div class="actions">
+
+
+                <div id="flag" class="ui red button" style="min-width: 90px;">
+                    Flag
+                </div>
+
+                <div id="close-button" class="ui deny button">
+                    Close
+                </div>
+
+            </div>
         </div>
-      </div>
-    </div>
-    <div id="main-view" class="ui container">
-      
+        <!-- End of Tab Modal -->
+
+   <div id="main-view" class="ui container">
+
      <div id="cotagsBorder" class="ui segment">
         <div id="header" class="ui clearing segment">
-          <h3 class="ui left floated header" id="co-tags">Suggested Co-tags: </h3>
-          <a class="ui green tag label">Food</a>
-          <a class="ui green tag label">Burger</a>
-          <a class="ui green tag label">American</a>
-          <a class="ui green tag label">Dinner</a>
-          <a class="ui green tag label">Takeaway</a>
+          <h3 class="ui left floated header" id="co-tag-title">Top Co-tags: </h3>
+
+          <div id="co-tags-container">
+            <!-- Top Co-tags will be shown here -->
+          </div>
+
           <h3 class="ui right floated header" id="results-label"><span id="total-results"></span> Results </h3>
         </div>
       </div>
-      
+
       <div id="main-grid" class="ui stackable four column grid">
         <!-- Items will be shown here -->
       </div>
     </div>
-    <div class="ui modal" id="itemOverlay">
-      <div class="header">
-        Item
-      </div>
-      <div class="image content">
-        <div class="ui medium image" id="item-modal-image">
 
-        </div>
-        <div class="description">
-          <div id="item-modal-name" class="ui header"></div>
-          <div id="item-modal-desc"></div>
-          <p></p>
-          <div id="item-modal-tags"></div><br><button onclick="drawAddTagMenu()" class="ui button green"><i
-              class="icon-text-padding plus icon square outline white"></i>Add Tag</button>
-          <p></p>
-          <div id="item-add-tag-menu" class="ui header">
+    <div class="ui modal " id="itemOverlay">
+      <i class="close icon"></i>
+      <div class="scrolling content">
+        <div class="ui four column grid">
+          <div class="row">
+            <div id="remove-tag-msg" class="header column">
+            </div>
+          </div>
+          <div class="row">
+            <div class="image content column">
+              <div class="ui medium image center" id="item-modal-image">
+              </div>
+            </div>
+            <div class="twelve wide column">
+              <div class="ui one column grid">
+                <div class="row">
+                  <div>
+                    <div id="item-modal-name" class="ui header column"></div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="column">
+                    <div id="item-modal-desc"></div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="column">
+                    <div id="item-modal-tags"></div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="column">
+                    <div id="item-tag-change-message"></div>
+
+                    <div id="filter-search-container">
+                      <h4 class="ui dividing header">Search For Tags To Add To This Item</h4>
+
+                      <div id="item-modal-add-tag-search-area" class="ui search">
+                        <div class="ui fluid right labeled left icon input">
+                          <i class="tags icon"></i>
+                          <input id="item-modal-add-tag-search-bar" class="prompt" type="text"
+                            placeholder="Search Tags To Add...">
+                          <a id="item-modal-add-tag" class="ui tag label" onclick="addTagToItem()">
+                            Add Tag
+                          </a>
+                        </div>
+                      </div>
+                      <div id="item-add-tag-menu" class="ui header">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="sixteen wide column ">
+            <div class="actions">
+              <button class="ui right floated deny button ">close</button>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="actions">
-        <div class="ui red deny button">
-          close
         </div>
       </div>
+    </div>
     </div>
 
   </div>

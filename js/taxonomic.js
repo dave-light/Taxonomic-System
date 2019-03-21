@@ -72,7 +72,7 @@ var Taxonomic = (function () {
 
       items.forEach(function (itemObject) {
         var tags = itemObject.tags;
-        delete itemObject.tags;
+        // delete itemObject.tags;
         var item = CRUD.create(data.items, itemObject);
         Items.setTagsByNames(item, tags);
       });
