@@ -138,3 +138,7 @@ padding-left: 7px
 #filter-button-container {
   margin-top: 50px;
 }
+
+#co-tags-container {
+  float: left !important;
+}

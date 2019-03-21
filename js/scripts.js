@@ -551,8 +551,12 @@ function onClickModal() {
       } else {
         results.sort((a, b) => (new Date(a.createdAt) < new Date(b.createdAt)) ? 1 : -1);
       }
-    } else if (sort_option == "attached-items") {
-
+    } else if (sort_option == "associated-items") {
+      if (sort_order == "ascending") {
+        results.sort((a, b) => (numberOfAssociatedItems(a) > numberOfAssociatedItems(b)) ? 1 : -1);
+      } else {
+        results.sort((a, b) => (numberOfAssociatedItems(a) < numberOfAssociatedItems(b)) ? 1 : -1);
+      }
     } else if (sort_option == "co-tags") {
       if (sort_order == "ascending") {
         results.sort((a, b) => (Tags.cotags(a).length > Tags.cotags(b).length) ? 1 : -1);
@@ -572,4 +576,14 @@ function onClickModal() {
       }
     }); 
     
+  }
+
+  function numberOfAssociatedItems(tag) {
+    var count = 0;
+    items.forEach(function(object) {
+      if (Tags.attached(tag, object.element) == true) {
+        count++;
+      }
+    });
+    return count;
   }
