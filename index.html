@@ -115,7 +115,7 @@
             </tbody>
           </table>
         </div>
-
+        
         <div id="filter-type-form" class="ui form">
           <h4 class="ui dividing header">Filter by Item Type</h4>
           <div class="fields">
@@ -438,17 +438,34 @@
         <!-- End of Tab Modal -->
     
    <div id="main-view" class="ui container">
-     <div id="cotagsBorder" class="ui segment">
-        <div id="header" class="ui clearing segment">
-          <h3 class="ui left floated header" id="co-tags">Suggested Co-tags: </h3>
-          <a class="ui green tag label">Food</a>
-          <a class="ui green tag label">Burger</a>
-          <a class="ui green tag label">American</a>
-          <a class="ui green tag label">Dinner</a>
-          <a class="ui green tag label">Takeaway</a>
-          <h3 class="ui right floated header" id="results-label"><span id="total-results"></span> Results </h3>
+     
+      <div id="cotagsBorder" class="ui segment">
+        <div id="header" class="content ui clearing segment">
+          <div class="ui stackable five column row grid container">
+            <div class="three wide column">
+              <!-- <button id="suggestCotagButton" class="ui primary button"> -->
+                <h3 class="ui left floated header" id="co-tags">Suggested Co-tags: </h3>
+              <!-- </button> -->
+            </div>
+            <div class="ten wide column mobile hidden">
+              <div class="ui four column grid container">
+                  <div id="food-cotag" class="column">
+                    <a class="ui green tag label">Food</a>
+                  </div>
+                  <div id="burger-cotag" class="column">
+                    <a class="ui green tag label">Burger</a>
+                  </div>
+                  <div class="column">
+                    <a class="ui green tag label">American</a>
+                  </div>
+                </div>
+              </div>
+              <div class="three wide column">
+                <h3 class="ui right floated header" id="results-label"><span id="total-results"></span> Results </h3>
+              </div>
+          </div>
         </div>
-      </div>
+    </div>
       
       <div id="main-grid" class="ui stackable four column grid">
         <!-- Items will be shown here -->
