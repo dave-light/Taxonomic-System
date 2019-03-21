@@ -417,10 +417,6 @@ function onClickModal() {
   function resetFilterForms() {
     $('.ui.form').form('clear');
     $('.ui.checkbox:not(.radio)').checkbox("check", true);
-    // $("#date").prop("checked", true);
-    // $("#ascending").prop("checked", true);
-    // sort_option = "date";
-    // sort_order = "ascending";
     $("#date").click();
     $("#ascending").click();
   }
@@ -474,12 +470,16 @@ function onClickModal() {
     var co_tags = Array.from(top_co_tags);
     co_tags.sort((a, b) => (a.count < b.count) ? 1 : -1);
     co_tags.slice(0,5).forEach(function(ob) {
-      if ($('.tag').text().indexOf(ob.tag.name) === -1) {
-        $("#co-tags-container").append('<a class="ui green tag label">' + ob.tag.name + '</a>');  
+      if ($('.co-tag').text().indexOf(ob.tag.name) === -1) {
+        $("#co-tags-container").append('<a class="ui green tag label co-tag">' + ob.tag.name + '</a>');  
       }
     });
     $("#co-tag-title").show();
   }
+
+  $("#co-tags-container").on('click', ".co-tag", function() {
+    insertTagToFilterList($(this).text());
+  });
 
   $(".filter-type-option").change(function(){
     var type = $(this).attr("id");
