@@ -164,11 +164,13 @@ padding-left: 7px
   position:fixed !important;
   top:44px;
   z-index:10 !important;
-  width: 89vw;
+  width: 91vw;
   padding-left: 0px;
-  padding-right: 1.5px;
+  padding-right: 0px;
   padding-bottom: 0px;
   border-width: 0px;
+  margin-right: 0px;
+  left: 4%;
 }
 
 #main-grid{
@@ -181,6 +183,15 @@ padding-left: 7px
   left: 50%;
   transform: translate(-50%, -50%);
   margin-top: 0px;
+  margin-right: 0px;
+}
+
+#food-cotag{
+  margin-right:12px;
+}
+
+#burger-cotag{
+  margin-right: 23px;
 }
 
 
