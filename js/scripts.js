@@ -764,6 +764,7 @@ function createTag() {
   });
 }
 
+  // Filter mechanism code
 
   function insertTagToFilterList(tag) {
     var tag_filter = '<tr class="center aligned"><td>' +
