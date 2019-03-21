@@ -112,6 +112,12 @@ padding-left: 7px
   }
 }
 
+@media screen and (max-width:767px){
+  #main-grid {
+    margin-top: 204px !important;
+  }
+}
+
 #filter-sidebar {
   padding: 20px;
 }
@@ -146,6 +152,7 @@ padding-left: 7px
   margin-top: 50px;
 }
 
+
 .item-delete-tag-icon{
   padding-left: 10px !important;
 }
@@ -164,11 +171,12 @@ padding-left: 7px
   position:fixed !important;
   top:44px;
   z-index:10 !important;
-  width: 89vw;
+  width: 91vw;
   padding-left: 0px;
   padding-right: 1.5px;
   padding-bottom: 0px;
   border-width: 0px;
+  left: 4%;
 }
 
 #main-grid{
@@ -216,6 +224,7 @@ padding-left: 7px
 }
 
 
+
 .content {
     flex: 1;
 }
@@ -229,5 +238,14 @@ padding-left: 7px
 .tab-modal-buttons{
 margin: 0px;
 margin-top: auto;
+}
+
+
+#co-tags-container {
+  float: left !important;
+}
+
+.item-card {
+  cursor: pointer;
 }
 

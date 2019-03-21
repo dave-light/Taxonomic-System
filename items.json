@@ -1,73 +1,218 @@
 [{
   "name": "Samsung S8",
-  "picture": "https://staticshop.o2.co.uk/product/images/samsung_galaxy_s8_64gb_midnight_black_front_sku_header.png?cb=80773a56ed8c7c3f0cb94cf8cdf159f6",
+  "picture": "images/samsung_s8.png",
   "description": "The revolutionary design of the Galaxy S8 begins from the inside out. We rethought every part of the phone's layout to break through the confines of the smartphone screen. So all you see is pure content and no bezel. It's the biggest, most immersive screen on a Galaxy smartphone of this size. And it's easy to hold in one hand. Camera Features: VDIS (Video Digital Image Stabilization), HDR (High Dynamic Range), Selective focus (Bokeh effect), Virtual shot, Motion photo, Filters, Stickers, Stamps, Grid line, Location tags, Timer, Quick launch, Voice control. ",
-  "tags": ["phone", "samsung"],
-  "type": "image"
+  "tags": ["phone", "samsung", "electronics", "gadgets"],
+  "type": "image",
+  "createdAt": "Sun Mar 17 2019 20:44:56 GMT+0000 (Greenwich Mean Time)"
 }, {
   "name": "Introduction To Algorithms",
-  "picture": "https://image.flaticon.com/icons/svg/136/136522.svg",
+  "picture": "images/intro_to_algs.png",
     "description": "Introduction to Algorithms is a book by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein. The book has been widely used as the textbook for algorithms courses at many universities.  Its fame has led to the common use of the abbreviation 'CLRS' (Cormen, Leiserson, Rivest, Stein)",
-  "tags": ["algorithms", "advanced"],
-  "type": "pdf"
+  "tags": ["algorithms", "computer-science", "book"],
+  "type": "pdf",
+  "createdAt": "Thu Mar 14 2019 20:44:56 GMT+0000 (Greenwich Mean Time)"
 }, {
   "name": "Macbook",
-  "picture": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/image/AppleInc/aos/published/images/m/bp/mbp13/space/mbp13-space-select-201807_GEO_GB?wid=452&hei=420&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1531167593845",
+  "picture": "images/macbook.png",
   "description": "On paper, it looked like an impressive, if predictable, set of internal component upgrades. Apple's 13-inch and 15-inch Touch Bar MacBook Pro models would get new eighth-gen Intel processors, more storage and RAM options, a color-temperature-sensing True Tone screen and other tweaks -- all nice improvements over a ho-hum 2017 update.",
-  "tags": ["macbook", "pro", "apple"],
-  "type": "image"
+  "tags": ["macbook", "apple", "laptop", "electronics", "gadgets"],
+  "type": "image",
+  "createdAt": "Fri Aug 17 2018 20:44:56 GMT+0000 (Greenwich Mean Time)"
 }, {
   "name": "Lord Of The Rings",
-  "picture": "https://image.flaticon.com/icons/svg/136/136545.svg",
+  "picture": "images/lord_rings.png",
   "description": "The Lord of the Rings is a film series of three epic fantasy adventure films directed by Peter Jackson, based on the novel The Lord of the Rings by J. R. R. Tolkien. The films are subtitled The Fellowship of the Ring (2001), The Two Towers (2002) and The Return of the King (2003). ",
-  "tags": ["lord", "of", "the", "rings"],
-  "type": "mp4"
+  "tags": ["lord", "rings", "movie"],
+  "type": "video",
+  "createdAt": "Wed Mar 20 2019 20:44:56 GMT+0000 (Greenwich Mean Time)"
 }, {
   "name": "Assignment 2",
-  "picture": "https://image.flaticon.com/icons/svg/136/136522.svg",
+  "picture": "images/assignment_2.png",
   "description": "This assignment covers algorithms on strings, directed graphs and max-flow problems.  The learning outcomes assessed are to reason about fundamental algorithms for a range of problems, and to describe and apply various algorithm design strategies for the construction of efficient algorithms",
-  "tags": ["algorithms", "assignment", "advanced", "2"],
-  "type": "document"
+  "tags": ["algorithms", "assignment", "computer-science"],
+  "type": "pdf",
+  "createdAt": "Wed Mar 20 2019 20:44:56 GMT+0000 (Greenwich Mean Time)"
 }, {
   "name": "Fur Elise",
-  "picture": "https://image.flaticon.com/icons/svg/136/136548.svg",
+  "picture": "images/fur_elise.png",
   "description": "The score was not published until 1867, 40 years after the composer's death in 1827. The discoverer of the piece, Ludwig Nohl, affirmed that the original autographed manuscript, now lost, was dated 27 April 1810.",
-  "tags": ["mozart"],
-  "type": "mp3"
+  "tags": ["beethoven", "music"],
+  "type": "audio",
+  "createdAt": "Mon Feb 25 2019 20:44:56 GMT+0000 (Greenwich Mean Time)"
 }, {
   "name": "iPhone 8",
-  "picture": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/image/AppleInc/aos/published/images/i/ph/iphone8/select/iphone8-select-2019-family?wid=882&amp;hei=1058&amp;fmt=jpeg&amp;qlt=80&amp;op_usm=0.5,0.5&amp;.v=1550795431127",
+  "picture": "images/iphone8.png",
   "description": "The iPhone 8 features a 4.7 Inch Retina HD display, 12MP Camera, 7MP Front-facing lens, 64GB or 256GB internal storage and wireless charging. It has a beautiful glass finish on the front and back, and is certified as IP67, protected against water and dust.",
-  "tags": ["apple", "iphone"],
-  "type": "picture"
+  "tags": ["apple", "iphone", "phone", "electronics", "gadgets"],
+  "type": "image",
+  "createdAt": "Tue Jan 01 2019 20:44:56 GMT+0000 (Greenwich Mean Time)"
 }, {
   "name": "Harry Potter and the Order of the Phoenix",
-  "picture": "https://upload.wikimedia.org/wikipedia/en/7/70/Harry_Potter_and_the_Order_of_the_Phoenix.jpg",
+  "picture": "images/order_of_phoenix.png",
   "description": "Harry Potter and the Order of the Phoenix is a fantasy novel written by British author J. K. Rowling and the fifth novel in the Harry Potter series. It follows Harry Potter's struggles through his fifth year at Hogwarts School of Witchcraft and Wizardry, including the surreptitious return of the antagonist Lord Voldemort, O.W.L. exams, and an obstructive Ministry of Magic. The novel was published on 21 June 2003 by Bloomsbury in the United Kingdom, Scholastic in the United States, and Raincoast in Canada.",
-  "tags": ["harry", "potter"],
-  "type": "pdf"
-}, {
-  "name": "Student Handbook",
-  "picture": "https://intranet.royalholloway.ac.uk/international/graphics/InternationalStudentSupportImagesandVideo/handbook-cropped-251x357.jpg",
-  "description": "",
-  "tags": ["student"],
-  "type": "document"
+  "tags": ["harry-potter", "harry", "potter", "book"],
+  "type": "pdf",
+  "createdAt": "Wed Mar 20 2019 20:44:56 GMT+0000 (Greenwich Mean Time)"
 }, {
   "name": "Abbey Road",
-  "picture": "https://i2.wp.com/www.beatlesbible.com/wp/media/abbey_road.jpg?resize=200%2C200&quality=100&strip=all&ssl=1",
+  "picture": "images/abbey_road.png",
   "description": "It is commonly thought that The Beatles knew that Abbey Road would be their final album, and wanted to present a fitting farewell to the world. However, the group members denied that they intended to split after its completion, despite a realisation that their time together was drawing to a close.",
-  "tags": ["beatles"],
-  "type": "mp3"
+  "tags": ["beatles", "pop", "music"],
+  "type": "audio",
+  "createdAt": "Wed Mar 13 2019 20:44:56 GMT+0000 (Greenwich Mean Time)"
+}, {
+  "name": "Little Less Conversation",
+  "picture": "images/elvis.png",
+  "description": "'A Little Less Conversation' is a 1968 song recorded by Elvis Presley written by Mac Davis and Billy Strange and published by Gladys Music, Inc., originally performed in the 1968 film Live a Little, Love a Little. The song became a minor hit in the United States when released as a single with 'Almost in Love' as the A-side. A 2002 remix by Junkie XL of a later re-recording of the song by Presley became a worldwide hit, topping the singles charts in nine countries and was awarded certifications in ten countries by 2003.",
+  "tags": ["elvis", "pop", "music"],
+  "type": "audio",
+  "createdAt": "Wed Mar 13 2019 20:44:56 GMT+0000 (Greenwich Mean Time)"
+}, {
+  "name": "All Eyez on Me",
+  "picture": "images/2pac.png",
+  "description": "All Eyez on Me is the fourth studio album by American rapper 2Pac (and the last to be released during his lifetime), released on February 13, 1996 by Death Row and Interscope Records. The album features the Billboard Hot 100 number-one singles 'How Do U Want It' and 'California Love'. It featured five singles in all, the most of any of Shakur's albums. Moreover, All Eyez on Me made history as the first double-full-length hip-hop solo studio album released for mass consumption globally.",
+  "tags": ["2pac", "hip-hop", "music"],
+  "type": "audio",
+  "createdAt": "Wed Mar 13 2019 20:44:56 GMT+0000 (Greenwich Mean Time)"
+}, {
+  "name": "Life After Death",
+  "picture": "images/biggie.png",
+  "description": "Life After Death is the second and final studio album by American rapper the Notorious B.I.G., released on March 25, 1997, on Bad Boy Records and Arista Records. A double album, it was released posthumously following his death sixteen days earlier. It features collaborations with guest artists such as 112, Jay-Z, Lil' Kim, Mase, Bone Thugs-n-Harmony, Too $hort, Angela Winbush, D.M.C. of Run-D.M.C., R. Kelly, The LOX and Puff Daddy. Life After Death exhibits The Notorious B.I.G. further delving into the mafioso rap subgenre. The album is a sequel to his first album, Ready to Die, and picks up where the last song, 'Suicidal Thoughts', ends.",
+  "tags": ["biggie", "hip-hop", "music"],
+  "type": "audio",
+  "createdAt": "Wed Mar 13 2019 20:44:56 GMT+0000 (Greenwich Mean Time)"
 }, {
   "name": "BMW i8",
-  "picture": "https://image.flaticon.com/icons/svg/136/136524.svg",
+  "picture": "images/bmw_i8.png",
   "description": "The BMW i8 is a plug-in hybrid sports car developed by BMW. The i8 is part of BMW's electric fleet 'Project i' being marketed as a new sub-brand, BMW i. The 2015 model year BMW i8 has a 7.1 kWh lithium-ion battery pack that delivers an all-electric range of 37 km (23 mi) under the New European Driving Cycle.",
-  "tags": ["bmw"],
-  "type": "image"
+  "tags": ["bmw", "car", "vehicle", "transport", "hybrid-car"],
+  "type": "image",
+  "createdAt": "Mon Mar 18 2019 20:44:56 GMT+0000 (Greenwich Mean Time)"
+}, {
+  "name": "BMW 318i",
+  "picture": "images/bmw_318.png",
+  "description": "As with most three-cylinder-engined cars the 318i’s initial throttle response is somewhat tardy, and even when serving up maximum torque (162lb ft between 1250 and 4000rpm) acceleration never feels any more special than BMW’s 8.9-second 0-62mph time would suggest.",
+  "tags": ["bmw", "car", "vehicle", "transport"],
+  "type": "image",
+  "createdAt": "Mon Mar 18 2019 20:44:56 GMT+0000 (Greenwich Mean Time)"
+}, {
+  "name": "Toyota Prius",
+  "picture": "images/prius.png",
+  "description": "The Toyota Prius is a full hybrid electric automobile developed by Toyota and manufactured by the company since 1997. Initially offered as a 4-door sedan, it has been produced only as a 5-door liftback since 2003",
+  "tags": ["toyota", "prius", "car", "vehicle", "transport", "hybrid-car", "uber"],
+  "type": "image",
+  "createdAt": "Mon Mar 18 2019 20:44:56 GMT+0000 (Greenwich Mean Time)"
+}, {
+  "name": "Honda CRF50F",
+  "picture": "images/honda_crf50.png",
+  "description": "The CRF line was launched in 2000 as a successor to the Honda XR series. The full sized motocross bikes are equipped with liquid-cooled, single-cylinder four-stroke engines that are available from 149 cc to 449 cc. They now have dual-sport motorcycles. The more trail friendly CRF's have simple air-cooled engines, and are available from 50 cc to 230 cc.",
+  "tags": ["honda", "motorbike", "vehicle", "transport"],
+  "type": "image",
+  "createdAt": "Mon Mar 18 2019 20:44:56 GMT+0000 (Greenwich Mean Time)"
+}, {
+  "name": "Honda Civic",
+  "picture": "images/honda_civic.png",
+  "description": "The Honda Civic is a line of cars manufactured by Honda. Originally a subcompact, the Civic has gone through several generational changes, becoming both larger and more upscale, moving into the compact car segment. EPA guidelines for vehicle size class stipulate a car having combined passenger and cargo room of 110 to 119.9 cubic feet (3,110 to 3,400 L) is considered a mid-size car, and as such the tenth generation Civic sedan is technically a small-end mid-size car, although it still competes in the compact class.",
+  "tags": ["honda", "car", "vehicle", "transport"],
+  "type": "image",
+  "createdAt": "Mon Mar 18 2019 20:44:56 GMT+0000 (Greenwich Mean Time)"
+}, {
+  "name": "Mercedes SLK",
+  "picture": "images/mercedes_slk.png",
+  "description": "The Mercedes-Benz SLK-Class is a compact luxury roadster, produced by Mercedes-Benz. It was released in 1996 and has since been built at the Mercedes plant in Bremen, Germany. The former name 'SLK' was derived from sportlich (sporty), leicht (light), and kurz (short). With the release of the facelift R172 in 2016, the SLK-Class was renamed to SLC-Class in accordance with the revised nomenclature adopted by Mercedes. Under this scheme, roadsters use the base name 'SL', followed by the model's placement in Mercedes-Benz hierarchy, the letter 'C', being the roadster equivalent to the C-Class.",
+  "tags": ["mercedes", "slk", "car", "vehicle", "transport"],
+  "type": "image",
+  "createdAt": "Mon Mar 18 2019 20:44:56 GMT+0000 (Greenwich Mean Time)"
+}, {
+  "name": "London Bus",
+  "picture": "images/london_bus.png",
+  "description": "London Buses is the subsidiary of Transport for London (TfL) that manages bus services within Greater London. It was formed following the Greater London Authority Act 1999 that transferred control of bus services in Greater London and its surrounding areas from the UK Government's London Regional Transport (LRT) to TfL, controlled by the locally elected Mayor of London.",
+  "tags": ["london", "bus", "vehicle", "transport"],
+  "type": "image",
+  "createdAt": "Mon Mar 18 2019 20:44:56 GMT+0000 (Greenwich Mean Time)"
+}, {
+  "name": "Concorde",
+  "picture": "images/concorde.png",
+  "description": "The Aérospatiale/BAC Concorde is a British-French turbojet-powered supersonic passenger airliner that was operated from 1976 until 2003. It had a maximum speed over twice the speed of sound at Mach 2.04 (1,354 mph or 2,180 km/h at cruise altitude), with seating for 92 to 128 passengers. First flown in 1969, Concorde entered service in 1976 and continued flying for the next 27 years. It is one of only two supersonic transports to have been operated commercially; the other is the Soviet-built Tupolev Tu-144, which operated in service from 1977 to 1978.",
+  "tags": ["plane", "vehicle", "transport"],
+  "type": "image",
+  "createdAt": "Mon Mar 18 2019 20:44:56 GMT+0000 (Greenwich Mean Time)"
+},  {
+  "name": "Airbus",
+  "picture": "images/airbus.png",
+  "description": "Airbus SE, from 2000 to 2014 known as the European Aeronautic Defence and Space Company (EADS), is a European aerospace corporation, registered in the Netherlands and trading shares in France, Germany and Spain. It designs, manufactures and sells civil and military aerospace products worldwide and manufactures in the European Union and various other countries.",
+  "tags": ["plane", "vehicle", "transport"],
+  "type": "image",
+  "createdAt": "Mon Mar 18 2019 20:44:56 GMT+0000 (Greenwich Mean Time)"
+}, {
+  "name": "Tower Bridge",
+  "picture": "images/tower_bridge.png",
+  "description": "Tower Bridge is a combined bascule and suspension bridge in London, built between 1886 and 1894. The bridge crosses the River Thames close to the Tower of London and has become an iconic symbol of London. Because of this, Tower Bridge is sometimes confused with London Bridge, situated some 0.5 mi (0.80 km) upstream. Tower Bridge is one of five London bridges now owned and maintained by the Bridge House Estates, a charitable trust overseen by the City of London Corporation.",
+  "tags": ["london", "tower", "bridge"],
+  "type": "image",
+  "createdAt": "Mon Mar 18 2019 20:44:56 GMT+0000 (Greenwich Mean Time)"
+}, {
+  "name": "Chelsea Bridge",
+  "picture": "images/chelsea_bridge.png",
+  "description": "Chelsea Bridge is a bridge over the River Thames in west London, connecting Chelsea on the north bank to Battersea on the south bank. There have been two Chelsea Bridges, on the site of what was an ancient ford.",
+  "tags": ["london", "chelsea", "bridge"],
+  "type": "image",
+  "createdAt": "Mon Mar 18 2019 20:44:56 GMT+0000 (Greenwich Mean Time)"
+}, {
+  "name": "Stamford Bridge",
+  "picture": "images/stamford_bridge.png",
+  "description": "Stamford Bridge is a football stadium in Fulham, adjacent to the borough of Chelsea in South West London, commonly referred to as The Bridge. It is the home of Chelsea Football Club, which competes in the Premier League. ",
+  "tags": ["london", "chelsea", "stadium", "football"],
+  "type": "image",
+  "createdAt": "Mon Mar 18 2019 20:44:56 GMT+0000 (Greenwich Mean Time)"
+}, {
+  "name": "Wembley Stadium",
+  "picture": "images/wembley_stadium.png",
+  "description": "Wembley Stadium (branded as Wembley Stadium connected by EE for sponsorship reasons) is a football stadium in Wembley, London, which opened in 2007, on the site of the original Wembley Stadium, which was demolished from 2002–2003. The stadium hosts major football matches including home matches of the England national football team, and the FA Cup Final.",
+  "tags": ["london", "wembley", "stadium", "football"],
+  "type": "image",
+  "createdAt": "Mon Mar 18 2019 20:44:56 GMT+0000 (Greenwich Mean Time)"
+}, {
+  "name": "Frank Lampard",
+  "picture": "images/lampard.png",
+  "description": "Frank James Lampard, OBE (born 20 June 1978) is an English football manager and former professional footballer. He is the manager of Championship club Derby County. He is the all-time leading goalscorer for Chelsea, where he played for 13 years, and is considered by a number of journalists and football experts to be one of the greatest midfielders of his generation, and as Chelsea's greatest ever player by some Chelsea players",
+  "tags": ["london", "chelsea", "football"],
+  "type": "image",
+  "createdAt": "Mon Mar 18 2019 20:44:56 GMT+0000 (Greenwich Mean Time)"
 }, {
   "name": "A Nightmare On Elm Street",
-  "picture": "https://upload.wikimedia.org/wikipedia/en/thumb/2/2e/NightmareOnElmStreetBoxSetSide.jpg/225px-NightmareOnElmStreetBoxSetSide.jpg",
+  "picture": "images/nightmare_elm_street.png",
   "description": "A Nightmare on Elm Street is a 1984 American slasher film written and directed by Wes Craven, and produced by Robert Shaye.",
-  "tags": ["Nightmare"],
-  "type": "mp4"
+  "tags": ["horror", "elm-street", "movie"],
+  "type": "video",
+  "createdAt": "Wed Mar 13 2019 20:44:56 GMT+0000 (Greenwich Mean Time)"
+}, {
+  "name": "Aladdin",
+  "picture": "images/aladdin.png",
+  "description": "Aladdin is a 1992 American animated musical fantasy film produced by Walt Disney Feature Animation and released by Walt Disney Pictures. The film is the 31st Disney animated feature film, and was the fourth produced during the Disney film era known as the Disney Renaissance.",
+  "tags": ["aladdin", "movie", "disney", "cartoon"],
+  "type": "video",
+  "createdAt": "Wed Mar 13 2019 20:44:56 GMT+0000 (Greenwich Mean Time)"
+}, {
+  "name": "Lion King",
+  "picture": "images/lion_king.png",
+  "description": "The Lion King is a 1994 American animated musical film produced by Walt Disney Feature Animation and released by Walt Disney Pictures. It is the 32nd Disney animated feature film, and the fifth animated film produced during a period known as the Disney Renaissance.",
+  "tags": ["lion-king", "movie", "disney", "cartoon"],
+  "type": "video",
+  "createdAt": "Wed Mar 13 2019 20:44:56 GMT+0000 (Greenwich Mean Time)"
+}, {
+  "name": "Scream",
+  "picture": "images/scream.png",
+  "description": "Scream is a 1996 American slasher film directed by Wes Craven and written by Kevin Williamson. The film stars David Arquette, Neve Campbell, Courteney Cox, Matthew Lillard, Rose McGowan, Skeet Ulrich, and Drew Barrymore. Released on December 20, 1996, Scream follows the character of Sidney Prescott (Campbell), a high school student in the fictional town of Woodsboro, California, who becomes the target of a mysterious killer known as Ghostface.",
+  "tags": ["scream", "movie", "horror"],
+  "type": "video",
+  "createdAt": "Wed Mar 13 2019 20:44:56 GMT+0000 (Greenwich Mean Time)"
+}, {
+  "name": "Scream 2",
+  "picture": "images/scream2.png",
+  "description": "Scream 2 is a 1997 American slasher film directed by Wes Craven and written by Kevin Williamson. It stars Neve Campbell, David Arquette, Courteney Cox, Sarah Michelle Gellar, Laurie Metcalf, Jamie Kennedy, Jerry O'Connell, Jada Pinkett and Liev Schreiber. The film was released on December 12, 1997 by Dimension Films as the second installment in the Scream film series.",
+  "tags": ["scream", "movie", "horror"],
+  "type": "video",
+  "createdAt": "Wed Mar 13 2019 20:44:56 GMT+0000 (Greenwich Mean Time)"
 }]
