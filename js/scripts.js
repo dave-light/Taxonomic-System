@@ -402,7 +402,7 @@ function addTagToItem() {
   var searchVal = $("#item-modal-add-tag-search-bar").val();
   var matchingTags = Tags.search(searchVal);
   var tagId;
-
+  $("#item-tag-change-message").empty();
   for (var i = 0; i < matchingTags.length; i++) {
     if (matchingTags[i].element.name === searchVal) {
       tagId = matchingTags[i].element.id;
@@ -417,7 +417,7 @@ function addTagToItem() {
     let tag = Tags.find(tagId);
     Tags.attach(tag, item);
     $('#item-modal-add-tag-search-bar').val("");
-    $("#item-tag-change-message").prepend("<div class='remove-tag-msg ui message green'><div class='header'>Added Tagg To Item</div><p>Tag " + tag.name + " added to item " + item.name + ".</p></div>");
+    $("#item-tag-change-message").prepend("<div class='remove-tag-msg ui message green'><div class='header'>Added Tag To Item</div><p>Tag " + tag.name + " added to item " + item.name + ".</p></div>");
     $("#item-modal-tags").append("<button id='item-modal-tag-button-" + tagId + "'class='ui button tag label' onclick='removeItemTag("
       + item.id + ", " + tag.id + ", " + tagId + ")'>" + tag.name + "<i class='delete icon red item-delete-tag-icon'> </i></button>");
   }
