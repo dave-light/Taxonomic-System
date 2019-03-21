@@ -454,7 +454,7 @@ function removeItemTag(itemId, tagId, buttonId) {
   $("#item-modal-tag-button-" + buttonId).remove();
   $(".remove-tag-msg").remove();
   $("#item-tag-change-message").prepend("<div class='remove-tag-msg ui message red'><div class='header'>Removed Tag From Item</div><div><p>Tag " + tag.name + " removed from item " + item.name
-    + ".</p><button class='ui button tag yellow center aligned' onclick='undoRemoveTag(" + itemId + ", " + tagId + ")'>undo</button></div>");
+    + ".</p><button class='ui right floated button tag yellow ' onclick='undoRemoveTag(" + itemId + ", " + tagId + ")'>undo</button><br><br></div>");
 
 }
 
