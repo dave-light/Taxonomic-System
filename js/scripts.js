@@ -49,6 +49,8 @@ $(document).ready(function () {
 
         onClickModal();
 
+        createTag();
+
         // Initialises check boxes in filter menu
         $('.ui.checkbox').checkbox();
 
@@ -501,12 +503,16 @@ $('.ui.form').form({
   }
 });
 
-$('#createNewTagButton').click(function () {
-      Taxonomic.Tags.create({
-        name: name.val(),
-        description: description.val()
-      });
+function createTag() {
+  let name = $('<input/>', { type: 'text' });
+  // let description = $('<textarea/>');
+  $('#createNewTagButton').click(function () {
+    Taxonomic.Tags.create({
+      name: name.val(),
+      description: description.val()
+    });
 
-      '#createNewTag'.hide();
+    $('#createNewTag').hide();
 
-});
+  });
+}
