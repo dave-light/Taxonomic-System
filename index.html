@@ -272,30 +272,68 @@
         <!-- Items will be shown here -->
       </div>
     </div>
-    <div class="ui modal" id="itemOverlay">
-      <div class="header">
-        Item
-      </div>
-      <div class="image content">
-        <div class="ui medium image" id="item-modal-image">
+    <div class="ui modal " id="itemOverlay">
+      <div class="scrolling content">
+        <div class="ui four column grid">
+          <div class="row">
+            <div id="remove-tag-msg" class="header column">
+              <h1>Item</h1>
+            </div>
+          </div>
+          <div class="row">
+            <div class="image content column">
+              <div class="ui medium image center" id="item-modal-image">
+              </div>
+            </div>
+            <div class="twelve wide column">
+              <div class="ui one column grid">
+                <div class="row">
+                  <div>
+                    <div id="item-modal-name" class="ui header column"></div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="column">
+                    <div id="item-modal-desc"></div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="column">
+                    <div id="item-modal-tags"></div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="column">
+                    <div id="item-tag-change-message"></div>
 
-        </div>
-        <div class="description">
-          <div id="item-modal-name" class="ui header"></div>
-          <div id="item-modal-desc"></div>
-          <p></p>
-          <div id="item-modal-tags"></div><br><button onclick="drawAddTagMenu()" class="ui button green"><i
-              class="icon-text-padding plus icon square outline white"></i>Add Tag</button>
-          <p></p>
-          <div id="item-add-tag-menu" class="ui header">
+                    <div id="filter-search-container">
+                      <h4 class="ui dividing header">Search For Tags To Add To This Item</h4>
+
+                      <div id="item-modal-add-tag-search-area" class="ui search">
+                        <div class="ui fluid right labeled left icon input">
+                          <i class="tags icon"></i>
+                          <input id="item-modal-add-tag-search-bar" class="prompt" type="text"
+                            placeholder="Search Tags To Add...">
+                          <a id="item-modal-add-tag" class="ui tag label" onclick="addTagToItem()">
+                            Add Tag
+                          </a>
+                        </div>
+                      </div>
+                      <div id="item-add-tag-menu" class="ui header">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+        <div class="actions">
+            <button class="ui right floated red deny button ">close</button>
+          </div>
+          <br>
       </div>
-      <div class="actions">
-        <div class="ui red deny button">
-          close
-        </div>
-      </div>
+    </div>
     </div>
 
   </div>
