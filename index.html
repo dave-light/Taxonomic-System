@@ -354,9 +354,9 @@
 
                     <div class="ui stackable three column centered grid">
                         <form class="ui form column">
-                            <div class="ui card">
+                            <div class="ui card style="height: 100%"">
                                 <div class="content">
-                                    <div class="header">Edit Tag</div>
+                                    <div class="header field">Edit Tag</div>
                                     <div class="field">
                                         <label>Tag Name</label>
                                         <input id="edit-tag-name" type="text" name="first-name" placeholder="First Name">
@@ -365,30 +365,34 @@
                                         <label>Short Text</label>
                                         <textarea id="edit-tag-description" rows="3"></textarea>
                                     </div>
-                                    <button type="button" id="edit-tag-save" class="ui button green">Save</button>
+                                    <div class="tab-modal-buttons">
+                                    <button type="button" id="edit-tag-save" class="ui button green left floated">Save</button>
                                     
-                                    <button type="button" id="edit-tag-cancel" class="ui yellow button">Undo</button>
+                                    <button type="button" id="edit-tag-cancel" class="ui yellow button right floated">Undo</button>
+                                     </div>
                                 </div>
                             </div>
 
 
                         </form>
                         <form class="ui form column">
-                            <div class="ui card">
+                            <div class="ui card" style="height: 100%">
                                 <div class="content">
-                                    <div class="header">Map Tags</div>
+                                    <div class="header field">Map Tags</div>
                                     <div class="field">
                                         <div class="ui form">
                                             <div class="field">
                                                 <label>Tags</label>
-                                                <select class="ui search dropdown map-dropdown" multiple="">
+                                                <select class="tag-modal ui search dropdown map-dropdown"  multiple="">
                                                 </select>
                                             </div>
-                                        </div>                                    </div>
-
-                                    <button type="button" id="map-save" class="ui green button">Save</button>
-                                    <button type="button" id="map-tag-cancel" class="ui yellow button">Undo</button>
-                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-modal-buttons">
+                                    <button type="button" id="map-save" class="ui green button left floated">Save</button>
+                                    <button type="button" id="map-tag-cancel" class="ui yellow button right floated">Undo</button>
+                                   </div>
+                             </div>
                             </div>
 
 
@@ -397,18 +401,28 @@
 
                         
                         <form class="ui form column">
-                            <div class="ui card">
+                            <div class="ui card" style="height: 100%">
                                 <div class="content">
-                                    <div class="header">Edit Tag</div>
+                                    <div class="header field">Add/Remove Tag from Items</div>
                                     <div class="field">
-                                        <label>Tag Name</label>
-                                        <input type="text" name="first-name" placeholder="First Name">
+                                    <button id="tag-add-item" type="button" class="ui left attached button green active">Add</button>
+                                    <button id="tag-remove-item" type="button" class="right attached ui button">Remove</button>
                                     </div>
-                                    <div class="field">
-                                        <label>Short Text</label>
-                                        <textarea rows="3"></textarea>
+                                        <div class="field">
+                                            <div class="ui form">
+                                                <div class="field">
+                                                    <label>Tags</label>
+                                                    <select class="tag-modal-two ui search dropdown add-remove-dropdown" multiple="">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <div class="tab-modal-buttons">
+                                        <button type="button" id="add-remove-save" class="ui green button left floated">Save</button>
+                                        <button type="button" id="add-remove-cancel" class="ui yellow button right floated">Undo</button>
+                                            </div>
                                     </div>
-                                    <button class="ui button" type="submit">Submit</button>
                                 </div>
                             </div>
 
