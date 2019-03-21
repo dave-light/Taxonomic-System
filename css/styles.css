@@ -112,6 +112,12 @@ padding-left: 7px
   }
 }
 
+@media screen and (max-width:767px){
+  #main-grid {
+    margin-top: 204px !important;
+  }
+}
+
 #filter-sidebar {
   padding: 20px;
 }
