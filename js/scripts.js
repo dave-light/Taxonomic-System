@@ -57,6 +57,7 @@
                   $('#filter-search-tags').search({source: all_tags});
                   resetFilterForms();
                   setFilterOrderRadioButtons();
+                  showCorrectFilterOptions();
                   displayAllResults();
                   updateTopCoTags();
 
@@ -341,15 +342,14 @@ function onClickModal() {
     if (dropdown_selection == "Tags") {
       $(".item-filter").addClass("disabled");
       $(".tag-filter").removeClass("disabled");
-      $("#clear-filters-button").click();
     } else if (dropdown_selection == "Items") {
       $(".item-filter").removeClass("disabled");
       $(".tag-filter").addClass("disabled");
-      $("#clear-filters-button").click();
     } else {
       $(".item-filter").removeClass("disabled");
-      $(".tag-filter").removeClass("disabled");
+      $(".tag-filter").addClass("disabled");
     }
+    $("#clear-filters-button").click();
   }
 
   $("#filter-button").click(function(){
