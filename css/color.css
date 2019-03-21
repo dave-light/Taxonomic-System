@@ -49,5 +49,9 @@ background-color: #cff7f0;
 }
 
 .remove-item-tag-button{
-background-color: lightgreen !important;    
+background-color: rgb(132, 241, 132) !important;    
+}
+
+.hashColor{
+color: rgb(105, 233, 105) !important;    
 }

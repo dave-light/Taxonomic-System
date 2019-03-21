@@ -205,20 +205,21 @@ function displayAllResults() {
   }
 }
 
-// This will eventually be updated to take further parameters, such as name
+// Generate html for tag / item cards
 function generateItemCard(id, image) {
   return '<div class="column"><div id="item-' + id + '" class="ui fluid card item-card" onclick="showItem(' + id + ')"><div class="content"><img class="ui centered image item-image" src="' + image + '" alt=""></div></div></div>';
 
 }
 
 function generateTagCard(id, tagName) {
-  return '<div class="column"><div id="tag-' + id + '" class="ui fluid card item-card"><div class="content"><img class="ui centered image item-image" src="https://www.publicdomainpictures.net/pictures/30000/velka/plain-white-background.jpg"><h1 id="centeredTag">' + '#' + tagName + '</h1></div></div></div>';
+  return '<div class="column"><div id="tag-' + id + '" class="ui fluid card item-card"><div class="content"><img class="ui centered image item-image" src="https://www.publicdomainpictures.net/pictures/30000/velka/plain-white-background.jpg"><h1 id="centeredTag">' + '<span class="hashColor">#</span>' + tagName + '</h1></div></div></div>';
 }
 
 function updateTotalResults() {
   $("#total-results").html($("#main-grid .column").length);
 }
 
+//Make cards responsive to screen sizes
 function updateGridWidth() {
   if ($(window).width() < 700) {
     setGridWidth("one");
