@@ -517,6 +517,14 @@ function onClickModal() {
       } else {
         results.sort((a, b) => (new Date(a.createdAt) < new Date(b.createdAt)) ? 1 : -1);
       }
+    } else if (sort_option == "attached-items") {
+
+    } else if (sort_option == "co-tags") {
+      if (sort_order == "ascending") {
+        results.sort((a, b) => (Tags.cotags(a).length > Tags.cotags(b).length) ? 1 : -1);
+      } else {
+        results.sort((a, b) => (Tags.cotags(a).length < Tags.cotags(b).length) ? 1 : -1);
+      }
     }
 
     $("#main-grid").empty();
