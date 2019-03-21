@@ -201,12 +201,17 @@ function displayAllResults() {
     if (count == 0) {
       addAllItems();
     }
-    tags.forEach(function (object) {
-      var id = object.element.id;
-      var tagName = object.element.name;
-      $("#main-grid").append(generateTagCard(id, tagName));
-      results.push(object.element);
-    });
+    if (top_co_tags.size == 0) {
+      addAllTags();
+    } else {
+      var co_tags = Array.from(top_co_tags);
+      co_tags.forEach(function(object) {
+        var id = object.tag.id;
+        var tagName = object.tag.name;
+        $("#main-grid").append(generateTagCard(id, tagName));
+        results.push(object.tag); 
+      });
+    }
   }
   else if (dropdown_selection == "Items") {
     $("#main-grid").html("");
@@ -384,6 +389,15 @@ function addAllItems() {
     var image = object.element.picture;
     $("#main-grid").append(generateItemCard(id, image));
     results.push(object.element);
+  });
+}
+
+function addAllTags() {
+  tags.forEach(function (object) {
+    var id = object.element.id;
+    var tagName = object.element.name;
+    $("#main-grid").append(generateTagCard(id, tagName));
+    results.push(object.element); 
   });
 }
 
