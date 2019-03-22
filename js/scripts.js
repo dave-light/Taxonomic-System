@@ -261,7 +261,7 @@ function generateItemCard(id, image) {
 }
 
 function generateTagCard(id, tagName) {
-  return '<div class="column"><div id="tag-' + id + '" class="ui fluid card item-card"><div class="content"><img class="ui centered image item-image" src="https://www.publicdomainpictures.net/pictures/30000/velka/plain-white-background.jpg"><h1 id="centeredTag">' + '<span class="hashColor">#</span>' + tagName + '</h1></div></div></div>';
+  return '<div class="column"><div id="tag-' + id + '" class="ui fluid card item-card"><div class="content"><img class="ui centered image item-image" ><h1 id="centeredTag">' + '<span class="hashColor">#</span>' + tagName + '</h1></div></div></div>';
 }
 
 function updateTotalResults() {
