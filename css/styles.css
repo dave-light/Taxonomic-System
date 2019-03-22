@@ -230,3 +230,15 @@ padding-left: 7px
 .item-card {
   cursor: pointer;
 }
+
+.tag-modal{
+    height: 19vh;
+}
+.tag-modal-two{
+    height: 13vh;
+}
+.tab-modal-buttons{
+margin: 0px;
+margin-top: auto;
+}
+
