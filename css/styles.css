@@ -223,24 +223,6 @@ padding-left: 7px
 
 }
 
-
-
-.content {
-    flex: 1;
-}
-
-.tag-modal{
-    height: 19vh;
-}
-.tag-modal-two{
-    height: 13vh;
-}
-.tab-modal-buttons{
-margin: 0px;
-margin-top: auto;
-}
-
-
 #co-tags-container {
   float: left !important;
 }
@@ -248,4 +230,3 @@ margin-top: auto;
 .item-card {
   cursor: pointer;
 }
-
