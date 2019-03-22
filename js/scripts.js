@@ -1,6 +1,7 @@
+//Imports from Taxaonomics API *****************************************************************************************
 const { Users, Items, Tags } = Taxonomic;
 
-//Global variables
+//Global variables *****************************************************************************************************
 var dropdown_selection = "All";
 var items;
 var tags;
@@ -16,6 +17,7 @@ var search_type = "all";
 var container = document.body;
 var currentSelectedItem;
 
+//Initialiser *****************************************************************************************************
 $(document).ready(function () {
 
   var user = Users.find(0);
@@ -64,7 +66,7 @@ $(document).ready(function () {
         $('#item-modal-add-tag-search-bar').val("");
 
         // Initialises the tag search box in filter sidebar
-        $('#filter-search-tags').search({source: all_tags});
+        $('#filter-search-tags').search({ source: all_tags });
         resetFilterForms();
         setFilterOrderRadioButtons();
         showCorrectFilterOptions();
@@ -101,34 +103,21 @@ $(document).ready(function () {
 
 });
 
-  function enable_dropdown() {
-      $( '.ui.dropdown' ).dropdown({
-          action: 'activate',
-          onChange: function(value, text, $selectedItem) {
-            console.log(text);
-            dropdown_selection = text;
-            displayAllResults();
-            showCorrectFilterOptions();
-          }
-      });
-  }
+//Enable "Search for" dropdown *****************************************************************************************************
 
-// Use this function to update the main view if updating it
-// on each single key press is too much.
-// This whole function is only for debugging!!!
-function bindKeys() {
-  $('#search-input').keypress(function (e) {
-
-    if (e.keyCode == 13) {
+function enable_dropdown() {
+  $('.ui.dropdown').dropdown({
+    action: 'activate',
+    onChange: function (value, text, $selectedItem) {
+      console.log(text);
+      dropdown_selection = text;
       displayAllResults();
+      showCorrectFilterOptions();
     }
-    else if (e.keyCode == 32) {
-      displayAllResults();
-    }
-
   });
 }
 
+//SEARCH  *****************************************************************************************************
 function search_listener() {
   // Binds event handler to the search field
   $("#search-input").on('input', function (e) {
@@ -186,14 +175,14 @@ function displayAllResults() {
   if (dropdown_selection == "All") {
     $("#main-grid").html("");
     var count = 0;
-    items.forEach(function(object){
-        var id = object.element.id;
-        var image = object.element.picture;
-        if (itemMatchesFilters(object.element)) {
-          $("#main-grid").append(generateItemCard(id, image));
-          results.push(object.element);
-          count++;
-        }
+    items.forEach(function (object) {
+      var id = object.element.id;
+      var image = object.element.picture;
+      if (itemMatchesFilters(object.element)) {
+        $("#main-grid").append(generateItemCard(id, image));
+        results.push(object.element);
+        count++;
+      }
     });
     if (count == 0) {
       addAllItems();
@@ -202,11 +191,11 @@ function displayAllResults() {
       addAllTags();
     } else {
       var co_tags = Array.from(top_co_tags);
-      co_tags.forEach(function(object) {
+      co_tags.forEach(function (object) {
         var id = object.tag.id;
         var tagName = object.tag.name;
         $("#main-grid").append(generateTagCard(id, tagName));
-        results.push(object.tag); 
+        results.push(object.tag);
       });
     }
   }
@@ -240,7 +229,25 @@ function displayAllResults() {
   sortResults();
 }
 
-// Generate html for tag / item cards
+function addAllItems() {
+  items.forEach(function (object) {
+    var id = object.element.id;
+    var image = object.element.picture;
+    $("#main-grid").append(generateItemCard(id, image));
+    results.push(object.element);
+  });
+}
+
+function addAllTags() {
+  tags.forEach(function (object) {
+    var id = object.element.id;
+    var tagName = object.element.name;
+    $("#main-grid").append(generateTagCard(id, tagName));
+    results.push(object.element);
+  });
+}
+
+// Generate html for tag and/or item cards *****************************************************************************************************
 function generateItemCard(id, image) {
   return '<div class="column"><div id="item-' + id + '" class="ui fluid card item-card" onclick="showItem(' + id + ')"><div class="content"><img class="ui centered image item-image" src="' + image + '" alt=""></div></div></div>';
 
@@ -254,7 +261,7 @@ function updateTotalResults() {
   $("#total-results").html($("#main-grid .column").length);
 }
 
-//Make cards responsive to screen sizes
+//Make cards responsive to screen sizes *****************************************************************************************************
 function updateGridWidth() {
   if ($(window).width() < 700) {
     setGridWidth("one");
@@ -266,83 +273,7 @@ function updateGridWidth() {
     setGridWidth("four");
   }
 }
-function showTag(id) {
-  let tag = Tags.find(id);
 
-  //Stuff on the modal
-  $(".remove-tag-msg").remove();
-  $('#tag-modal-image').empty();
-
-  //Title
-  $("#tag-modal-name").text(tag.name);
-
-  //Description
-  $("#tag-modal-desc").text(tag.description);
-
-
-  //Appends image
-  $('#tag-modal-image').append("<img src=></img>");
-  $('.ui.modal#tagOverlay').modal('show');
-
-}
-
-function onClickModal() {
-  var id;
-  var tag_id;
-  var tag;
-
-  $("#main-grid").on('click', '.column', function () {
-    id = $(this).children()[0].id;
-    if (id.indexOf("tag") >= 0) {
-
-      tag_id = parseInt(id.substring(id.indexOf("-") + 1));
-      console.log(tag_id);
-
-      tag = Tags.find(tag_id);
-      console.log(tag);
-
-
-      if (Tags.isFlagged(tag)) {
-        $('#flag').text("Un-flag");
-      } else {
-        $('#flag').text("Flag");
-      }
-
-
-
-      //Stuff on the modal
-      $(".remove-tag-msg").remove();
-      $('#tag-modal-image').empty();
-
-      //Title
-      $("#tag-modal-name").text(tag.name);
-
-      //Description
-      $("#tag-modal-desc").text(tag.description);
-
-
-      //Appends image
-      $('#tag-modal-image').append("<img src=></img>");
-      $('.ui.modal#tagsOverlay').modal('show');
-    }
-  });
-
-
-  $('#flag').on('click', function () {
-    if ($('#flag').text() == "Flag") {
-      console.log("Flagged.");
-      Tags.flag(tag);
-      $('#flag').text("Un-flag");
-    } else {
-      console.log("Un-flagged.");
-      Tags.unflag(tag);
-      $('#flag').text("Flag");
-    }
-
-
-    console.log(Tags.history(tag));
-  });
-}
 
 function setGridWidth(size) {
   $('#main-grid').removeClass('one two three four column grid');
@@ -350,6 +281,7 @@ function setGridWidth(size) {
 
 }
 
+//FILTER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 $("#filter-button").click(function () {
   $('.ui.sidebar').sidebar('toggle');
 });
@@ -377,26 +309,8 @@ $("#add-tag-filter").click(function () {
     $("#error-container").hide();
     insertTagToFilterList(tag_name);
     $("#filter-search-bar").val("");
-}
+  }
 });
-
-function addAllItems() {
-  items.forEach(function(object){
-    var id = object.element.id;
-    var image = object.element.picture;
-    $("#main-grid").append(generateItemCard(id, image));
-    results.push(object.element);
-  });
-}
-
-function addAllTags() {
-  tags.forEach(function (object) {
-    var id = object.element.id;
-    var tagName = object.element.name;
-    $("#main-grid").append(generateTagCard(id, tagName));
-    results.push(object.element); 
-  });
-}
 
 $("#filter-search-bar").focus(function () {
   $("#error-container").hide();
@@ -409,8 +323,17 @@ $("#tag-rows").on("click", ".filtered-tag", function () {
   updateEmptyTable();
 });
 
+$("#clear-filters-button").click(function () {
+  $("#filter-search-bar").val("");
+  $("#error-container").hide();
+  clearFilterTable();
+  resetFilterForms();
+  updateFilters();
+});
+
+
 function updateEmptyTable() {
-  var empty_table = '<tr id="empty-tag-list" class="center aligned">' +'<td>No tags currently filtered</td></tr>';
+  var empty_table = '<tr id="empty-tag-list" class="center aligned">' + '<td>No tags currently filtered</td></tr>';
   if (tagFilterListIsEmpty()) {
     $("#tag-rows").html(empty_table);
   } else {
@@ -418,15 +341,31 @@ function updateEmptyTable() {
   }
 }
 
+// function clearFilterTable() {
+//   $("#tag-rows").empty();
+//   updateEmptyTable();
+// }
+
+
+
 function clearFilterTable() {
   $("#tag-rows").empty();
   updateEmptyTable();
+  filtered_tags = [];
+  updateTopCoTags();
 }
+
+// function resetFilterForms() {
+//   $('.ui.form').form('clear');
+//   $("#date").prop("checked", true);
+//   $("#ascending").prop("checked", true);
+// }
 
 function resetFilterForms() {
   $('.ui.form').form('clear');
-  $("#date").prop("checked", true);
-  $("#ascending").prop("checked", true);
+  $('.ui.checkbox:not(.radio)').checkbox("check", true);
+  $("#date").click();
+  $("#ascending").click();
 }
 
 function tagFilterListIsEmpty() {
@@ -451,21 +390,22 @@ function insertTagToFilterList(tag) {
   filtered_tags.push(tag);
   updateEmptyTable();
 }
-function drawAddTagMenu() {
 
-  var tagNames = [];
-  var allTags = Tags.search("");
-  for (i = 0; i < allTags.length; i++) {
-    tagNames.push({ "title": allTags[i].element.name });
+function showCorrectFilterOptions() {
+  if (dropdown_selection == "Tags") {
+    $(".item-filter").addClass("disabled");
+    $(".tag-filter").removeClass("disabled");
+  } else if (dropdown_selection == "Items") {
+    $(".item-filter").removeClass("disabled");
+    $(".tag-filter").addClass("disabled");
+  } else {
+    $(".item-filter").removeClass("disabled");
+    $(".tag-filter").addClass("disabled");
   }
-  $("#item-add-tag-menu").append("<div class='ui dropdown search'><div class='ui icon input'><input id='add-tag-item-search' class='prompt' type='text' placeholder='Search Tags to Add...'><i class='search icon'></i></div><div class='results'></div></div>")
-  $('.ui.search').search({ source: tagNames, on: click });
-  let input = $('.ui.search').search('get value');
-  //let input = $("#prompt.add-tag-item-search").val();
-  console.log(input);
-  //addTagToItem();
-
+  $("#clear-filters-button").click();
 }
+
+// ITEM MODAL ***************************************************************************************************************
 
 function addTagToItem() {
   var searchVal = $("#item-modal-add-tag-search-bar").val();
@@ -483,19 +423,21 @@ function addTagToItem() {
     $("#item-tag-change-message").prepend("<div class='remove-tag-msg ui message red'><div class='header'>Tag Does Not Exist</div><p>" + searchVal + " is not a tag.</p></div>");
   } else {
     let item = Items.find(currentSelectedItem);
-    let tag = Tags.find(tagId); 
+    let tag = Tags.find(tagId);
     $('#item-modal-add-tag-search-bar').val("");
-    if(Tags.attach(tag, item)){
+    if (Tags.attach(tag, item)) {
       $("#item-tag-change-message").prepend("<div class='remove-tag-msg ui message green'><div class='header'>Added Tag To Item</div><p>Tag " + tag.name + " added to item " + item.name + ".</p></div>");
       $("#item-modal-tags").append("<button id='item-modal-tag-button-" + tagId + "'class=' remove-item-tag-button ui button tag label' onclick='removeItemTag("
         + item.id + ", " + tag.id + ", " + tagId + ")'>" + tag.name + "<i class='delete icon red item-delete-tag-icon'> </i></button>");
     } else {
-      $("#item-tag-change-message").prepend("<div class='remove-tag-msg ui message yellow'><div class='header'>Tag Already Attached to Item</div><p>Tag " 
-      + tag.name + " already attached to item " + item.name + ".</p></div>");
+      $("#item-tag-change-message").prepend("<div class='remove-tag-msg ui message yellow'><div class='header'>Tag Already Attached to Item</div><p>Tag "
+        + tag.name + " already attached to item " + item.name + ".</p></div>");
 
     }
-  } 
+  }
 }
+
+
 
 function undoRemoveTag(itemId, tagId) {
   let item = Items.find(itemId);
@@ -539,215 +481,174 @@ function showItem(id) {
 
 }
 
-//Tag Modal
+//Tag Modal ***************************************************************************************************************
 
 function onClickModal() {
-    var id;
-    var tag_id;
-    var tag;
+  var id;
+  var tag_id;
+  var tag;
 
-    $("#main-grid").on('click', '.column', function() {
-        id = $(this).children()[0].id;
-        if(id.indexOf("tag") >= 0) {
+  $("#main-grid").on('click', '.column', function () {
+    id = $(this).children()[0].id;
+    if (id.indexOf("tag") >= 0) {
 
-            tag_id = parseInt(id.substring(id.indexOf("-") + 1));
-            console.log(tag_id);
+      tag_id = parseInt(id.substring(id.indexOf("-") + 1));
+      console.log(tag_id);
 
-            tag = Tags.find(tag_id);
-            console.log(tag);
-
-
-            if(Tags.isFlagged(tag)){
-                $('#flag').text("Un-flag");
-            }else{
-                $('#flag').text("Flag");
-            }
-
-            populateTagInfo(tag);
-
-            //Resets tab position
-            $('.ui.modal#tagsOverlay').modal({
-                onHidden: function () {
-                  $('.menu .item').tab('change tab', 'first');
-                }
-            }).modal('show');
-
-            //Initial history
-            setHistory(tag);
+      tag = Tags.find(tag_id);
+      console.log(tag);
 
 
-            setManageTag(tag);
-            mapTag(tag);
+      if (Tags.isFlagged(tag)) {
+        $('#flag').text("Un-flag");
+      } else {
+        $('#flag').text("Flag");
+      }
+
+      populateTagInfo(tag);
+
+      //Resets tab position
+      $('.ui.modal#tagsOverlay').modal({
+        onHidden: function () {
+          $('.menu .item').tab('change tab', 'first');
         }
-        });
+      }).modal('show');
+
+      //Initial history
+      setHistory(tag);
 
 
-    $('#flag').on('click', function() {
-        if($('#flag').text() == "Flag"){
-            console.log("Flagged.");
-            Tags.flag(tag);
-            $('#flag').text("Un-flag");
-        }else{
-            console.log("Un-flagged.");
-            Tags.unflag(tag);
-            $('#flag').text("Flag");
-        }
-
-
-        setHistory(tag);
-        console.log(Tags.history(tag));
-    });
-
-}
-  function setGridWidth(size) {
-    $('#main-grid').removeClass('one two three four column grid');
-    $('#main-grid').addClass(size + ' column grid');
-  }
-
-  function showCorrectFilterOptions() {
-    if (dropdown_selection == "Tags") {
-      $(".item-filter").addClass("disabled");
-      $(".tag-filter").removeClass("disabled");
-    } else if (dropdown_selection == "Items") {
-      $(".item-filter").removeClass("disabled");
-      $(".tag-filter").addClass("disabled");
-    } else {
-      $(".item-filter").removeClass("disabled");
-      $(".tag-filter").addClass("disabled");
+      setManageTag(tag);
+      mapTag(tag);
     }
-    $("#clear-filters-button").click();
-  }
-
-
-
-
-  $("#clear-filters-button").click(function(){
-    $("#filter-search-bar").val("");
-    $("#error-container").hide();
-    clearFilterTable();
-    resetFilterForms();
-    updateFilters();
   });
 
-function mapTag(tag){
-    var tag_names = [];
 
-    tags.forEach(function(e){
-        tag_names.push({"name": e.element.name, "value": e.element.name});
-    });
-
-    $('.ui.dropdown.map-dropdown').dropdown({
-        values: tag_names
-    });
-
-    $('#map-save').on('click', function() {
-        $('.ui.dropdown.map-dropdown').dropdown("get value");
-        var values = $('.ui.search.dropdown.map-dropdown');
-
-    });
-    $('#map-tag-cancel').on('click', function() {
-        $('.ui.dropdown.map-dropdown').dropdown(
-            "clear"
-        );
-    });
-
-
-    console.log($(this));
-
-}
-function populateTagInfo(tag) {
-    //Clear and populate fields
-    $('#modal-tag-title').       empty().text("Tag: " + tag.name);
-    $('#modal-tag-id').          empty().text(tag.id);
-    $('#modal-tag-name').        empty().text(tag.name);
-    $('#modal-tag-description'). empty().text(tag.description);
-    $('#modal-tag-creator').     empty().text(tag.creator.name);
-    $('#modal-tag-created').     empty().text(tag.createdAt);
-    if(tag.status){
-        $('#modal-tag-status').empty().text("open");
-    }else{
-
-        $('#modal-tag-status').empty().text("closed");
+  $('#flag').on('click', function () {
+    if ($('#flag').text() == "Flag") {
+      console.log("Flagged.");
+      Tags.flag(tag);
+      $('#flag').text("Un-flag");
+    } else {
+      console.log("Un-flagged.");
+      Tags.unflag(tag);
+      $('#flag').text("Flag");
     }
 
-}
-function setManageTag(tag) {
-    //tag.element.name
-    //tag.element.description
 
+    setHistory(tag);
+    console.log(Tags.history(tag));
+  });
+
+}
+
+function mapTag(tag) {
+  var tag_names = [];
+
+  tags.forEach(function (e) {
+    tag_names.push({ "name": e.element.name, "value": e.element.name });
+  });
+
+  $('.ui.dropdown.map-dropdown').dropdown({
+    values: tag_names
+  });
+
+  $('#map-save').on('click', function () {
+    $('.ui.dropdown.map-dropdown').dropdown("get value");
+    var values = $('.ui.search.dropdown.map-dropdown');
+
+  });
+  $('#map-tag-cancel').on('click', function () {
+    $('.ui.dropdown.map-dropdown').dropdown(
+      "clear"
+    );
+  });
+
+
+  console.log($(this));
+}
+
+function populateTagInfo(tag) {
+  //Clear and populate fields
+  $('#modal-tag-title').empty().text("Tag: " + tag.name);
+  $('#modal-tag-id').empty().text(tag.id);
+  $('#modal-tag-name').empty().text(tag.name);
+  $('#modal-tag-description').empty().text(tag.description);
+  $('#modal-tag-creator').empty().text(tag.creator.name);
+  $('#modal-tag-created').empty().text(tag.createdAt);
+  if (tag.status) {
+    $('#modal-tag-status').empty().text("open");
+  } else {
+
+    $('#modal-tag-status').empty().text("closed");
+  }
+
+}
+
+function setManageTag(tag) {
+  //tag.element.name
+  //tag.element.description
+
+  $('#edit-tag-name').val(tag.name);
+  $('#edit-tag-description').val(tag.description);
+
+  //onchange on name to check if the name already exists
+  console.log(tag);
+  $('#edit-tag-save').on('click', function () {
+    tag.name = $('#edit-tag-name').val();
+    tag.description = $('#edit-tag-description').val();
+    Tags.update(tag);
+    populateTagInfo(tag);
+    displayAllResults();
+  });
+
+  $('#edit-tag-cancel').on('click', function () {
     $('#edit-tag-name').val(tag.name);
     $('#edit-tag-description').val(tag.description);
-
-    //onchange on name to check if the name already exists
-    console.log(tag);
-    $('#edit-tag-save').on('click', function(){
-        tag.name = $('#edit-tag-name').val();
-        tag.description = $('#edit-tag-description').val();
-        Tags.update(tag);
-        populateTagInfo(tag);
-        displayAllResults();
-    });
-
-    $('#edit-tag-cancel').on('click', function() {
-        $('#edit-tag-name').val(tag.name);
-        $('#edit-tag-description').val(tag.description);
-    });
+  });
 }
-function setHistory(tag) {
-    console.log(Tags.history(tag));
-    var history = Tags.history(tag);
 
-    $('tbody#history-body').empty();
-    history.slice().reverse().forEach(function(element){
-        //History ID var
-        var history_id = element.id;
-        //Description
-        var description = element.payload;
-        //Action by
-        var author = element.creator.name;
-        //Time
-        var time = element.createdAt.split(" GMT")[0];
-        $('tbody#history-body').append('\
+function setHistory(tag) {
+  console.log(Tags.history(tag));
+  var history = Tags.history(tag);
+
+  $('tbody#history-body').empty();
+  history.slice().reverse().forEach(function (element) {
+    //History ID var
+    var history_id = element.id;
+    //Description
+    var description = element.payload;
+    //Action by
+    var author = element.creator.name;
+    //Time
+    var time = element.createdAt.split(" GMT")[0];
+    $('tbody#history-body').append('\
                 <tr>\
-                <td data-label="History ID">'+ history_id +'</td>\
-                <td data-label="Description">'+ description +'</td>\
-                <td data-label="Action by">' + author +'</td>\
+                <td data-label="History ID">'+ history_id + '</td>\
+                <td data-label="Description">'+ description + '</td>\
+                <td data-label="Action by">' + author + '</td>\
                 <td data-label="Time">' + time + '</td>\
                 </tr>\
                 ');
-    });
+  });
 }
 
-  $( "#tag-rows" ).on( "click", ".filtered-tag", function() {
-    var i = filtered_tags.indexOf($(this).text());
-    filtered_tags.splice(i,1);
-    updateTopCoTags();
-    $(this).parents("tr").remove();
-    updateEmptyTable();
-    updateFilters();
-  });
 
-  function clearFilterTable() {
-    $("#tag-rows").empty();
-    updateEmptyTable();
-    filtered_tags = [];
-    updateTopCoTags();
-  }
-
-  function resetFilterForms() {
-    $('.ui.form').form('clear');
-    $('.ui.checkbox:not(.radio)').checkbox("check", true);
-    $("#date").click();
-    $("#ascending").click();
-  }
+$("#tag-rows").on("click", ".filtered-tag", function () {
+  var i = filtered_tags.indexOf($(this).text());
+  filtered_tags.splice(i, 1);
+  updateTopCoTags();
+  $(this).parents("tr").remove();
+  updateEmptyTable();
+  updateFilters();
+});
 
 
-
-// Create new tag
+// Create new tag ********************************************************************************************************
 $("#add-tag").click(function () {
-    $('#name-id').val("");
-    $('#description-id').val("");
-    $('#createNewTag').modal('show');
+  $('#name-id').val("");
+  $('#description-id').val("");
+  $('#createNewTag').modal('show');
 });
 
 $('.ui.form').form({
@@ -767,170 +668,170 @@ $('.ui.form').form({
 $('#createNewTagButton').click(function () {
   let name = $('#name-id').val();
   let description = $('#description-id').val();
-  let newTag = 
+  let newTag =
     Tags.create({
       'name': name,
       'description': description
     });
-  all_tags.push({title: newTag.name});
-  tags.push({key: "name", element: newTag});
-  $('#item-modal-add-tag-search-area').search({source: all_tags});
-  $('#filter-search-tags').search({source: all_tags});
+  all_tags.push({ title: newTag.name });
+  tags.push({ key: "name", element: newTag });
+  $('#item-modal-add-tag-search-area').search({ source: all_tags });
+  $('#filter-search-tags').search({ source: all_tags });
   $('#createNewTag').hide();
 });
 
-  // Filter mechanism code
+// Filter mechanism code ********************************************************************************************************
 
-  function insertTagToFilterList(tag) {
-    var tag_filter = '<tr class="center aligned"><td>' +
+function insertTagToFilterList(tag) {
+  var tag_filter = '<tr class="center aligned"><td>' +
     '<a class="ui tag label filtered-tag"><span class="tag-entry">' + tag +
     '</span><i class="red close icon"></i></a></td></tr>';
-    $("#tag-rows").append(tag_filter);
-    filtered_tags.push(tag);
-    updateTopCoTags();
-    updateFilters();
-    updateEmptyTable();
-  }
+  $("#tag-rows").append(tag_filter);
+  filtered_tags.push(tag);
+  updateTopCoTags();
+  updateFilters();
+  updateEmptyTable();
+}
 
-  function updateTopCoTags() {
-    top_co_tags.clear();
-    $("#co-tags-container").empty();
-    if (filtered_tags.length == 0) {
-      $("#co-tag-title").hide();
-      return;
-    }
-    filtered_tags.forEach(function(object) {
-      var co_tags = Tags.cotags(Tags.findAll({"name": object})[0]);
-      co_tags.forEach(function(obj) {
-        if (!top_co_tags.has(obj.tag.name)) {
-          top_co_tags.add(obj);
-        }
-      });
-    });
-    top_co_tags.forEach(function(object) {
-      if (filtered_tags.includes(object.tag.name)) {
-        top_co_tags.delete(object);
+function updateTopCoTags() {
+  top_co_tags.clear();
+  $("#co-tags-container").empty();
+  if (filtered_tags.length == 0) {
+    $("#co-tag-title").hide();
+    return;
+  }
+  filtered_tags.forEach(function (object) {
+    var co_tags = Tags.cotags(Tags.findAll({ "name": object })[0]);
+    co_tags.forEach(function (obj) {
+      if (!top_co_tags.has(obj.tag.name)) {
+        top_co_tags.add(obj);
       }
     });
-    console.log(top_co_tags);
-    var co_tags = Array.from(top_co_tags);
-    co_tags.sort((a, b) => (a.count < b.count) ? 1 : -1);
-    co_tags.slice(0,5).forEach(function(ob) {
-      if ($('.co-tag').text().indexOf(ob.tag.name) === -1) {
-        $("#co-tags-container").append('<a class="ui green tag label co-tag">' + ob.tag.name + '</a>');
-      }
-    });
-    $("#co-tag-title").show();
+  });
+  top_co_tags.forEach(function (object) {
+    if (filtered_tags.includes(object.tag.name)) {
+      top_co_tags.delete(object);
+    }
+  });
+  console.log(top_co_tags);
+  var co_tags = Array.from(top_co_tags);
+  co_tags.sort((a, b) => (a.count < b.count) ? 1 : -1);
+  co_tags.slice(0, 5).forEach(function (ob) {
+    if ($('.co-tag').text().indexOf(ob.tag.name) === -1) {
+      $("#co-tags-container").append('<a class="ui green tag label co-tag">' + ob.tag.name + '</a>');
+    }
+  });
+  $("#co-tag-title").show();
+}
+
+$("#co-tags-container").on('click', ".co-tag", function () {
+  insertTagToFilterList($(this).text());
+});
+
+$(".filter-type-option").change(function () {
+  var type = $(this).attr("id");
+  if ($(this).is(":checked")) {
+    filter_type.add(type);
+  } else {
+    filter_type.delete(type);
   }
+  updateFilters();
+});
 
-  $("#co-tags-container").on('click', ".co-tag", function() {
-    insertTagToFilterList($(this).text());
-  });
+$(".filter-sort-option-radio").change(function () {
+  sort_option = $(this).attr("id");
+  setFilterOrderRadioButtons();
+  $(".filter-sort-option-radio:not(#" + sort_option + ")").prop("checked", false);
+  updateFilters();
+  sortResults();
+});
 
-  $(".filter-type-option").change(function(){
-    var type = $(this).attr("id");
-    if($(this).is(":checked")) {
-      filter_type.add(type);
-    } else {
-      filter_type.delete(type);
-    }
-    updateFilters();
-  });
-
-  $(".filter-sort-option-radio").change(function(){
-    sort_option = $(this).attr("id");
-    setFilterOrderRadioButtons();
-    $(".filter-sort-option-radio:not(#" + sort_option + ")").prop("checked", false);
-    updateFilters();
-    sortResults();
-  });
-
-  function setFilterOrderRadioButtons() {
-    if (sort_option == "date") {
-      $("#ascending").next().text("Oldest");
-      $("#descending").next().text("Newest");
-    } else {
-      $("#ascending").next().text("Ascending");
-      $("#descending").next().text("Descending");
-    }
+function setFilterOrderRadioButtons() {
+  if (sort_option == "date") {
+    $("#ascending").next().text("Oldest");
+    $("#descending").next().text("Newest");
+  } else {
+    $("#ascending").next().text("Ascending");
+    $("#descending").next().text("Descending");
   }
+}
 
-  $(".filter-sort-order-radio").change(function(){
-    sort_order = $(this).attr("id");
-    $(".filter-sort-order-radio:not(#" + sort_order + ")").prop("checked", false);
-    updateFilters();
-    sortResults();
-  });
+$(".filter-sort-order-radio").change(function () {
+  sort_order = $(this).attr("id");
+  $(".filter-sort-order-radio:not(#" + sort_order + ")").prop("checked", false);
+  updateFilters();
+  sortResults();
+});
 
-  function updateFilters() {
-    displayAllResults();
-  }
+function updateFilters() {
+  displayAllResults();
+}
 
-  function itemMatchesFilters(item) {
-    if (filter_type.size > 0 && !filter_type.has(item.type)) {
-      return false;
-    }
-    if (filtered_tags.length > 0) {
-      for (var i in filtered_tags) {
-        if (!item.tags.includes(filtered_tags[i])) {
-          return false;
-        }
-      }
-      return true;
-    }
-    if (filter_type.has(item.type)) {
-      return true;
-    }
+function itemMatchesFilters(item) {
+  if (filter_type.size > 0 && !filter_type.has(item.type)) {
     return false;
   }
-
-  function sortResults() {
-    if (sort_option == "name") {
-      if (sort_order == "ascending") {
-        results.sort((a, b) => (a.name.toUpperCase() > b.name.toUpperCase()) ? 1 : -1);
-      } else {
-        results.sort((a, b) => (a.name.toUpperCase() < b.name.toUpperCase()) ? 1 : -1);
-      }
-    } else if (sort_option == "date") {
-      if (sort_order == "ascending") {
-        results.sort((a, b) => (new Date(a.createdAt) > new Date(b.createdAt)) ? 1 : -1);
-      } else {
-        results.sort((a, b) => (new Date(a.createdAt) < new Date(b.createdAt)) ? 1 : -1);
-      }
-    } else if (sort_option == "associated-items") {
-      if (sort_order == "ascending") {
-        results.sort((a, b) => (numberOfAssociatedItems(a) > numberOfAssociatedItems(b)) ? 1 : -1);
-      } else {
-        results.sort((a, b) => (numberOfAssociatedItems(a) < numberOfAssociatedItems(b)) ? 1 : -1);
-      }
-    } else if (sort_option == "co-tags") {
-      if (sort_order == "ascending") {
-        results.sort((a, b) => (Tags.cotags(a).length > Tags.cotags(b).length) ? 1 : -1);
-      } else {
-        results.sort((a, b) => (Tags.cotags(a).length < Tags.cotags(b).length) ? 1 : -1);
+  if (filtered_tags.length > 0) {
+    for (var i in filtered_tags) {
+      if (!item.tags.includes(filtered_tags[i])) {
+        return false;
       }
     }
+    return true;
+  }
+  if (filter_type.has(item.type)) {
+    return true;
+  }
+  return false;
+}
 
-    $("#main-grid").empty();
-    results.forEach(function(object){
-      var id = object.id;
-      var image = object.picture;
-      if (object.hasOwnProperty("tags")) {
-        $("#main-grid").append(generateItemCard(id, image));
-      } else {
-        var tag_name = object.name;
-        $("#main-grid").append(generateTagCard(id, tag_name));
-      }
-    });
-
+function sortResults() {
+  if (sort_option == "name") {
+    if (sort_order == "ascending") {
+      results.sort((a, b) => (a.name.toUpperCase() > b.name.toUpperCase()) ? 1 : -1);
+    } else {
+      results.sort((a, b) => (a.name.toUpperCase() < b.name.toUpperCase()) ? 1 : -1);
+    }
+  } else if (sort_option == "date") {
+    if (sort_order == "ascending") {
+      results.sort((a, b) => (new Date(a.createdAt) > new Date(b.createdAt)) ? 1 : -1);
+    } else {
+      results.sort((a, b) => (new Date(a.createdAt) < new Date(b.createdAt)) ? 1 : -1);
+    }
+  } else if (sort_option == "associated-items") {
+    if (sort_order == "ascending") {
+      results.sort((a, b) => (numberOfAssociatedItems(a) > numberOfAssociatedItems(b)) ? 1 : -1);
+    } else {
+      results.sort((a, b) => (numberOfAssociatedItems(a) < numberOfAssociatedItems(b)) ? 1 : -1);
+    }
+  } else if (sort_option == "co-tags") {
+    if (sort_order == "ascending") {
+      results.sort((a, b) => (Tags.cotags(a).length > Tags.cotags(b).length) ? 1 : -1);
+    } else {
+      results.sort((a, b) => (Tags.cotags(a).length < Tags.cotags(b).length) ? 1 : -1);
+    }
   }
 
-  function numberOfAssociatedItems(tag) {
-    var count = 0;
-    items.forEach(function(object) {
-      if (Tags.attached(tag, object.element) == true) {
-        count++;
-      }
-    });
-    return count;
-  }
+  $("#main-grid").empty();
+  results.forEach(function (object) {
+    var id = object.id;
+    var image = object.picture;
+    if (object.hasOwnProperty("tags")) {
+      $("#main-grid").append(generateItemCard(id, image));
+    } else {
+      var tag_name = object.name;
+      $("#main-grid").append(generateTagCard(id, tag_name));
+    }
+  });
+
+}
+
+function numberOfAssociatedItems(tag) {
+  var count = 0;
+  items.forEach(function (object) {
+    if (Tags.attached(tag, object.element) == true) {
+      count++;
+    }
+  });
+  return count;
+}
