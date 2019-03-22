@@ -68,9 +68,7 @@ $(document).ready(function () {
         resetFilterForms();
         setFilterOrderRadioButtons();
         showCorrectFilterOptions();
-        displayAllResults();
         updateTopCoTags();
-
         displayAllResults();
 
         search_listener(); // REMOVE WHEN SEARCH IS FUNCTIONAL.
@@ -186,9 +184,11 @@ function displayAllResults() {
   if (dropdown_selection == "All") {
     $("#main-grid").html("");
     var count = 0;
+    // items = Items.search("");
     items.forEach(function(object){
         var id = object.element.id;
         var image = object.element.picture;
+        // console.log(object.element.name);
         if (itemMatchesFilters(object.element)) {
           $("#main-grid").append(generateItemCard(id, image));
           results.push(object.element);
@@ -359,6 +359,7 @@ $("#clear-filters-button").click(function () {
   $("#error-container").hide();
   clearFilterTable();
   resetFilterForms();
+  updateFilters();
 });
 
 $("#add-tag-filter").click(function () {
@@ -402,15 +403,8 @@ $("#filter-search-bar").focus(function () {
   $("#error-container").hide();
 });
 
-$("#tag-rows").on("click", ".filtered-tag", function () {
-  var i = filtered_tags.indexOf($(this).text());
-  filtered_tags.splice(i, 1);
-  $(this).parents("tr").remove();
-  updateEmptyTable();
-});
-
 function updateEmptyTable() {
-  var empty_table = '<tr id="empty-tag-list" class="center aligned">' +'<td>No tags currently filtered</td></tr>';
+  var empty_table = '<tr id="empty-tag-list" class="center aligned"><td>No tags currently filtered</td></tr>';
   if (tagFilterListIsEmpty()) {
     $("#tag-rows").html(empty_table);
   } else {
@@ -421,12 +415,15 @@ function updateEmptyTable() {
 function clearFilterTable() {
   $("#tag-rows").empty();
   updateEmptyTable();
+  filtered_tags = [];
+  updateTopCoTags();
 }
 
 function resetFilterForms() {
   $('.ui.form').form('clear');
-  $("#date").prop("checked", true);
-  $("#ascending").prop("checked", true);
+  $('.ui.checkbox:not(.radio)').checkbox("check", true);
+  $("#date").click();
+  $("#ascending").click();
 }
 
 function tagFilterListIsEmpty() {
@@ -445,27 +442,18 @@ function tagInFilterList(tag) {
 
 function insertTagToFilterList(tag) {
   var tag_filter = '<tr class="center aligned"><td>' +
-    '<a class="ui tag label filtered-tag"><span class="tag-entry">' + tag +
-    '</span><i class="red close icon"></i></a></td></tr>';
+  '<a class="ui tag label filtered-tag"><span class="tag-entry">' + tag +
+  '</span><i class="red close icon"></i></a></td></tr>';
   $("#tag-rows").append(tag_filter);
   filtered_tags.push(tag);
+  updateTopCoTags();
+  updateFilters();
   updateEmptyTable();
 }
-function drawAddTagMenu() {
 
-  var tagNames = [];
-  var allTags = Tags.search("");
-  for (i = 0; i < allTags.length; i++) {
-    tagNames.push({ "title": allTags[i].element.name });
-  }
-  $("#item-add-tag-menu").append("<div class='ui dropdown search'><div class='ui icon input'><input id='add-tag-item-search' class='prompt' type='text' placeholder='Search Tags to Add...'><i class='search icon'></i></div><div class='results'></div></div>")
-  $('.ui.search').search({ source: tagNames, on: click });
-  let input = $('.ui.search').search('get value');
-  //let input = $("#prompt.add-tag-item-search").val();
-  console.log(input);
-  //addTagToItem();
-
-}
+$("#item-modal-add-tag").click(function() {
+  addTagToItem();
+});
 
 function addTagToItem() {
   var searchVal = $("#item-modal-add-tag-search-bar").val();
@@ -772,7 +760,12 @@ $('#createNewTagButton').click(function () {
       'name': name,
       'description': description
     });
+  // Tags.create({
+  //   'name': name,
+  //   'description': description
+  // });
   all_tags.push({title: newTag.name});
+  // all_tags = Tags.search("");
   tags.push({key: "name", element: newTag});
   $('#item-modal-add-tag-search-area').search({source: all_tags});
   $('#filter-search-tags').search({source: all_tags});
@@ -867,16 +860,26 @@ $('#createNewTagButton').click(function () {
   }
 
   function itemMatchesFilters(item) {
+    var item_object = Items.search(item.name)[0].element;
+    var attached_tags = Tags.forItem(item_object);
+    console.log(item.name + " : " + attached_tags[attached_tags.length-1].name);
     if (filter_type.size > 0 && !filter_type.has(item.type)) {
       return false;
     }
     if (filtered_tags.length > 0) {
       for (var i in filtered_tags) {
-        if (!item.tags.includes(filtered_tags[i])) {
-          return false;
-        }
+        attached_tags.forEach(function(object){
+          console.log("object.name = " + object.name);
+          if (object.name == filtered_tags[i]) {
+            console.log(object.name + " matches " + filtered_tags[i]);
+            return true;
+          }
+        });
+        // if (!attached_tags.includes(filtered_tags[i])) {
+          // return false;
+        // }
       }
-      return true;
+      return false;
     }
     if (filter_type.has(item.type)) {
       return true;
