@@ -272,176 +272,190 @@
 
     <!-- Modal for Tags -->
     <div class="ui modal" id="tagsOverlay" style="text-align:unset;">
-      <i class="close icon"></i>
-      <div class="header" style="border-bottom: none;">
-        <h2 class="ui center aligned icon header">
-          <i class="circular tag icon"></i>
-          <i id="modal-tag-title"> Tag: </i>
-        </h2>
-      </div>
+        <i class="close icon"></i>
+        <div class="header" style="border-bottom: none;">
+            <h2 class="ui center aligned icon header">
+                <i class="circular tag icon"></i>
+                <i id="modal-tag-title"> Tag: </i>
+            </h2>
+            </div>
 
-      <div class="content">
-        <div class="ui secondary tabular menu">
-          <a class="item active" data-tab="first">General</a>
-          <a class="item" data-tab="second">History</a>
-          <a class="item" data-tab="third">Manage Tag</a>
-        </div>
-      </div>
-      <div class="content">
-
-
-        <div class="ui bottom attached tab active" data-tab="first">
-
-          <h4 class="ui horizontal divider header">
-            <i class="bar chart icon"></i>
-            Tag Details
-          </h4>
-          <table class="ui definition table">
-
-            <tbody>
-              <tr>
-                <td class="two wide column">ID</td>
-                <td id="modal-tag-id"></td>
-              </tr>
-              <tr>
-                <td>Name</td>
-                <td id="modal-tag-name"></td>
-              </tr>
-              <tr>
-                <td>Description</td>
-                <td id="modal-tag-description"></td>
-              </tr>
-              <tr>
-                <td>Creator</td>
-                <td id="modal-tag-creator"></td>
-              </tr>
-              <tr>
-                <td>Created</td>
-                <td id="modal-tag-created"></td>
-              </tr>
-
-              <tr>
-                <td>Status</td>
-                <td id="modal-tag-status"></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="ui bottom attached tab" data-tab="second">
-
-          <h4 class="ui horizontal divider header">
-            <i class="bar chart icon"></i>
-            History
-          </h4>
-          <div>
-            <table id="history" class="fixed_header ui celled table">
-              <thead>
-                <tr>
-                  <th>History ID</th>
-                  <th>Description</th>
-                  <th>Action by</th>
-                  <th>Time</th>
-                </tr>
-              </thead>
-              <tbody id="history-body">
-              </tbody>
-            </table>
-          </div>
-
-        </div>
-        <div class="ui bottom attached tab" data-tab="third">
-          <!-- Manage Tag        -->
-          <h4 class="ui horizontal divider header">
-            <i class="bar chart icon"></i>
-            Tag Details
-          </h4>
-
-
-          <div class="ui stackable three column centered grid">
-            <form class="ui form column">
-              <div class="ui card">
-                <div class="content">
-                  <div class="header">Edit Tag</div>
-                  <div class="field">
-                    <label>Tag Name</label>
-                    <input id="edit-tag-name" type="text" name="first-name" placeholder="First Name">
-                  </div>
-                  <div class="field">
-                    <label>Short Text</label>
-                    <textarea id="edit-tag-description" rows="3"></textarea>
-                  </div>
-                  <button type="button" id="edit-tag-save" class="ui button green">Save</button>
-
-                  <button type="button" id="edit-tag-cancel" class="ui yellow button">Undo</button>
+            <div class="content">
+                <div class="ui secondary tabular menu">
+                    <a class="item active" data-tab="first">General</a>
+                    <a class="item" data-tab="second">History</a>
+                    <a class="item" data-tab="third">Manage Tag</a>
                 </div>
-              </div>
+            </div>
+            <div class="content">
 
 
-            </form>
-            <form class="ui form column">
-              <div class="ui card">
-                <div class="content">
-                  <div class="header">Map Tags</div>
-                  <div class="field">
-                    <div class="ui form">
-                      <div class="field">
-                        <label>Tags</label>
-                        <select class="ui search dropdown map-dropdown" multiple="">
-                        </select>
-                      </div>
+                <div class="ui bottom attached tab active" data-tab="first">
+
+                    <h4 class="ui horizontal divider header">
+                        <i class="bar chart icon"></i>
+                        Tag Details
+                    </h4>
+                    <table class="ui definition table">
+
+                        <tbody>
+                            <tr>
+                                <td class="two wide column">ID</td>
+                                <td id="modal-tag-id"></td>
+                            </tr>
+                            <tr>
+                                <td>Name</td>
+                                <td id="modal-tag-name"></td>
+                            </tr>
+                            <tr>
+                                <td>Description</td>
+                                <td id="modal-tag-description"></td>
+                            </tr>
+                            <tr>
+                                <td>Creator</td>
+                                <td id="modal-tag-creator"></td>
+                            </tr>
+                            <tr>
+                                <td>Created</td>
+                                <td id="modal-tag-created"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Status</td>
+                                <td id="modal-tag-status"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="ui bottom attached tab" data-tab="second">
+
+                    <h4 class="ui horizontal divider header">
+                        <i class="bar chart icon"></i>
+                        History 
+                    </h4>
+                    <div >
+                    <table id="history" class="fixed_header ui celled table" >
+                        <thead>
+                            <tr><th>History ID</th>
+                                <th>Description</th>
+                                <th>Action by</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-body">
+                        </tbody>
+                    </table>
                     </div>
-                  </div>
-
-                  <button type="button" id="map-save" class="ui green button">Save</button>
-                  <button type="button" id="map-tag-cancel" class="ui yellow button">Undo</button>
+                    
                 </div>
-              </div>
+                <div class="ui bottom attached tab" data-tab="third">
+                    <!-- Manage Tag        -->
+                    <h4 class="ui horizontal divider header">
+                        <i class="bar chart icon"></i>
+                        Tag Details
+                    </h4>
 
 
-            </form>
+                    <div class="ui stackable three column centered grid">
+                        <form class="ui form column">
+                            <div class="ui card style="height: 100%"">
+                                <div class="content">
+                                    <div class="header field">Edit Tag</div>
+                                    <div class="field">
+                                        <label>Tag Name</label>
+                                        <input id="edit-tag-name" type="text" name="first-name" placeholder="First Name">
+                                    </div>
+                                    <div class="field">
+                                        <label>Short Text</label>
+                                        <textarea id="edit-tag-description" rows="3"></textarea>
+                                    </div>
+                                    <div class="tab-modal-buttons">
+                                    <button type="button" id="edit-tag-save" class="ui button green left floated">Save</button>
+                                    
+                                    <button type="button" id="edit-tag-cancel" class="ui yellow button right floated">Undo</button>
+                                     </div>
+                                </div>
+                            </div>
+
+
+                        </form>
+                        <form class="ui form column">
+                            <div class="ui card" style="height: 100%">
+                                <div class="content">
+                                    <div class="header field">Map Tags</div>
+                                    <div class="field">
+                                        <div class="ui form">
+                                            <div class="field">
+                                                <label>Tags</label>
+                                                <select class="tag-modal ui search dropdown map-dropdown"  multiple="">
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-modal-buttons">
+                                    <button type="button" id="map-save" class="ui green button left floated">Save</button>
+                                    <button type="button" id="map-tag-cancel" class="ui yellow button right floated">Undo</button>
+                                   </div>
+                             </div>
+                            </div>
+
+
+                        </form>
+
+
+                        
+                        <form class="ui form column">
+                            <div class="ui card" style="height: 100%">
+                                <div class="content">
+                                    <div class="header field">Add/Remove Tag from Items</div>
+                                    <div class="field">
+                                    <button id="tag-add-item" type="button" class="ui left attached button green active">Add</button>
+                                    <button id="tag-remove-item" type="button" class="right attached ui button">Remove</button>
+                                    </div>
+                                        <div class="field">
+                                            <div class="ui form">
+                                                <div class="field">
+                                                    <label>Tags</label>
+                                                    <select class="tag-modal-two ui search dropdown add-remove-dropdown" multiple="">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <div class="tab-modal-buttons">
+                                        <button type="button" id="add-remove-save" class="ui green button left floated">Save</button>
+                                        <button type="button" id="add-remove-cancel" class="ui yellow button right floated">Undo</button>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
 
 
 
-            <form class="ui form column">
-              <div class="ui card">
-                <div class="content">
-                  <div class="header">Edit Tag</div>
-                  <div class="field">
-                    <label>Tag Name</label>
-                    <input type="text" name="first-name" placeholder="First Name">
-                  </div>
-                  <div class="field">
-                    <label>Short Text</label>
-                    <textarea rows="3"></textarea>
-                  </div>
-                  <button class="ui button" type="submit">Submit</button>
                 </div>
-              </div>
+                    <!-- End of Manage Tag -->
+            </div>
+
+            <div class="actions">
 
 
-            </form>
-          </div>
+                <div id="flag" class="ui red button" style="min-width: 90px;">
+                    Flag
+                </div>
 
+                <div id="close-button" class="ui deny button">
+                    Close
+                </div>
 
-
+            </div>
         </div>
-        <!-- End of Manage Tag -->
-      </div>
-
-      <div class="actions">
+        <!-- End of Tab Modal -->
 
 
-        <div id="flag" class="ui red button" style="min-width: 90px;">
-          Flag
-        </div>
-
-        <div id="close-button" class="ui deny button">
-          Close
-        </div>
-
-      </div>
-    </div>
-    <!-- End of Tab Modal -->
 
     <div id="main-view" class="ui container">
 
