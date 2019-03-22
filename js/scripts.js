@@ -54,9 +54,6 @@ $(document).ready(function () {
 
         onClickModal();
 
-
-        createTag();
-
         // Initialises check boxes in filter menu
         $('.ui.checkbox').checkbox();
 
@@ -734,14 +731,9 @@ function setHistory(tag) {
 
 // Create new tag
 $("#add-tag").click(function () {
-  var createTag = true;
-  if (createTag == true) {
-    
     $('#name-id').val("");
     $('#description-id').val("");
-
     $('#createNewTag').modal('show');
-  }
 });
 
 $('.ui.form').form({
@@ -758,29 +750,20 @@ $('.ui.form').form({
   }
 });
 
-function createTag() {
-  let name = $('#name-id');
-  let description = $('#description-id');
-  console.log(name.val());
-
-  $('#createNewTagButton').click(function () {
+$('#createNewTagButton').click(function () {
+  let name = $('#name-id').val();
+  let description = $('#description-id').val();
+  let newTag = 
     Tags.create({
-      'name': name.val(),
-      'description': description.val()
+      'name': name,
+      'description': description
     });
-
-    // all_tags = null;
-    var tags = Tags.search("");
-    tags.forEach(function(obj){
-        all_tags.push({title: obj.element.name})
-    })
-    
-    $('#item-modal-add-tag-search-area').search({source: all_tags});
-    $('#filter-search-tags').search({source: all_tags});
-    $('#createNewTag').hide();
-
-  });
-}
+  all_tags.push({title: newTag.name});
+  tags.push({key: "name", element: newTag});
+  $('#item-modal-add-tag-search-area').search({source: all_tags});
+  $('#filter-search-tags').search({source: all_tags});
+  $('#createNewTag').hide();
+});
 
   // Filter mechanism code
 
