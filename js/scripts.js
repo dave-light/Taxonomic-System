@@ -323,12 +323,6 @@
       $("#error-container").hide();
     });
 
-    $("#tag-rows").on("click", ".filtered-tag", function () {
-      var i = filtered_tags.indexOf($(this).text());
-      filtered_tags.splice(i, 1);
-      $(this).parents("tr").remove();
-      updateEmptyTable();
-    });
 
     $("#clear-filters-button").click(function () {
       $("#filter-search-bar").val("");
@@ -508,6 +502,7 @@
 
                 if(Tags.isFlagged(tag)){
                     $('#flag').text("Un-flag");
+
                 }else{
                     $('#flag').text("Flag");
                 }
@@ -537,7 +532,7 @@
 
 
         $('#flag').on('click', function() {
-            if($('#flag').text() == "Fla  g"){
+            if($('#flag').text() == "Flag"){
                 console.log("Flagged.");
                 Tags.flag(tag);
                 $('#flag').text("Un-flag");
