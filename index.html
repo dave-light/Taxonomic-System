@@ -44,11 +44,11 @@
                 <form class="ui form">
                     <div class="field">
                       <label>Name (without hash-tag)</label>
-                      <input type="text" name="name" placeholder="Name your new tag">
+                      <input id="name-id" type="text" name="name" placeholder="Name your new tag">
                     </div>
                     <div class="field">
                       <label>Description</label>
-                    <textarea name="description" placeholder="This is optional"></textarea>
+                    <textarea id="description-id" name="description" placeholder="This is optional"></textarea>
                     </div>
                   </form>
             </div>
@@ -56,7 +56,7 @@
               <div class="ui red deny button">
                 Cancel
               </div>
-              <div class="ui positive button" id="createNewTagButton">
+              <div type="button" class="ui positive button" id="createNewTagButton">
                 Create
               </div>
             </div>
