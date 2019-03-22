@@ -48,7 +48,6 @@ $(document).ready(function () {
           updateGridWidth();
         });
 
-        bindKeys();
         enable_dropdown();
 
         //Tag Modal stuff
@@ -75,11 +74,7 @@ $(document).ready(function () {
 
         displayAllResults();
 
-        search_listener(); // REMOVE WHEN SEARCH IS FUNCTIONAL.
-        // stored in -> items
-        //              tags
-        //              items_and_tags
-        // depending on search
+        search_listener();
 
         mutationObserver.disconnect();
 
