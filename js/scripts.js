@@ -769,7 +769,7 @@ function createTag() {
       'description': description.val()
     });
 
-    all_tags.push({ title: name.val()});
+    // all_tags = null;
     var tags = Tags.search("");
     tags.forEach(function(obj){
         all_tags.push({title: obj.element.name})
