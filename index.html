@@ -12,6 +12,7 @@
 
 </head>
 
+<!-- LOGGED OUT -->
 <body>
   <div class='box' id='loggedOut' class="pusher">
     <div class="ui huge header item" id='logo-logged-out'>
@@ -25,6 +26,7 @@
     </div>
   </div>
 
+  <!-- LOGGED IN -->
   <div id="loggedIn" class="pusher">
     <div class="ui menu search fixed">
       <div class="ui medium header item bin" id="logo-logged-in">
@@ -59,13 +61,13 @@
             <div class="ui red deny button">
               Cancel
             </div>
-            <div type="button" class="ui button" id="createNewTagButton">
+            <div type="button" class="ui green button" id="createNewTagButton">
               Create
             </div>
           </div>
         </div>
 
-        <!--  -->
+        <!-- FILTER -->
         <button class="ui button" id="filter-button" data-inverted="" data-tooltip="Filter"
           data-position="bottom center">
           <i class="filter icon" style="margin: 0px;"></i>
@@ -188,7 +190,7 @@
 
             <div class="column">
               <div id="filter-sort-order" class="ui form">
-                <!-- <h4 class="ui dividing header">Sort Results by</h4> -->
+
                 <div class="grouped fields">
                   <div class="field sort-type">
                     <div class="ui radio checkbox">
@@ -216,10 +218,7 @@
 
               <button id="clear-filters-button" class="negative ui fluid button">Clear Filters</button>
             </div>
-            <!-- <div class="column">
 
-            <button class="positive ui fluid button">Apply Filters</button>
-          </div> -->
           </div>
         </div>
 
@@ -244,6 +243,7 @@
         </div>
       </div>
 
+      <!-- LOG OUT -->
       <div class="right menu" id="logout-button-surrounding">
         <div class="item">
           <div class="ui transparent big icon input">

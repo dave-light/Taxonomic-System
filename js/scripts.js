@@ -749,6 +749,7 @@ $("#tag-rows").on("click", ".filtered-tag", function () {
 
 // Create new tag ********************************************************************************************************
 $("#add-tag").click(function () {
+  $("#errorCT").empty();
   $('#name-id').val("");
   $('#description-id').val("");
   $('#createNewTag').modal('show');
@@ -789,8 +790,7 @@ $('#createNewTagButton').click(function () {
   } else {
     $("#errorCT").empty();
     $("#errorCT").append("<div class='errorCTMSG ui message red'><div class='header'>No Tag Name Given</div></div>");
-  }
-
+  } 
 });
 
 // Filter mechanism code ********************************************************************************************************
